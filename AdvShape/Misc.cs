@@ -5,6 +5,7 @@ using System.Diagnostics;
 using Microsoft.Office.Core;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using org.mariuszgromada.math.mxparser;
 using Color = System.Windows.Media.Color;
 using Slide = Microsoft.Office.Interop.PowerPoint.Slide;
 using Shape = Microsoft.Office.Interop.PowerPoint.Shape;
@@ -245,6 +246,12 @@ namespace AdvShape {
                 Result += (Result == "") ? r.ToString() : ", " + r.ToString();
             }
             Debug.WriteLine(Result);
+        }
+        static public double? MathParse(string input) {
+            input = (input.Count<char>() > 0) ?
+                (input.Last<char>() == '.' ? input + "0" : input) : input;
+            Expression e = new Expression(input);
+            if(e.checkSyntax()) { return e.calculate(); } else { return null; }
         }
     }
 }

@@ -23,24 +23,14 @@ namespace AdvShape {
         }
 
         private void TextboxSetup() { 
-            this.RowCount_TB.TextChanged += (sender,args) => {
-                UserInterface.TextBoxFormat((TextBox)sender,TextBoxDataType.Integer,   1,null,"");
-            };
-            this.RowDx_TB.TextChanged += (sender,args) => {
-                UserInterface.TextBoxFormat((TextBox)sender,TextBoxDataType.Decimal,null,null,"");
-            };
-            this.RowDy_TB.TextChanged += (sender,args) => {
-                UserInterface.TextBoxFormat((TextBox)sender,TextBoxDataType.Decimal,null,null,"");
-            };
-            this.ColCount_TB.TextChanged += (sender,args) => {
-                UserInterface.TextBoxFormat((TextBox)sender,TextBoxDataType.Integer,   1,null,"");
-            };
-            this.ColDx_TB.TextChanged += (sender,args) => {
-                UserInterface.TextBoxFormat((TextBox)sender,TextBoxDataType.Decimal,null,null,"");
-            };
-            this.ColDy_TB.TextChanged += (sender,args) => {
-                UserInterface.TextBoxFormat((TextBox)sender,TextBoxDataType.Decimal,null,null,"");
-            };
+            this.RowCount_TB.setParseProperty( AdvTextBox.ParseDataType.Integer,    1, null);
+            this.RowDx_TB.setParseProperty(    AdvTextBox.ParseDataType.Decimal, null, null);
+            this.RowDy_TB.setParseProperty(    AdvTextBox.ParseDataType.Decimal, null, null);
+            this.ColCount_TB.setParseProperty( AdvTextBox.ParseDataType.Integer,    1, null);
+            this.ColDx_TB.setParseProperty(    AdvTextBox.ParseDataType.Decimal, null, null);
+            this.ColDy_TB.setParseProperty(    AdvTextBox.ParseDataType.Decimal, null, null);
+            this.CirCount_TB.setParseProperty( AdvTextBox.ParseDataType.Integer,    1, null);
+            this.Radius_TB.setParseProperty(   AdvTextBox.ParseDataType.Decimal, null, null);
         }
     }
 }

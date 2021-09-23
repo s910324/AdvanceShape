@@ -50,7 +50,7 @@ namespace AdvShape {
         }
 
         private void ShapeAlignTopCent_Click(object sender,RibbonControlEventArgs e) {
-            UserInterface.Debug();
+ 
         }
     }
 }

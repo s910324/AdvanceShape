@@ -40,17 +40,17 @@
                     <Label Content="dY" Grid.Row ="3" Grid.Column="0" 
                            HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
 
-                    <TextBox Text="0" Grid.Row="1" Grid.Column="1" x:Name="RowCount_TB" HorizontalContentAlignment="Center"
+                    <local:AdvTextBox Text="1" Grid.Row="1" Grid.Column="1" x:Name="RowCount_TB" HorizontalContentAlignment="Center"
                              HorizontalAlignment="Center"  VerticalAlignment="Center" Width="90"  Height="23" Margin="0,0,0,0"/>
-                    <TextBox Text="0" Grid.Row="1" Grid.Column="2" x:Name="ColCount_TB" HorizontalContentAlignment="Center"
+                    <local:AdvTextBox Text="1" Grid.Row="1" Grid.Column="2" x:Name="ColCount_TB" HorizontalContentAlignment="Center"
                              HorizontalAlignment="Center"  VerticalAlignment="Center" Width="90"  Height="23" Margin="0,0,0,0"/>
-                    <TextBox Text="0" Grid.Row="2" Grid.Column="1" x:Name="RowDx_TB" HorizontalContentAlignment="Center"
+                    <local:AdvTextBox Text="0" Grid.Row="2" Grid.Column="1" x:Name="RowDx_TB" HorizontalContentAlignment="Center"
                              HorizontalAlignment="Center"  VerticalAlignment="Center" Width="90"  Height="23" Margin="0,0,0,0"/>
-                    <TextBox Text="0" Grid.Row="2" Grid.Column="2" x:Name="ColDx_TB" HorizontalContentAlignment="Center"
+                    <local:AdvTextBox Text="0" Grid.Row="2" Grid.Column="2" x:Name="ColDx_TB" HorizontalContentAlignment="Center"
                              HorizontalAlignment="Center"  VerticalAlignment="Center" Width="90"  Height="23" Margin="0,0,0,0"/>
-                    <TextBox Text="0" Grid.Row="3" Grid.Column="1" x:Name="RowDy_TB" HorizontalContentAlignment="Center"
+                    <local:AdvTextBox Text="0" Grid.Row="3" Grid.Column="1" x:Name="RowDy_TB" HorizontalContentAlignment="Center"
                              HorizontalAlignment="Center"  VerticalAlignment="Center" Width="90"  Height="23" Margin="0,0,0,0"/>
-                    <TextBox Text="0" Grid.Row="3" Grid.Column="2" x:Name="ColDy_TB" HorizontalContentAlignment="Center"
+                    <local:AdvTextBox Text="0" Grid.Row="3" Grid.Column="2" x:Name="ColDy_TB" HorizontalContentAlignment="Center"
                              HorizontalAlignment="Center"  VerticalAlignment="Center" Width="90"  Height="23" Margin="0,0,0,0"/>
                     <Button Content="Confirm" Grid.Row="4" Grid.Column="2" x:Name="ParaSubmin_PB" HorizontalContentAlignment="Center"
                              HorizontalAlignment="Center"  VerticalAlignment="Center" Width="90"  Height="23" Margin="0,0,0,0"/>
@@ -77,9 +77,9 @@
                            HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
                     <Label Content="Count" Grid.Row ="3" Grid.Column="0" 
                            HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
-                    <TextBox Text="0" Grid.Row="2" Grid.Column="1" x:Name="Radius_TB" HorizontalContentAlignment="Center"
+                    <local:AdvTextBox Text="0" Grid.Row="2" Grid.Column="1" x:Name="Radius_TB" HorizontalContentAlignment="Center"
                              HorizontalAlignment="Center"  VerticalAlignment="Center" Width="90"  Height="23" Margin="0,0,0,0"/>
-                    <TextBox Text="0" Grid.Row="3" Grid.Column="1" x:Name="Count_TB" HorizontalContentAlignment="Center"
+                    <local:AdvTextBox Text="1" Grid.Row="3" Grid.Column="1" x:Name="CirCount_TB" HorizontalContentAlignment="Center"
                              HorizontalAlignment="Center"  VerticalAlignment="Center" Width="90"  Height="23" Margin="0,0,0,0"/>
                     <ComboBox Grid.Row ="1" Grid.Column="1" x:Name="Mode_CB"
                               HorizontalAlignment="Center" VerticalAlignment="Center" Width="90"  Height="23" Margin="0,0,0,0"/>
