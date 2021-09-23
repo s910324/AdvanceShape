@@ -4,12 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Controls.Ribbon;
+using RibbonButton = Microsoft.Office.Tools.Ribbon.RibbonButton;
+
 
 namespace AdvShape {
     public partial class Ribbon1 {
-        private void Ribbon1_Load(object sender, RibbonUIEventArgs e)
-        {
-            
+        private void Ribbon1_Load(object sender,RibbonUIEventArgs e) {
+
         }
 
 

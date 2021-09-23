@@ -4,7 +4,7 @@
 library
 C#
 .cs
-E:\github\AdvanceShape\PowerPointAddIn2\obj\Debug\
+E:\github\AdvanceShape\AdvShape\obj\Debug\
 PowerPointAddIn2
 none
 false
@@ -13,8 +13,8 @@ VSTO40;DEBUG;TRACE
 2-724486495
 
 17409482775
-24906103221
+25-1085617739
 WPF_ShapeArray.xaml;WPF_ShapeAlign.xaml;
 
-True
+False
 

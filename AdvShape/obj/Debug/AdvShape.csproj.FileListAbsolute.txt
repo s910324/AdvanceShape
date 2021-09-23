@@ -39,4 +39,3 @@ E:\github\AdvanceShape\AdvShape\obj\Debug\AdvShape.csproj.CopyComplete
 E:\github\AdvanceShape\AdvShape\obj\Debug\AdvShape.dll
 E:\github\AdvanceShape\AdvShape\obj\Debug\AdvShape.pdb
 E:\github\AdvanceShape\AdvShape\obj\Debug\GeneratedInternalTypeHelper.g.cs
-E:\github\AdvanceShape\AdvShape\obj\Debug\AdvShape.csproj.AssemblyReference.cache
