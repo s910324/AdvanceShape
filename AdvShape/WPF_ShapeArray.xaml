@@ -14,7 +14,8 @@
             <RowDefinition Height = "*" />
         </Grid.RowDefinitions>
 
-        <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0"  Grid.Row ="0" Grid.Column="0">
+        <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0"  Grid.Row ="0" Grid.Column="0"
+                    x:Name="Tab">
             <TabItem Header="Parallelogram">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
@@ -53,7 +54,7 @@
                     <local:AdvTextBox Text="0" Grid.Row="3" Grid.Column="2" x:Name="ColDy_TB" HorizontalContentAlignment="Center"
                              HorizontalAlignment="Center"  VerticalAlignment="Center" Width="90"  Height="23" Margin="0,0,0,0"/>
                     <Button Content="Confirm" Grid.Row="4" Grid.Column="2" x:Name="ParaSubmin_PB" HorizontalContentAlignment="Center"
-                             HorizontalAlignment="Center"  VerticalAlignment="Center" Width="90"  Height="23" Margin="0,0,0,0"/>
+                             HorizontalAlignment="Center"  VerticalAlignment="Center" Width="90"  Height="23" Margin="0,0,0,0" Click="ParaSubmin_PB_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Circular">
@@ -81,10 +82,13 @@
                              HorizontalAlignment="Center"  VerticalAlignment="Center" Width="90"  Height="23" Margin="0,0,0,0"/>
                     <local:AdvTextBox Text="1" Grid.Row="3" Grid.Column="1" x:Name="CirCount_TB" HorizontalContentAlignment="Center"
                              HorizontalAlignment="Center"  VerticalAlignment="Center" Width="90"  Height="23" Margin="0,0,0,0"/>
-                    <ComboBox Grid.Row ="1" Grid.Column="1" x:Name="Mode_CB"
-                              HorizontalAlignment="Center" VerticalAlignment="Center" Width="90"  Height="23" Margin="0,0,0,0"/>
+                    <ComboBox Grid.Row ="1" Grid.Column="1" x:Name="Mode_CB" SelectedIndex="0" HorizontalContentAlignment="Center"
+                              HorizontalAlignment="Center" VerticalAlignment="Center" Width="90"  Height="23" Margin="0,0,0,0">
+                        <ComboBoxItem Content="Translation" HorizontalContentAlignment="Center"/>
+                        <ComboBoxItem Content="Radial"      HorizontalContentAlignment="Center"/>
+                    </ComboBox>
                     <Button Content="Confirm" Grid.Row="4" Grid.Column="1" x:Name="CirSubmin_PB" HorizontalContentAlignment="Center"
-                             HorizontalAlignment="Center"  VerticalAlignment="Center" Width="90"  Height="23" Margin="0,0,0,0"/>
+                             HorizontalAlignment="Center"  VerticalAlignment="Center" Width="90"  Height="23" Margin="0,0,0,0" Click="CirSubmin_PB_Click"/>
                 </Grid>
             </TabItem>
         </TabControl>

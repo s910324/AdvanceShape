@@ -36,6 +36,7 @@ namespace AdvShape {
                         if(ArrayMode == Mode.Preview) {
                             iRange = ShapeArray.PreviewTheme(iRange);
                         }
+                        ///// multiple shape 
                         iRange.Left = (float)(X + Misc.CmToPoints(Row_dX) * i + Misc.CmToPoints(Col_dX) * j);
                         iRange.Top  = (float)(Y + Misc.CmToPoints(Row_dY) * i + Misc.CmToPoints(Col_dY) * j);
                         ArrayRange.Add(iRange);

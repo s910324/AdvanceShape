@@ -54,5 +54,12 @@ namespace AdvShape {
         private void ShapeAlignTopCent_Click(object sender,RibbonControlEventArgs e) {
  
         }
+
+        private void button1_Click(object sender,RibbonControlEventArgs e) {
+            //var w = new WPF_ShapeArray();
+            //w.Show();
+            ShapeRange iRange = Misc.SelectedShapes();
+            Misc.print(iRange.Count);
+        }
     }
 }

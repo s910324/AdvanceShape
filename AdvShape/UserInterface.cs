@@ -44,17 +44,38 @@ namespace AdvShape {
 
 
         public AdvTextBox() {
-            ToolTip ParseToolTip   = new ToolTip();
-            ParseToolTip.StaysOpen = false;
-            this.ToolTip           = ParseToolTip;
-            this.TextChanged      += (o,e) => { this.TextBoxOnChangeFormat(); };
-            this.KeyDown          += (o,e) => { this.OnKeyDownHandler(o,e);   };
+            this.TextBoxOnChangeFormat();
+            this.TextChanged += (o,e) => { this.TextBoxOnChangeFormat(); };
+            this.Loaded      += (o,e) => { this.TextBoxOnChangeFormat(); };
+            this.KeyDown     += (o,e) => { this.OnKeyDownHandler(o,e); };
         }
-
+        
         public AdvTextBox setParseProperty(ParseDataType Type, Double? LowerLimit, Double? UpperLimit) {
-            this.ParseType  = Type;
-            this.LowerLimit = LowerLimit;
-            this.UpperLimit = UpperLimit;
+            ToolTip ParseToolTip = new ToolTip();
+            this.ParseType       = Type;
+            this.LowerLimit      = LowerLimit;
+            this.UpperLimit      = UpperLimit;
+            string TipHint       = "";
+
+            if((this.ParseType != ParseDataType.String) && (this.LowerLimit != null) && (this.UpperLimit != null)) {
+                this.ToolTip = ParseToolTip;
+                TipHint = String.Format("{0} Range: {1}~{2}",
+                    (this.ParseType == ParseDataType.Integer) ? "Integer" : "Decimal",
+                    this.LowerLimit,this.UpperLimit);
+            }
+            if((this.ParseType != ParseDataType.String) && (this.LowerLimit == null) && (this.UpperLimit != null)) {
+                this.ToolTip = ParseToolTip;
+                TipHint = String.Format("{0} Value ≤ {1}",
+                    (this.ParseType == ParseDataType.Integer) ? "Integer" : "Decimal",
+                    this.UpperLimit);
+            }
+            if((this.ParseType != ParseDataType.String) && (this.LowerLimit != null) && (this.UpperLimit == null)) {
+                this.ToolTip = ParseToolTip;
+                TipHint = String.Format("{0} Value ≥ {1}",
+                    (this.ParseType == ParseDataType.Integer) ? "Integer" : "Decimal",
+                    this.LowerLimit);
+            }
+            if(TipHint != "") {((ToolTip)this.ToolTip).Content = TipHint;}
             return this;
         }
         private void OnKeyDownHandler(object sender,KeyEventArgs e) {
@@ -88,24 +109,7 @@ namespace AdvShape {
             this.Foreground  = new SolidColorBrush(this.InputValid ? this.Theme["ForegroundColor"] : this.Theme["InvalidForegroundColor"]);
             this.BorderBrush = new SolidColorBrush(this.InputValid ? this.Theme["BorderColor"]     : this.Theme["InvalidBorderColor"]);
 
-            string TipHint = "";
-            if ((this.ParseType != ParseDataType.String) && (this.LowerLimit != null) && (this.UpperLimit != null)){
-                TipHint = String.Format("{0} Range: {1}~{2}",
-                    (this.ParseType==ParseDataType.Integer) ? "Integer" : "Decimal",
-                    this.LowerLimit, this.UpperLimit);
-            }
-            if((this.ParseType != ParseDataType.String) && (this.LowerLimit == null) && (this.UpperLimit != null)) {
-                TipHint = String.Format("{0} Value ≤ {1}",
-                    (this.ParseType == ParseDataType.Integer) ? "Integer" : "Decimal",
-                    this.UpperLimit);
-            }
-            if((this.ParseType != ParseDataType.String) && (this.LowerLimit != null) && (this.UpperLimit == null)) {
-                TipHint = String.Format("{0} Value ≥ {1}",
-                    (this.ParseType == ParseDataType.Integer) ? "Integer" : "Decimal",
-                    this.LowerLimit);
-            }
-            ((ToolTip)this.ToolTip).Content = TipHint;
-            ((ToolTip)this.ToolTip).IsOpen  = !this.InputValid;
+            if(this.ToolTip != null) {((ToolTip)this.ToolTip).IsOpen = !this.InputValid;}
         }
     }
 
