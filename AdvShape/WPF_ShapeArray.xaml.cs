@@ -21,10 +21,10 @@ namespace AdvShape {
         private List<ShapeRange> PreviewShapes = null;
         public WPF_ShapeArray() {
             InitializeComponent();
-            TextboxSetup();
+            UIBindingSetup();
         }
 
-        private void TextboxSetup() { 
+        private void UIBindingSetup() { 
             this.RowCount_TB.setParseProperty( AdvTextBox.ParseDataType.Integer,    1, null);
             this.RowDx_TB.setParseProperty(    AdvTextBox.ParseDataType.Decimal, null, null);
             this.RowDy_TB.setParseProperty(    AdvTextBox.ParseDataType.Decimal, null, null);
@@ -33,6 +33,32 @@ namespace AdvShape {
             this.ColDy_TB.setParseProperty(    AdvTextBox.ParseDataType.Decimal, null, null);
             this.CirCount_TB.setParseProperty( AdvTextBox.ParseDataType.Integer,    1, null);
             this.Radius_TB.setParseProperty(   AdvTextBox.ParseDataType.Decimal, null, null);
+            this.RowCount_TB.TextChanged  += (e,o) => { this.test(ShapeArray.Mode.Preview); };
+            this.RowDx_TB.TextChanged     += (e,o) => { this.test(ShapeArray.Mode.Preview); };
+            this.RowDy_TB.TextChanged     += (e,o) => { this.test(ShapeArray.Mode.Preview); };
+            this.ColCount_TB.TextChanged  += (e,o) => { this.test(ShapeArray.Mode.Preview); };
+            this.ColDx_TB.TextChanged     += (e,o) => { this.test(ShapeArray.Mode.Preview); };
+            this.ColDy_TB.TextChanged     += (e,o) => { this.test(ShapeArray.Mode.Preview); };
+            this.CirCount_TB.TextChanged  += (e,o) => { this.test(ShapeArray.Mode.Preview); };
+            this.Radius_TB.TextChanged    += (e,o) => { this.test(ShapeArray.Mode.Preview); };
+            this.Tab.SelectionChanged     += (e,o) => { this.RemovePreview(); };
+            this.RowCount_TB.KeyDown      += (o,e) => { this.OnKeyDownHandler(o,e); };
+            this.RowDx_TB.KeyDown         += (o,e) => { this.OnKeyDownHandler(o,e); };
+            this.RowDy_TB.KeyDown         += (o,e) => { this.OnKeyDownHandler(o,e); };
+            this.ColCount_TB.KeyDown      += (o,e) => { this.OnKeyDownHandler(o,e); };
+            this.ColDx_TB.KeyDown         += (o,e) => { this.OnKeyDownHandler(o,e); };
+            this.ColDy_TB.KeyDown         += (o,e) => { this.OnKeyDownHandler(o,e); };
+            this.CirCount_TB.KeyDown      += (o,e) => { this.OnKeyDownHandler(o,e); };
+            this.Radius_TB.KeyDown        += (o,e) => { this.OnKeyDownHandler(o,e); };
+            this.Tab.KeyDown              += (o,e) => { this.OnKeyDownHandler(o,e); };
+            this.KeyDown                  += (o,e) => { this.OnKeyDownHandler(o,e); };
+            this.ParallelogramTab.KeyDown += (o,e) => { this.OnKeyDownHandler(o,e); };
+            this.CircularTab.KeyDown      += (o,e) => { this.OnKeyDownHandler(o,e); };
+        }
+
+        private void OnKeyDownHandler(object sender,KeyEventArgs e) {
+            Misc.print(sender, "onkeydown");
+            if(e.Key == Key.Escape) { this.Close(); }
         }
 
         private void ParaSubmin_PB_Click(object sender,RoutedEventArgs e) {
@@ -54,10 +80,11 @@ namespace AdvShape {
                             this.ColCount_TB,this.ColDx_TB,this.ColDy_TB};
 
                         if(RowColTextBox.All(iTextBox => iTextBox.InputValid)) {
-                            ShapeArray.Parallelogram(
-                                (int)  this.RowCount_TB.NumericValue,(int)  this.ColCount_TB.NumericValue,
-                                (float)this.RowDx_TB.NumericValue,   (float)this.RowDy_TB.NumericValue,
-                                (float)this.ColDx_TB.NumericValue,   (float)this.ColDy_TB.NumericValue, mode);
+                            List<ShapeRange> Preview = ShapeArray.Parallelogram(
+                            (int)  this.RowCount_TB.NumericValue,(int)  this.ColCount_TB.NumericValue,
+                            (float)this.RowDx_TB.NumericValue,   (float)this.RowDy_TB.NumericValue,
+                            (float)this.ColDx_TB.NumericValue,   (float)this.ColDy_TB.NumericValue, mode);
+                            this.PreviewShapes = (mode == ShapeArray.Mode.Preview) ? Preview : null;
                         }
                         break;
 
@@ -68,7 +95,8 @@ namespace AdvShape {
                             ShapeArray.OvalType.Translation : ShapeArray.OvalType.Rotation;
 
                         if(CircularTextBox.All(iTextBox => iTextBox.InputValid)) {
-                            ShapeArray.Circular((float)Radius_TB.NumericValue, (int)CirCount_TB.NumericValue,type, mode);
+                            List<ShapeRange> Preview = ShapeArray.Circular((float)Radius_TB.NumericValue, (int)CirCount_TB.NumericValue,type, mode);
+                            this.PreviewShapes = (mode == ShapeArray.Mode.Preview) ? Preview : null;
                         }
                         break;
                 }
@@ -76,7 +104,7 @@ namespace AdvShape {
         }
         private void RemovePreview() {
             if(this.PreviewShapes != null) {
-                foreach(Shape iShape in this.PreviewShapes) { iShape.Delete(); }
+                foreach(ShapeRange iRange in this.PreviewShapes) { iRange.Delete(); }
                 this.PreviewShapes = null;
             }
         }

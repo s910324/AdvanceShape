@@ -11,6 +11,7 @@ using Slide = Microsoft.Office.Interop.PowerPoint.Slide;
 using Shape = Microsoft.Office.Interop.PowerPoint.Shape;
 using Selection = Microsoft.Office.Interop.PowerPoint.Selection;
 using ShapeRange = Microsoft.Office.Interop.PowerPoint.ShapeRange;
+using PpSelectionType = Microsoft.Office.Interop.PowerPoint.PpSelectionType;
 
 namespace AdvShape {
     class Misc {
@@ -21,9 +22,10 @@ namespace AdvShape {
         static public double CmToPoints(double cm ) { return (cm * 28.34646); }
         static public Slide ActiveSlide() { return (Slide)Globals.ThisAddIn.Application.ActiveWindow.View.Slide; }
         static public ShapeRange SelectedShapes() {
-            Slide ActiveSlide = Misc.ActiveSlide();
-            Selection CurrentSelection = (Selection)Globals.ThisAddIn.Application.ActiveWindow.Selection;
-            return CurrentSelection.Type == 0 ? ActiveSlide.Shapes.Range(0) : CurrentSelection.ShapeRange;
+            Slide ActiveSlide                = Misc.ActiveSlide();
+            Selection CurrentSelection       = (Selection)Globals.ThisAddIn.Application.ActiveWindow.Selection;
+            PpSelectionType[] validSelection = new PpSelectionType[] { PpSelectionType.ppSelectionText,PpSelectionType.ppSelectionShapes };
+            return validSelection.Contains(CurrentSelection.Type) ? CurrentSelection.ShapeRange : ActiveSlide.Shapes.Range(0);
         }
         static public float ActiveSlideWidth() { return Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideWidth; }
         static public float ActiveSlideHeight() {return Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideHeight;}

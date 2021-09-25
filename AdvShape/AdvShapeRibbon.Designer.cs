@@ -36,8 +36,8 @@ namespace AdvShape {
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group2 = this.Factory.CreateRibbonGroup();
             this.ShapeAlignMenu = this.Factory.CreateRibbonMenu();
-            this.group1 = this.Factory.CreateRibbonGroup();
             this.button1 = this.Factory.CreateRibbonButton();
+            this.group1 = this.Factory.CreateRibbonGroup();
             this.tab1.SuspendLayout();
             this.group2.SuspendLayout();
             this.SuspendLayout();
@@ -62,16 +62,16 @@ namespace AdvShape {
             this.ShapeAlignMenu.Label = "Align";
             this.ShapeAlignMenu.Name = "ShapeAlignMenu";
             // 
-            // group1
-            // 
-            this.group1.Label = "group1";
-            this.group1.Name = "group1";
-            // 
             // button1
             // 
             this.button1.Label = "button1";
             this.button1.Name = "button1";
             this.button1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click);
+            // 
+            // group1
+            // 
+            this.group1.Label = "group1";
+            this.group1.Name = "group1";
             // 
             // Ribbon1
             // 

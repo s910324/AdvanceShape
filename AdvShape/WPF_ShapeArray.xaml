@@ -16,7 +16,7 @@
 
         <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,0,0"  Grid.Row ="0" Grid.Column="0"
                     x:Name="Tab">
-            <TabItem Header="Parallelogram">
+            <TabItem Header="Parallelogram" x:Name="ParallelogramTab">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width = "60" />
@@ -57,7 +57,7 @@
                              HorizontalAlignment="Center"  VerticalAlignment="Center" Width="90"  Height="23" Margin="0,0,0,0" Click="ParaSubmin_PB_Click"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Circular">
+            <TabItem Header="Circular" x:Name="CircularTab">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width = "60" />

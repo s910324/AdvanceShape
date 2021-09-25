@@ -21,25 +21,23 @@ namespace AdvShape {
         }
 
         static public List<ShapeRange> Parallelogram(
-            int Row, int Col,float Row_dX,float Row_dY,float Col_dX,float Col_dY, Mode ArrayMode) {
+            int Row,int Col,float Row_dX,float Row_dY,float Col_dX,float Col_dY,Mode ArrayMode) {
             Slide ActiveSlide           = Misc.ActiveSlide();
             ShapeRange SelectRange      = Misc.SelectedShapes();
             List<ShapeRange> ArrayRange = new List<ShapeRange>();
 
-            float X = SelectRange.Left;
-            float Y = SelectRange.Top;
-            
-            for(int i = 0;i < Row;i++) {
-                for(int j = 0;j < Col;j++) {
-                    if (!(i == 0 && j == 0)) {
-                        ShapeRange iRange = SelectRange.Duplicate();
-                        if(ArrayMode == Mode.Preview) {
-                            iRange = ShapeArray.PreviewTheme(iRange);
+            foreach(Shape iShape in SelectRange) {
+                float X = iShape.Left;
+                float Y = iShape.Top;
+                for(int r = 0;r < Row;r++) {
+                    for(int c = 0;c < Col;c++) {
+                        if(!(r == 0 && c == 0)) {
+                            ShapeRange iRange = iShape.Duplicate();
+                            if(ArrayMode == Mode.Preview) { iRange = ShapeArray.PreviewTheme(iRange); }
+                            iRange.Left = (float)(X + Misc.CmToPoints(Row_dX) * r + Misc.CmToPoints(Col_dX) * c);
+                            iRange.Top  = (float)(Y + Misc.CmToPoints(Row_dY) * r + Misc.CmToPoints(Col_dY) * c);
+                            ArrayRange.Add(iRange);
                         }
-                        ///// multiple shape 
-                        iRange.Left = (float)(X + Misc.CmToPoints(Row_dX) * i + Misc.CmToPoints(Col_dX) * j);
-                        iRange.Top  = (float)(Y + Misc.CmToPoints(Row_dY) * i + Misc.CmToPoints(Col_dY) * j);
-                        ArrayRange.Add(iRange);
                     }
                 }
             }
@@ -49,21 +47,22 @@ namespace AdvShape {
             Slide ActiveSlide           = Misc.ActiveSlide();
             ShapeRange SelectRange      = Misc.SelectedShapes();
             List<ShapeRange> ArrayRange = new List<ShapeRange>();
-            float X       = SelectRange.Left;
-            float Y       = SelectRange.Top;
-            double dArc   = 2 * Math.PI / Count;
-            double dTheta = 2 * 180 / Count;
+            double dArc                 = 2 * Math.PI / Count;
+            double dTheta               = 2 * 180 / Count;
 
-            for(int i = 0;i < Count;i++) {
-                if(i != 0) {
-                    ShapeRange iRange = SelectRange.Duplicate();
-                    if(ArrayMode == Mode.Preview) {
-                        iRange = ShapeArray.PreviewTheme(iRange);
+            foreach(Shape iShape in SelectRange) {
+                float X = iShape.Left;
+                float Y = iShape.Top;
+
+                for(int i = 0;i < Count;i++) {
+                    if(i > 0) {
+                        ShapeRange iRange = SelectRange.Duplicate();
+                        if(ArrayMode == Mode.Preview) {iRange = ShapeArray.PreviewTheme(iRange);}
+                        iRange.Left = (float)(X - Misc.CmToPoints(Radius) * (Math.Cos(dArc * i) - 1));
+                        iRange.Top  = (float)(Y + Misc.CmToPoints(Radius) * (Math.Sin(dArc * i)));
+                        iRange.Rotation = (OType == OvalType.Rotation) ? (float)(iRange.Rotation - dTheta * i) : iRange.Rotation;
+                        ArrayRange.Add(iRange);
                     }
-                    iRange.Left     = (float)(X - Misc.CmToPoints(Radius) * (Math.Cos(dArc * i)-1));
-                    iRange.Top      = (float)(Y + Misc.CmToPoints(Radius) * (Math.Sin(dArc * i)));
-                    iRange.Rotation = (OType == OvalType.Rotation) ? (float)(iRange.Rotation - dTheta * i): iRange.Rotation;
-                    ArrayRange.Add(iRange);
                 }
             }
             return ArrayRange;
