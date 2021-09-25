@@ -57,7 +57,6 @@ namespace AdvShape {
         }
 
         private void OnKeyDownHandler(object sender,KeyEventArgs e) {
-            Misc.print(sender, "onkeydown");
             if(e.Key == Key.Escape) { this.Close(); }
         }
 
