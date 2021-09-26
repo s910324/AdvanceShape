@@ -45,7 +45,6 @@ class Boundbox {
                         default:
                             NativeShapeBoundbox(ishape);
                             break;
-
                     }
                     break;
             }
@@ -89,10 +88,10 @@ class Boundbox {
             this.Right        = right;
             this.Top          = top;
             this.Bottom       = bottom;
-            this.Width        = right - left;
+            this.Width        = right  - left;
             this.Height       = bottom - top;
-            this.Xc           = left + this.Width / 2;
-            this.Yc           = top + this.Height / 2;
+            this.Xc           = left + this.Width  / 2;
+            this.Yc           = top  + this.Height / 2;
             this.Initiallized = true;
         }
         public static Boundbox operator +(Boundbox a,Boundbox b) {
@@ -159,13 +158,15 @@ class Boundbox {
             
             ishape.Left = shape.Left;
             ishape.Top  = shape.Top;
-            float r     = (float)Math.Pow((shape.Width * shape.Width) + (shape.Height * shape.Height),0.5) / 2;
-            float xc    = shape.Left + shape.Width / 2;
-            float yc    = shape.Top - shape.Height / 2;
-            Shape iRect = iSlide.Shapes.AddShape(MsoAutoShapeType.msoShapeRectangle,xc - r,yc + r,2 * r,2 * r);
-            //iSlide.Shapes.Range(new int[] { ishape.ZOrderPosition,iRect.ZOrderPosition }).MergeShapes(MsoMergeCmd.msoMergeUnion, iRect);
-            //this.SetParameter(iRect.Left, iRect.Top, iRect.Width, iRect.Top);
-
+            float xc    = shape.Left + shape.Width  / 2;
+            float yc    = shape.Top  + shape.Height / 2;
+            Shape iRect = iSlide.Shapes.AddShape(MsoAutoShapeType.msoShapeRectangle,xc,yc,1,1);
+            iSlide.Shapes.Range(new int[] { ishape.ZOrderPosition,iRect.ZOrderPosition }).MergeShapes(MsoMergeCmd.msoMergeUnion, iRect);
+            ShapeRange mergeShape = iSlide.Shapes.Range(iSlide.Shapes.Count);
+            this.SetParameter(
+                mergeShape.Left, mergeShape.Left + mergeShape.Width,
+                mergeShape.Top,  mergeShape.Top  + mergeShape.Height);
+            mergeShape.Delete();
         }
         private void NativeShapeBoundbox(Shape ishape) {
             double ShapeRotation = (double) ishape.Rotation;
