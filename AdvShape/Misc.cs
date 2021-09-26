@@ -34,7 +34,6 @@ namespace AdvShape {
             foreach(Shape iShape in iSlide.Shapes) {
                 iShape.Name = ShapeTypeString(iShape) + iShape.Id;
             }
-            
         }
         static public string ShapeTypeString(Shape iShape) {
             string result = "";

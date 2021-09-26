@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.Office.Core;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using MsoMergeCmd = Microsoft.Office.Core.MsoMergeCmd;
 using Slide = Microsoft.Office.Interop.PowerPoint.Slide;
 using Shape = Microsoft.Office.Interop.PowerPoint.Shape;
 using Selection = Microsoft.Office.Interop.PowerPoint.Selection;
@@ -19,12 +20,7 @@ class Boundbox {
         public double Height  { get; private set; }
         public double Xc      { get; private set; }
         public double Yc      { get; private set; }
-        public double? X1     { get; private set; }
-        public double? Y1     { get; private set; }
-        public double? X2     { get; private set; }
-        public double? Y2     { get; private set; }
-        public double? Length { get; private set; }
-        public double? Angle  { get; private set; }
+
 
         public bool Initiallized { get; private set; }
 
@@ -33,8 +29,13 @@ class Boundbox {
             var ShapeAutoType = ishape.AutoShapeType;
             switch(ShapeType) {
                 case MsoShapeType.msoGroup:
+                    GroupShapeBoundBox(ishape);
                     break;
                 case MsoShapeType.msoLine:
+                    NativeShapeBoundbox(ishape);
+                    break;
+                case MsoShapeType.msoAutoShape:
+                    AutoShapeBoundBox(ishape);
                     break;
                 default:
                     switch(ShapeAutoType) {
@@ -44,11 +45,11 @@ class Boundbox {
                         default:
                             NativeShapeBoundbox(ishape);
                             break;
+
                     }
-                    
                     break;
             }
-            bool DebugMode = false;
+            bool DebugMode = true;
             if(DebugMode) {
                 Slide ActiveSlide  = Misc.ActiveSlide();
                 double R = Math.Pow(Math.Pow(ishape.Width / 2,2) + Math.Pow(ishape.Height / 2,2),0.5);
@@ -76,20 +77,22 @@ class Boundbox {
                 BLIndicator.Fill.Transparency   = (float)0.5;
                 BRIndicator.Fill.Transparency   = (float)0.5;
             }
-
         }
 
         public Boundbox() {
         }
         public Boundbox(double left, double right, double top, double bottom) {
-            this.Left   = left;
-            this.Right  = right;
-            this.Top    = top;
-            this.Bottom = bottom;
-            this.Width  = right  - left;
-            this.Height = bottom - top;
-            this.Xc     = left   + this.Width  / 2;
-            this.Yc     = top    + this.Height / 2;
+            this.SetParameter( left, right, top, bottom);
+        }
+        private void SetParameter(double left,double right,double top,double bottom) {
+            this.Left         = left;
+            this.Right        = right;
+            this.Top          = top;
+            this.Bottom       = bottom;
+            this.Width        = right - left;
+            this.Height       = bottom - top;
+            this.Xc           = left + this.Width / 2;
+            this.Yc           = top + this.Height / 2;
             this.Initiallized = true;
         }
         public static Boundbox operator +(Boundbox a,Boundbox b) {
@@ -106,8 +109,8 @@ class Boundbox {
                         Math.Min(a.Top,b.Top),Math.Max(a.Bottom,b.Bottom));
                 }
             }
-            
         }
+
         public void DebugMode() {
             Slide ActiveSlide = Misc.ActiveSlide();
             Shape ParentRect = ActiveSlide.Shapes.AddShape(MsoAutoShapeType.msoShapeRectangle,
@@ -123,44 +126,47 @@ class Boundbox {
             for (int Index = 1; Index <= ishape.GroupItems.Count; Index ++) {
                 Boundbox iBox = new Boundbox(ishape.GroupItems[Index]);
                 if(Index == 1) {
-                    this.Left   = iBox.Left;
-                    this.Right  = iBox.Right;
-                    this.Top    = iBox.Top;
-                    this.Bottom = iBox.Bottom;
+                    this.Left         = iBox.Left;
+                    this.Right        = iBox.Right;
+                    this.Top          = iBox.Top;
+                    this.Bottom       = iBox.Bottom;
+                    this.Initiallized = true;
                 } else {
-                    this.Left   = iBox.Left   < this.Left   ? iBox.Left   : this.Left;
-                    this.Right  = iBox.Right  > this.Right  ? iBox.Right  : this.Right;
-                    this.Top    = iBox.Top    < this.Top    ? iBox.Top    : this.Top;
-                    this.Bottom = iBox.Bottom > this.Bottom ? iBox.Bottom : this.Bottom;
+                    Boundbox newBox = this + iBox;
+                    this.Left         = newBox.Left;
+                    this.Right        = newBox.Right;
+                    this.Top          = newBox.Top;
+                    this.Bottom       = newBox.Bottom;
+                    this.Initiallized = true;
                 }
             }
-            this.Width  = this.Right  - this.Left;
-            this.Height = this.Bottom - this.Top;
-            this.Xc     = this.Left   + this.Width / 2;
-            this.Yc     = this.Top    + this.Height / 2;
-            this.Initiallized = true;
-        }
-
-        private void LineBoundBox(Shape ishape) {
-            double ShapeAngle    = Misc.RadToDeg(Math.Atan(ishape.Height / ishape.Width) * (ishape.VerticalFlip==MsoTriState.msoTrue ? 1 : -1) * (ishape.HorizontalFlip== MsoTriState.msoTrue ? 1 : -1));
-            double ShapeRotation = Misc.UnifiedAngle(ishape.Rotation);
-            double LineAngle     = Misc.UnifiedAngle(ShapeAngle + ShapeRotation) *-1;
-            double LineLength    = Math.Pow(Math.Pow(ishape.Width, 2) + Math.Pow(ishape.Height,2), 0.5);
         }
         private void NotPremitiveShapeBoundbox(Shape ishape) {
-            Boundbox box = new ShapeData(ishape).Boundbox;
-            this.Left    = box.Left;
-            this.Right   = box.Right;
-            this.Top     = box.Top;
-            this.Bottom  = box.Bottom;
-            this.Width   = box.Width;
-            this.Height  = box.Height;
-            this.Xc      = box.Xc;
-            this.Yc      = box.Yc;
+            Boundbox box      = new ShapeData(ishape).Boundbox;
+            this.Left         = box.Left;
+            this.Right        = box.Right;
+            this.Top          = box.Top;
+            this.Bottom       = box.Bottom;
+            this.Width        = box.Width;
+            this.Height       = box.Height;
+            this.Xc           = box.Xc;
+            this.Yc           = box.Yc;
             this.Initiallized = true;
         }
+        private void AutoShapeBoundBox(Shape shape) {
+            Slide iSlide      = Misc.ActiveSlide();
+            ShapeRange ishape = shape.Duplicate();
+            
+            ishape.Left = shape.Left;
+            ishape.Top  = shape.Top;
+            float r     = (float)Math.Pow((shape.Width * shape.Width) + (shape.Height * shape.Height),0.5) / 2;
+            float xc    = shape.Left + shape.Width / 2;
+            float yc    = shape.Top - shape.Height / 2;
+            Shape iRect = iSlide.Shapes.AddShape(MsoAutoShapeType.msoShapeRectangle,xc - r,yc + r,2 * r,2 * r);
+            //iSlide.Shapes.Range(new int[] { ishape.ZOrderPosition,iRect.ZOrderPosition }).MergeShapes(MsoMergeCmd.msoMergeUnion, iRect);
+            //this.SetParameter(iRect.Left, iRect.Top, iRect.Width, iRect.Top);
 
-
+        }
         private void NativeShapeBoundbox(Shape ishape) {
             double ShapeRotation = (double) ishape.Rotation;
             double AxisRotation  = 0;
@@ -177,9 +183,9 @@ class Boundbox {
                 AxisRotation = ShapeRotation;
             }
 
-            this.Xc  = ishape.Left + (ishape.Width  / 2);
-            this.Yc  = ishape.Top  + (ishape.Height / 2);
-            double R  = Math.Pow(Math.Pow(ishape.Width / 2,2) + Math.Pow(ishape.Height / 2,2), 0.5);
+            this.Xc      = ishape.Left + (ishape.Width  / 2);
+            this.Yc      = ishape.Top  + (ishape.Height / 2);
+            double R     = Math.Pow(Math.Pow(ishape.Width / 2,2) + Math.Pow(ishape.Height / 2,2), 0.5);
             double Theta = 90 - Misc.RadToDeg(Math.Atan(ishape.Width / ishape.Height));
 
             double axis_rotation_tl = AxisRotation + Theta;

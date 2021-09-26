@@ -60,13 +60,27 @@ namespace AdvShape {
             if(iRange.Count > 0) {
                 var app = new WPF_ShapeArray();
                 app.WindowStartupLocation = System.Windows.WindowStartupLocation.Manual;
-                double w = System.Windows.SystemParameters.WorkArea.Width;
-                double h = System.Windows.SystemParameters.WorkArea.Height;
+                double w    = System.Windows.SystemParameters.WorkArea.Width;
+                double h    = System.Windows.SystemParameters.WorkArea.Height;
                 
-                app.Left = ((w * 0.1) < 100) ?       100 : (w * 0.1);
-                app.Top  = ((h * 0.1) < 100) ? (h - 100 + app.Height) : (h * 0.9 + app.Height);
+                app.Left    = ((w * 0.1) < 100) ?       100 : (w * 0.1);
+                app.Top     = ((h * 0.1) < 100) ? (h - 100 + app.Height) : (h * 0.9 + app.Height);
+                app.Topmost = true;
                 app.Show();
             }
         }
+
+        private void button2_Click(object sender,RibbonControlEventArgs e) {
+            var app = new WPF_ShapeAlign();
+            app.WindowStartupLocation = System.Windows.WindowStartupLocation.Manual;
+            double w    = System.Windows.SystemParameters.WorkArea.Width;
+            double h    = System.Windows.SystemParameters.WorkArea.Height;
+
+            app.Left    = ((w * 0.1) < 100) ? 100 : (w * 0.1);
+            app.Top     = ((h * 0.1) < 100) ? (h - 100 + app.Height) : (h * 0.9 + app.Height);
+            app.Topmost = true;
+            app.Show();
+        }
+    
     }
 }
