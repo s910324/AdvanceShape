@@ -81,6 +81,10 @@ namespace AdvShape {
             app.Topmost = true;
             app.Show();
         }
-    
+
+        private void button3_Click(object sender,RibbonControlEventArgs e) {
+            ShapeRange iRange = Misc.SelectedShapes();
+            LineBoundBox lbb = new LineBoundBox(iRange[1]);
+        }
     }
 }

@@ -39,8 +39,10 @@ namespace AdvShape {
             this.button1 = this.Factory.CreateRibbonButton();
             this.button2 = this.Factory.CreateRibbonButton();
             this.group1 = this.Factory.CreateRibbonGroup();
+            this.button3 = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group2.SuspendLayout();
+            this.group1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tab1
@@ -78,8 +80,15 @@ namespace AdvShape {
             // 
             // group1
             // 
+            this.group1.Items.Add(this.button3);
             this.group1.Label = "group1";
             this.group1.Name = "group1";
+            // 
+            // button3
+            // 
+            this.button3.Label = "button3";
+            this.button3.Name = "button3";
+            this.button3.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button3_Click);
             // 
             // Ribbon1
             // 
@@ -91,6 +100,8 @@ namespace AdvShape {
             this.tab1.PerformLayout();
             this.group2.ResumeLayout(false);
             this.group2.PerformLayout();
+            this.group1.ResumeLayout(false);
+            this.group1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -103,6 +114,7 @@ namespace AdvShape {
         internal Microsoft.Office.Tools.Ribbon.RibbonMenu ShapeAlignMenu;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button2;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button3;
     }
 
     partial class ThisRibbonCollection {
