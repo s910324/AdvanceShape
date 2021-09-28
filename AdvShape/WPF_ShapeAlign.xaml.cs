@@ -22,38 +22,38 @@ namespace AdvShape {
             BindButtonClick();
         }
         private void BindButtonClick() {
-            this.AlignLeft_PB.Click          += (o,i) => { AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignLeft); };
-            this.AlignCent_PB.Click          += (o,i) => { AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignCenter); };
-            this.AlignRight_PB.Click         += (o,i) => { AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignRight); };
+            this.AlignLeft_PB.Click          += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignLeft); };
+            this.AlignCent_PB.Click          += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignCenter); };
+            this.AlignRight_PB.Click         += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignRight); };
 
-            this.AlignTop_PB.Click           += (o,i) => { AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTop); };
-            this.AlignMid_PB.Click           += (o,i) => { AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMid); };
-            this.AlignBottom_PB.Click        += (o,i) => { AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottom); };
+            this.AlignTop_PB.Click           += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTop); };
+            this.AlignMid_PB.Click           += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMid); };
+            this.AlignBottom_PB.Click        += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottom); };
 
-            this.AlignTopLeft_PB.Click       += (o,i) => { AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTopLeft); };
-            this.AlignTopCent_PB.Click       += (o,i) => { AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTopCenter); };
-            this.AlignTopRight_PB.Click      += (o,i) => { AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTopRight); };
+            this.AlignTopLeft_PB.Click       += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTopLeft); };
+            this.AlignTopCent_PB.Click       += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTopCenter); };
+            this.AlignTopRight_PB.Click      += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTopRight); };
 
-            this.AlignMidLeft_PB.Click       += (o,i) => { AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMidLeft); };
-            this.AlignMidCent_PB.Click       += (o,i) => { AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMidCenter); };
-            this.AlignMidRight_PB.Click      += (o,i) => { AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMidRight); };
+            this.AlignMidLeft_PB.Click       += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMidLeft); };
+            this.AlignMidCent_PB.Click       += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMidCenter); };
+            this.AlignMidRight_PB.Click      += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMidRight); };
             
-            this.AlignBottomLeft_PB.Click    += (o,i) => { AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottomLeft); };
-            this.AlignBottomCent_PB.Click    += (o,i) => { AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottomCenter); };
-            this.AlignBottomRight_PB.Click   += (o,i) => { AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottomRight); };
+            this.AlignBottomLeft_PB.Click    += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottomLeft); };
+            this.AlignBottomCent_PB.Click    += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottomCenter); };
+            this.AlignBottomRight_PB.Click   += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottomRight); };
 
-            this.SnapTop_PB.Click            += (o,i) => { AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapTop); };
-            this.SnapBottom_PB.Click         += (o,i) => { AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapBottom); };
-            this.SnapLeft_PB.Click           += (o,i) => { AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapLeft); };
-            this.SnapRight_PB.Click          += (o,i) => { AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapRight); };
+            this.SnapTop_PB.Click            += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapTop); };
+            this.SnapBottom_PB.Click         += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapBottom); };
+            this.SnapLeft_PB.Click           += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapLeft); };
+            this.SnapRight_PB.Click          += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapRight); };
             
-            this.SnapTopLeft_PB.Click        += (o,i) => { AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapTopLeft); };
-            this.SnapTopRight_PB.Click       += (o,i) => { AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapTopRight); };
-            this.SnapBottomLeft_PB.Click     += (o,i) => { AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapBottomLeft); };
-            this.SnapBottomRight_PB.Click    += (o,i) => { AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapBottomRight); };
+            this.SnapTopLeft_PB.Click        += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapTopLeft); };
+            this.SnapTopRight_PB.Click       += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapTopRight); };
+            this.SnapBottomLeft_PB.Click     += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapBottomLeft); };
+            this.SnapBottomRight_PB.Click    += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapBottomRight); };
 
-            this.DistributeH_PB.Click        += (o,i) => { ShapeDist(Microsoft.Office.Core.MsoDistributeCmd.msoDistributeHorizontally); };
-            this.DistributeV_PB.Click        += (o,i) => { ShapeDist(Microsoft.Office.Core.MsoDistributeCmd.msoDistributeVertically); };
+            this.DistributeH_PB.Click        += (o,i) => { ShapeAlign.ShapeDist(Microsoft.Office.Core.MsoDistributeCmd.msoDistributeHorizontally); };
+            this.DistributeV_PB.Click        += (o,i) => { ShapeAlign.ShapeDist(Microsoft.Office.Core.MsoDistributeCmd.msoDistributeVertically); };
 
             this.AlignLeft_PB.KeyDown        += (o,i) => { this.OnKeyDownHandler(o,i); };
             this.AlignCent_PB.KeyDown        += (o,i) => { this.OnKeyDownHandler(o,i); };
@@ -86,114 +86,85 @@ namespace AdvShape {
                     this.Close();
                     break;
                 case Key.Q:
-                    this.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTopLeft);
+                    ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTopLeft);
                     break;
                 case Key.W:
-                    this.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTopCenter);
+                    ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTopCenter);
                     break;
                 case Key.E:
-                    this.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTopRight);
+                    ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTopRight);
                     break;
                 case Key.A:
-                    this.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMidLeft);
+                    ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMidLeft);
                     break;
                 case Key.S:
-                    this.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMidCenter);
+                    ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMidCenter);
                     break;
                 case Key.D:
-                    this.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMidRight);
+                    ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMidRight);
                     break;
                 case Key.Z:
-                    this.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottomLeft);
+                    ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottomLeft);
                     break;
                 case Key.X:
-                    this.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottomCenter);
+                    ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottomCenter);
                     break;
                 case Key.C:
-                    this.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottomRight);
+                    ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottomRight);
                     break;
                 case Key.D1:
-                    this.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignLeft);
+                    ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignLeft);
                     break;
                 case Key.D2:
-                    this.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignCenter);
+                    ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignCenter);
                     break;
                 case Key.D3:
-                    this.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignRight);
+                    ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignRight);
                     break;
                 case Key.D8:
-                    this.ShapeDist(Microsoft.Office.Core.MsoDistributeCmd.msoDistributeHorizontally);
+                    ShapeAlign.ShapeDist(Microsoft.Office.Core.MsoDistributeCmd.msoDistributeHorizontally);
                     break;
                 case Key.D9:
-                    this.ShapeDist(Microsoft.Office.Core.MsoDistributeCmd.msoDistributeVertically);
+                    ShapeAlign.ShapeDist(Microsoft.Office.Core.MsoDistributeCmd.msoDistributeVertically);
                     break;
                 case Key.R:
-                    this.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTop);
+                    ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTop);
                     break;
                 case Key.F:
-                    this.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMid);
+                    ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMid);
                     break;
                 case Key.V:
-                    this.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottom);
+                    ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottom);
                     break;
 
                 case Key.I:
-                    this.AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapTopLeft);
+                    ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapTopLeft);
                     break;
                 case Key.O:
-                    this.AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapTop);
+                    ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapTop);
                     break;
                 case Key.P:
-                    this.AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapTopRight);
+                    ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapTopRight);
                     break;
                 case Key.K:
-                    this.AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapLeft);
+                    ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapLeft);
                     break;
                 case Key.Separator:
-                    this.AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapRight);
+                    ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapRight);
                     break;
                 case Key.OemComma:
-                    this.AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapBottomLeft);
+                    ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapBottomLeft);
                     break;
                 case Key.OemPeriod:
-                    this.AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapBottom);
+                    ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapBottom);
                     break;
                 case Key.OemQuestion:
-                    this.AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapBottomRight);
+                    ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeSnapBottomRight);
                     break;
             }
         }
 
-        private void AlignSelectedShapes(ShapeAlign.Mode Mode) {
-            ShapeRange SRange = Misc.SelectedShapes();
-            int ShapeCount    = SRange.Count;
-            switch(ShapeCount) {
-                case 0:
-                    break;
-                case 1:
-                    ShapeAlign.Align(SRange[1],Mode);
-                    break;
-                default:
-                    Shape AnchorShape = SRange[1];
-                    for(int Index = 2;Index <= ShapeCount;Index++) {
-                        Shape FloatShape = SRange[Index];
-                        ShapeAlign.Align(AnchorShape,FloatShape,Mode);
-                    }
-                    break;
-            }
-        }
-        private void ShapeDist(Microsoft.Office.Core.MsoDistributeCmd Mode) {
-            ShapeRange SRange = Misc.SelectedShapes();
-            int ShapeCount = SRange.Count;
-            switch(ShapeCount) {
-                case 0:
-                    break;
-                case 1:
-                    break;
-                default:
-                    SRange.Distribute(Mode,Microsoft.Office.Core.MsoTriState.msoFalse);
-                    break;
-            }
-        }
+
+
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml.Linq;
 using PowerPoint = Microsoft.Office.Interop.PowerPoint;
 using Office = Microsoft.Office.Core;
+using Microsoft.Office.Interop.PowerPoint;
 
 namespace AdvShape
 {
@@ -12,11 +13,17 @@ namespace AdvShape
     {
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
+            Application.WindowSelectionChange += this.test;
+
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
         }
+        private void test(PowerPoint.Selection o) {
+            Misc.print("123");
+        }
+       
 
         #region VSTO generated code
 
