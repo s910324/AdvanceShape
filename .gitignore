@@ -1,4 +1,5 @@
 /AdvShape/bin/*
 /AdvShape/obj/*
 /package/*
-
+.vs
+UpgradeLog.htm
