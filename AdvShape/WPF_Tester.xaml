@@ -15,7 +15,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <local:AdvTextBox Grid.Row="0" Grid.Column="0" Height="23" Width="200"/>
+        <local:AdvSpinBox Grid.Row="0" Grid.Column="0" Height="23" Width="200" />
 
     </Grid>
 </Window>

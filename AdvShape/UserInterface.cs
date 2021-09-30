@@ -19,7 +19,7 @@ using System.Windows.Controls;
 
 namespace AdvShape {
 
-    class UserInterface {
+    public class UserInterface {
 
 
 
@@ -43,6 +43,11 @@ namespace AdvShape {
 
         public double? NumericValue { get; private set; }
         public bool    InputValid   { get; private set; }
+        private string text;
+        public new string Text {
+            get {return text;}
+            set {text = value; this.TextBoxOnChangeFormat();}
+        }
 
         public ParseDataType ParseType  = ParseDataType.String;
         public Double?       LowerLimit = null;
@@ -119,20 +124,65 @@ namespace AdvShape {
         }
     }
     public class AdvSpinBox:UserControl {
+        private Grid       grid;
+        private Button     buttonUp;
+        private Button     buttonDown;
+        private AdvTextBox advTextBox;
+        public  Double     Increment;
+        Dictionary<string,Color> Theme { 
+            get { return this.advTextBox.Theme; }
+            set { this.advTextBox.Theme = value; }
+        }
+        public String Text {
+            get { return this.advTextBox.Text; }
+            set { this.advTextBox.Text = value; }
+        }
+        public Double? NumericValue {
+            get { return this.advTextBox.NumericValue; }
+        }
+        public bool InputValid {
+            get { return this.advTextBox.InputValid; }
+        }
+        public AdvTextBox.ParseDataType ParseType {
+            get { return this.advTextBox.ParseType; }
+            set { this.advTextBox.ParseType = value; }
+        }
+        public Double? LowerLimit {
+            get { return this.advTextBox.LowerLimit; }
+            set { this.advTextBox.LowerLimit = value; }
+        }
+        public Double? UpperLimit {
+            get { return this.advTextBox.LowerLimit; }
+            set { this.advTextBox.LowerLimit = value; }
+        }
 
         public AdvSpinBox() {
             
-            this.s();
+            this.InitializedComponents();
         }
-        private void s() {
-            System.Windows.Controls.Grid grid = this.GenerateGrid(new string[] { "*","*" },new string[] { "*","15" });
-            AdvTextBox advTextBox = new AdvTextBox();
-            Button buttonUp       = new Button();
-            Button buttonDown     = new Button();
-            this.setRowColumn(grid,advTextBox, 0, 0, 1, 2);
-            this.setRowColumn(grid,buttonUp,   0, 1, 1, 2);
-            this.setRowColumn(grid,buttonDown, 1, 1, 1, 2);
+        private void InitializedComponents() {
+            this.grid       = this.GenerateGrid(new string[] { "*","*" },new string[] { "*","25" });
+            this.advTextBox = new AdvTextBox();
+            this.buttonUp   = new Button();
+            this.buttonDown = new Button();
+            this.buttonUp.Content    = "▲";
+            this.buttonDown.Content  = "▼";
+            this.buttonUp.FontSize   = 8;
+            this.buttonDown.FontSize = 8;
+            this.setRowColumn(grid,advTextBox, 0, 0, 2, 1);
+            this.setRowColumn(grid,buttonUp,   0, 1, 1, 1);
+            this.setRowColumn(grid,buttonDown, 1, 1, 1, 1);
             this.AddChild(grid);
+            this.buttonUp.Click   += (o,i) => { if(this.advTextBox.NumericValue != null) 
+                { this.advTextBox.Text = (this.advTextBox.NumericValue + Increment).ToString(); }};
+            this.buttonDown.Click += (o,i) => { if(this.advTextBox.NumericValue != null) 
+                { this.advTextBox.Text = (this.advTextBox.NumericValue - Increment).ToString(); }};
+        }
+
+
+        public AdvSpinBox setParseProperty(AdvTextBox.ParseDataType Type,Double? LowerLimit,Double? UpperLimit) {
+            this.advTextBox.setParseProperty(Type,LowerLimit,UpperLimit);
+            return this;
         }
 
         private void setRowColumn(Grid grid, UIElement element,
@@ -151,12 +201,13 @@ namespace AdvShape {
 
                 if(RowDim.ToLower() == "auto") {
                     UnitType = GridUnitType.Auto;
-                }
-                if(RowDim == "*") {
+                } else if(RowDim == "*") {
                     UnitType = GridUnitType.Star;
                 } else if(RowDim.Contains("*")) {
                     UnitType = GridUnitType.Star;
                     Dimension = int.Parse(RowDim.Replace("*",""));
+                } else if(int.TryParse(RowDim,out Dimension)) {
+                    UnitType = GridUnitType.Pixel;
                 }
 
                 RowDefinition RowDef = new RowDefinition();
@@ -169,12 +220,13 @@ namespace AdvShape {
 
                 if(ColDim.ToLower() == "auto") {
                     UnitType = GridUnitType.Auto;
-                }
-                if(ColDim == "*") {
+                } else if(ColDim == "*") {
                     UnitType = GridUnitType.Star;
                 } else if(ColDim.Contains("*")) {
                     UnitType = GridUnitType.Star;
                     Dimension = int.Parse(ColDim.Replace("*",""));
+                } else if(int.TryParse(ColDim,out Dimension)) {
+                    UnitType = GridUnitType.Pixel;
                 }
 
                 ColumnDefinition ColDef = new ColumnDefinition();

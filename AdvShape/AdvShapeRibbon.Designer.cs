@@ -60,9 +60,8 @@
             this.AlignBottomRight_RBPB = this.Factory.CreateRibbonButton();
             this.ShapeArrayDialog_RBPB = this.Factory.CreateRibbonButton();
             this.group3 = this.Factory.CreateRibbonGroup();
-            this.editBox2 = this.Factory.CreateRibbonEditBox();
-            this.editBox3 = this.Factory.CreateRibbonEditBox();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.button1 = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             this.box1.SuspendLayout();
@@ -239,27 +238,20 @@
             // 
             // group3
             // 
-            this.group3.Items.Add(this.editBox2);
-            this.group3.Items.Add(this.editBox3);
+            this.group3.Items.Add(this.button1);
             this.group3.Label = "group3";
             this.group3.Name = "group3";
-            // 
-            // editBox2
-            // 
-            this.editBox2.Label = "editBox2";
-            this.editBox2.Name = "editBox2";
-            this.editBox2.Text = null;
-            // 
-            // editBox3
-            // 
-            this.editBox3.Label = "editBox3";
-            this.editBox3.Name = "editBox3";
-            this.editBox3.Text = null;
             // 
             // notifyIcon1
             // 
             this.notifyIcon1.Text = "notifyIcon1";
             this.notifyIcon1.Visible = true;
+            // 
+            // button1
+            // 
+            this.button1.Label = "button1";
+            this.button1.Name = "button1";
+            this.button1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click);
             // 
             // Ribbon1
             // 
@@ -308,9 +300,8 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonSeparator separator3;
         internal Microsoft.Office.Tools.Ribbon.RibbonSeparator separator4;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group3;
-        internal Microsoft.Office.Tools.Ribbon.RibbonEditBox editBox2;
-        internal Microsoft.Office.Tools.Ribbon.RibbonEditBox editBox3;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;
     }
 
     partial class ThisRibbonCollection {

@@ -77,6 +77,9 @@ namespace AdvShape {
             LineBoundBox lbb = new LineBoundBox(iRange[1]);
         }
 
-
+        private void button1_Click(object sender,RibbonControlEventArgs e) {
+            WPF_Tester test = new WPF_Tester();
+            test.Show();
+        }
     }
 }
