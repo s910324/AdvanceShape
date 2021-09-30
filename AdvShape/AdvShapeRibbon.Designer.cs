@@ -1,9 +1,4 @@
-﻿
-using DocumentFormat.OpenXml.Office.CustomUI;
-using Microsoft.Office.Tools.Ribbon;
-using System.Windows.Controls.Ribbon;
-
-namespace AdvShape {
+﻿namespace AdvShape {
     partial class Ribbon1 : Microsoft.Office.Tools.Ribbon.RibbonBase {
         /// <summary>
         /// Required designer variable.
@@ -37,6 +32,7 @@ namespace AdvShape {
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tab1 = this.Factory.CreateRibbonTab();
             this.group2 = this.Factory.CreateRibbonGroup();
             this.group1 = this.Factory.CreateRibbonGroup();
@@ -46,26 +42,31 @@ namespace AdvShape {
             this.AlignTop_RBPB = this.Factory.CreateRibbonButton();
             this.AlignMid_RBPB = this.Factory.CreateRibbonButton();
             this.AlignBottom_RBPB = this.Factory.CreateRibbonButton();
+            this.separator1 = this.Factory.CreateRibbonSeparator();
             this.AlignLeft_RBPB = this.Factory.CreateRibbonButton();
             this.AlignCent_RBPB = this.Factory.CreateRibbonButton();
             this.AlignRight_RBPB = this.Factory.CreateRibbonButton();
+            this.separator2 = this.Factory.CreateRibbonSeparator();
             this.AlignTopLeft_RBPB = this.Factory.CreateRibbonButton();
             this.AlignMidLeft_RBPB = this.Factory.CreateRibbonButton();
             this.AlignBottomLeft_RBPB = this.Factory.CreateRibbonButton();
+            this.separator3 = this.Factory.CreateRibbonSeparator();
             this.AlignTopCent_RBPB = this.Factory.CreateRibbonButton();
             this.AlignMidCent_RBPB = this.Factory.CreateRibbonButton();
             this.AlignBottomCent_RBPB = this.Factory.CreateRibbonButton();
+            this.separator4 = this.Factory.CreateRibbonSeparator();
             this.AlignTopRight_RBPB = this.Factory.CreateRibbonButton();
             this.AlignMidRight_RBPB = this.Factory.CreateRibbonButton();
             this.AlignBottomRight_RBPB = this.Factory.CreateRibbonButton();
             this.ShapeArrayDialog_RBPB = this.Factory.CreateRibbonButton();
-            this.separator1 = this.Factory.CreateRibbonSeparator();
-            this.separator2 = this.Factory.CreateRibbonSeparator();
-            this.separator3 = this.Factory.CreateRibbonSeparator();
-            this.separator4 = this.Factory.CreateRibbonSeparator();
+            this.group3 = this.Factory.CreateRibbonGroup();
+            this.editBox2 = this.Factory.CreateRibbonEditBox();
+            this.editBox3 = this.Factory.CreateRibbonEditBox();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.tab1.SuspendLayout();
             this.group1.SuspendLayout();
             this.box1.SuspendLayout();
+            this.group3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tab1
@@ -73,6 +74,7 @@ namespace AdvShape {
             this.tab1.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office;
             this.tab1.Groups.Add(this.group2);
             this.tab1.Groups.Add(this.group1);
+            this.tab1.Groups.Add(this.group3);
             this.tab1.Label = "TabAddIns";
             this.tab1.Name = "tab1";
             // 
@@ -142,6 +144,10 @@ namespace AdvShape {
             this.AlignBottom_RBPB.Name = "AlignBottom_RBPB";
             this.AlignBottom_RBPB.ShowImage = true;
             // 
+            // separator1
+            // 
+            this.separator1.Name = "separator1";
+            // 
             // AlignLeft_RBPB
             // 
             this.AlignLeft_RBPB.Label = "Align Left";
@@ -159,6 +165,10 @@ namespace AdvShape {
             this.AlignRight_RBPB.Label = "Align Right";
             this.AlignRight_RBPB.Name = "AlignRight_RBPB";
             this.AlignRight_RBPB.ShowImage = true;
+            // 
+            // separator2
+            // 
+            this.separator2.Name = "separator2";
             // 
             // AlignTopLeft_RBPB
             // 
@@ -178,6 +188,10 @@ namespace AdvShape {
             this.AlignBottomLeft_RBPB.Name = "AlignBottomLeft_RBPB";
             this.AlignBottomLeft_RBPB.ShowImage = true;
             // 
+            // separator3
+            // 
+            this.separator3.Name = "separator3";
+            // 
             // AlignTopCent_RBPB
             // 
             this.AlignTopCent_RBPB.Label = "Align Top Center";
@@ -195,6 +209,10 @@ namespace AdvShape {
             this.AlignBottomCent_RBPB.Label = "Align Bottom Center";
             this.AlignBottomCent_RBPB.Name = "AlignBottomCent_RBPB";
             this.AlignBottomCent_RBPB.ShowImage = true;
+            // 
+            // separator4
+            // 
+            this.separator4.Name = "separator4";
             // 
             // AlignTopRight_RBPB
             // 
@@ -219,21 +237,29 @@ namespace AdvShape {
             this.ShapeArrayDialog_RBPB.Label = "Shape Array";
             this.ShapeArrayDialog_RBPB.Name = "ShapeArrayDialog_RBPB";
             // 
-            // separator1
+            // group3
             // 
-            this.separator1.Name = "separator1";
+            this.group3.Items.Add(this.editBox2);
+            this.group3.Items.Add(this.editBox3);
+            this.group3.Label = "group3";
+            this.group3.Name = "group3";
             // 
-            // separator2
+            // editBox2
             // 
-            this.separator2.Name = "separator2";
+            this.editBox2.Label = "editBox2";
+            this.editBox2.Name = "editBox2";
+            this.editBox2.Text = null;
             // 
-            // separator3
+            // editBox3
             // 
-            this.separator3.Name = "separator3";
+            this.editBox3.Label = "editBox3";
+            this.editBox3.Name = "editBox3";
+            this.editBox3.Text = null;
             // 
-            // separator4
+            // notifyIcon1
             // 
-            this.separator4.Name = "separator4";
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
             // 
             // Ribbon1
             // 
@@ -247,6 +273,8 @@ namespace AdvShape {
             this.group1.PerformLayout();
             this.box1.ResumeLayout(false);
             this.box1.PerformLayout();
+            this.group3.ResumeLayout(false);
+            this.group3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -279,6 +307,10 @@ namespace AdvShape {
         internal Microsoft.Office.Tools.Ribbon.RibbonSeparator separator2;
         internal Microsoft.Office.Tools.Ribbon.RibbonSeparator separator3;
         internal Microsoft.Office.Tools.Ribbon.RibbonSeparator separator4;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group3;
+        internal Microsoft.Office.Tools.Ribbon.RibbonEditBox editBox2;
+        internal Microsoft.Office.Tools.Ribbon.RibbonEditBox editBox3;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
     }
 
     partial class ThisRibbonCollection {

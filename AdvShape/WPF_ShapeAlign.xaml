@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:AdvShape"
              mc:Ignorable="d" 
              Width="375" Height="241">
+    
     <Grid Name="Grid" Background="#FFD1D1D1" Width="370" Height="210">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50" />
