@@ -18,6 +18,7 @@ namespace AdvShape {
     public partial class WPF_Tester:Window {
         public WPF_Tester() {
             InitializeComponent();
+            this.spin.setParseProperty(AdvTextBox.ParseDataType.Integer,null,null);
         }
     }
 }

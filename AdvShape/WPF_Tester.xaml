@@ -15,7 +15,9 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <local:AdvSpinBox Grid.Row="0" Grid.Column="0" Height="23" Width="200" />
+        <local:AdvSpinBox x:Name="spin"  Grid.Row="0" Grid.Column="0" Height="23" Width="200" Text="1"
+                          VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
 
     </Grid>
 </Window>
+ 

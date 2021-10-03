@@ -16,7 +16,8 @@ using GridUnitType = System.Windows.GridUnitType;
 using UIElement = System.Windows.UIElement;
 using System.Windows.Input;
 using System.Windows.Controls;
-
+using VerticalAlignment = System.Windows.VerticalAlignment;
+using HorizontalAlignment = System.Windows.HorizontalAlignment;
 namespace AdvShape {
 
     public class UserInterface {
@@ -43,11 +44,11 @@ namespace AdvShape {
 
         public double? NumericValue { get; private set; }
         public bool    InputValid   { get; private set; }
-        private string text;
+/*        private string text;
         public new string Text {
             get {return text;}
             set {text = value; this.TextBoxOnChangeFormat();}
-        }
+        }*/
 
         public ParseDataType ParseType  = ParseDataType.String;
         public Double?       LowerLimit = null;
@@ -94,6 +95,7 @@ namespace AdvShape {
         }
 
         private void TextBoxOnChangeFormat() {
+            Misc.print("textChanged");
             bool RangeValid = false;
 
             if(this.ParseType != ParseDataType.String) {
@@ -157,11 +159,13 @@ namespace AdvShape {
         }
 
         public AdvSpinBox() {
-            
             this.InitializedComponents();
+            this.Style.BasedOn = advTextBox.Style;
         }
         private void InitializedComponents() {
+            
             this.grid       = this.GenerateGrid(new string[] { "*","*" },new string[] { "*","25" });
+            this.Increment = 1;
             this.advTextBox = new AdvTextBox();
             this.buttonUp   = new Button();
             this.buttonDown = new Button();
@@ -174,9 +178,12 @@ namespace AdvShape {
             this.setRowColumn(grid,buttonDown, 1, 1, 1, 1);
             this.AddChild(grid);
             this.buttonUp.Click   += (o,i) => { if(this.advTextBox.NumericValue != null) 
-                { this.advTextBox.Text = (this.advTextBox.NumericValue + Increment).ToString(); }};
+                { this.Text = (this.advTextBox.NumericValue + this.Increment).ToString(); }
+                Misc.print("clicked",this.advTextBox.NumericValue,this.advTextBox.Text, this.Text, "XX");
+            };
             this.buttonDown.Click += (o,i) => { if(this.advTextBox.NumericValue != null) 
                 { this.advTextBox.Text = (this.advTextBox.NumericValue - Increment).ToString(); }};
+            this.Text = this.Text;
         }
 
 
