@@ -70,7 +70,7 @@ namespace AdvShape {
                 app.Show();
             }
         }
-
+        
 
         private void button3_Click(object sender,RibbonControlEventArgs e) {
             ShapeRange iRange = Misc.SelectedShapes();
@@ -80,6 +80,83 @@ namespace AdvShape {
         private void button1_Click(object sender,RibbonControlEventArgs e) {
             WPF_Tester test = new WPF_Tester();
             test.Show();
+        }
+        protected void ShapeRibbonSetValue() {
+            ShapeRange SelectRange = Misc.SelectedShapes();
+            if(SelectRange.Count > 0) {
+                List<float> width  = new List<float>();
+                List<float> height = new List<float>();
+                List<float> angle  = new List<float>();
+
+                foreach(Shape ishape in Misc.SelectedShapes()) {
+                    width.Add(ishape.Width);
+                    height.Add(ishape.Height);
+                    angle.Add(ishape.Rotation);
+                }
+
+                HashSet<float> hashWidth  = width.ToHashSet();
+                HashSet<float> hashheight = height.ToHashSet();
+                HashSet<float> hashangle  = angle.ToHashSet();
+                ShapeWidth_RBET.Text  = (hashWidth.Count  == 1) ? Misc.PointsToCm(hashWidth.First() ).ToString(): "";
+                ShapeHeight_RBET.Text = (hashheight.Count == 1) ? Misc.PointsToCm(hashheight.First()).ToString(): "";
+                ShapeAngle_RBET.Text  = (hashangle.Count  == 1) ? Misc.PointsToCm(hashangle.First() ).ToString(): "";
+            }
+        }
+        private void ShapeWidth_RBET_TextChanged(object sender,RibbonControlEventArgs e) {
+            Double? ParseVal = Misc.MathParse(this.ShapeWidth_RBET.Text);
+            if(ParseVal != null) {
+                foreach(Shape ishape in Misc.SelectedShapes()) {
+                    if(ParseVal != null) { ishape.Width = (float)Misc.CmToPoints((double)ParseVal); }
+                }
+            }
+        }
+
+        private void ShapeHeight_RBET_TextChanged(object sender,RibbonControlEventArgs e) {
+            Double? ParseVal = Misc.MathParse(this.ShapeHeight_RBET.Text);
+            if(ParseVal != null) {
+                foreach(Shape ishape in Misc.SelectedShapes()) {
+                    if(ParseVal != null) { ishape.Height = (float)Misc.CmToPoints((double)ParseVal); }
+                }
+            }
+        }
+
+        private void ShapeAngle_RBET_TextChanged(object sender,RibbonControlEventArgs e) {
+            Double? ParseVal = Misc.MathParse(this.ShapeAngle_RBET.Text);
+            if(ParseVal != null) {
+                foreach(Shape ishape in Misc.SelectedShapes()) {
+                    if(ParseVal != null) { ishape.Rotation = (float)Misc.CmToPoints((double)ParseVal); }
+                }
+            }
+        }
+
+        private void ShapeWidthDec_RBPB_Click(object sender,RibbonControlEventArgs e) {
+            Double? ParseVal = Misc.MathParse(this.ShapeWidth_RBET.Text);
+            if(ParseVal != null) {this.ShapeWidth_RBET.Text = (ParseVal - 0.1).ToString();}
+        }
+
+        private void ShapeHeightDec_RBPB_Click(object sender,RibbonControlEventArgs e) {
+            Double? ParseVal = Misc.MathParse(this.ShapeHeight_RBET.Text);
+            if(ParseVal != null) { this.ShapeHeight_RBET.Text = (ParseVal - 0.1).ToString(); }
+        }
+
+        private void ShapeAngleDec_RBPB_Click(object sender,RibbonControlEventArgs e) {
+            Double? ParseVal = Misc.MathParse(this.ShapeAngle_RBET.Text);
+            if(ParseVal != null) { this.ShapeAngle_RBET.Text = (ParseVal - 0.1).ToString(); }
+        }
+
+        private void ShapeWidthInc_RBPB_Click(object sender,RibbonControlEventArgs e) {
+            Double? ParseVal = Misc.MathParse(this.ShapeWidth_RBET.Text);
+            if(ParseVal != null) { this.ShapeWidth_RBET.Text = (ParseVal + 0.1).ToString(); }
+        }
+
+        private void ShapeHeightInc_RBPB_Click(object sender,RibbonControlEventArgs e) {
+            Double? ParseVal = Misc.MathParse(this.ShapeHeight_RBET.Text);
+            if(ParseVal != null) { this.ShapeHeight_RBET.Text = (ParseVal + 0.1).ToString(); }
+        }
+
+        private void ShapeAngleInc_RBPB_Click(object sender,RibbonControlEventArgs e) {
+            Double? ParseVal = Misc.MathParse(this.ShapeAngle_RBET.Text);
+            if(ParseVal != null) { this.ShapeAngle_RBET.Text = (ParseVal + 0.1).ToString(); }
         }
     }
 }

@@ -160,7 +160,7 @@ namespace AdvShape {
 
         public AdvSpinBox() {
             this.InitializedComponents();
-            this.Style.BasedOn = advTextBox.Style;
+            /*this.Style.BasedOn = advTextBox.Style;*/
         }
         private void InitializedComponents() {
             
