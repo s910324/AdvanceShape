@@ -5,14 +5,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls.Ribbon;
+
 using RibbonButton = Microsoft.Office.Tools.Ribbon.RibbonButton;
 using RibbonToggleButton = Microsoft.Office.Tools.Ribbon.RibbonToggleButton;
+using RibbonControl = Microsoft.Office.Tools.Ribbon.RibbonControl;
 
 namespace AdvShape {
     public partial class Ribbon1 {
         private void Ribbon1_Load(object sender,RibbonUIEventArgs e) {
             this.InitRibbon();
-            
+            //WindowSelectionChange
+            //SlideSelectionChanged
+            Globals.ThisAddIn.Application.WindowSelectionChange += (o)=> {
+                this.SelectionRibbonUpdate();
+                this.ShapeRibbonSetValue();
+            };
         }
 
         private ShapeRange GetSelectedShapes() {
@@ -22,6 +29,7 @@ namespace AdvShape {
         }
 
         private void InitRibbon() {
+            
             this.ShapeAlignDialog_RBPB.Click += (o,i) => { this.ShowShapeAlignDialig(); };
             this.ShapeArrayDialog_RBPB.Click += (o,i) => { this.ShowShapeArrayDialig(); };
             this.AlignLeft_RBPB.Click        += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignLeft); };
@@ -43,6 +51,7 @@ namespace AdvShape {
             this.AlignBottomLeft_RBPB.Click  += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottomLeft); };
             this.AlignBottomCent_RBPB.Click  += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottomCenter); };
             this.AlignBottomRight_RBPB.Click += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottomRight); };
+
         }
         private void ShowShapeAlignDialig() {
             var app = new WPF_ShapeAlign();
@@ -94,12 +103,25 @@ namespace AdvShape {
                     angle.Add(ishape.Rotation);
                 }
 
-                HashSet<float> hashWidth  = width.ToHashSet();
-                HashSet<float> hashheight = height.ToHashSet();
-                HashSet<float> hashangle  = angle.ToHashSet();
-                ShapeWidth_RBET.Text  = (hashWidth.Count  == 1) ? Misc.PointsToCm(hashWidth.First() ).ToString(): "";
-                ShapeHeight_RBET.Text = (hashheight.Count == 1) ? Misc.PointsToCm(hashheight.First()).ToString(): "";
-                ShapeAngle_RBET.Text  = (hashangle.Count  == 1) ? Misc.PointsToCm(hashangle.First() ).ToString(): "";
+                HashSet<float> hashWidth   = width.ToHashSet();
+                HashSet<float> hashheight  = height.ToHashSet();
+                HashSet<float> hashangle   = angle.ToHashSet();
+                this.ShapeWidth_RBET.Text  = (hashWidth.Count  == 1) ? Math.Round(Misc.PointsToCm(hashWidth.First()), 3).ToString(): "";
+                this.ShapeHeight_RBET.Text = (hashheight.Count == 1) ? Math.Round(Misc.PointsToCm(hashheight.First()),3).ToString(): "";
+                this.ShapeAngle_RBET.Text  = (hashangle.Count  == 1) ? Math.Round(hashangle.First(), 3).ToString(): "";
+            }
+        }
+        protected void SelectionRibbonUpdate() {
+            RibbonControl[] UISets = new RibbonControl[] {
+                this.ShapeWidth_RBET,       this.ShapeHeight_RBET,      this.ShapeAngle_RBET,
+                this.ShapeWidthDec_RBPB,    this.ShapeHeightDec_RBPB,   this.ShapeAngleDec_RBPB,
+                this.ShapeWidthInc_RBPB,    this.ShapeHeightInc_RBPB,   this.ShapeAngleInc_RBPB,
+                this.ShapeAlignDialog_RBPB, this.ShapeArrayDialog_RBPB, this.ShapeAlignMenu
+            };
+
+            ShapeRange SelectRange = Misc.SelectedShapes();
+            foreach(RibbonControl UI in UISets) {
+                UI.Enabled = (SelectRange.Count > 0);
             }
         }
         private void ShapeWidth_RBET_TextChanged(object sender,RibbonControlEventArgs e) {
@@ -157,6 +179,14 @@ namespace AdvShape {
         private void ShapeAngleInc_RBPB_Click(object sender,RibbonControlEventArgs e) {
             Double? ParseVal = Misc.MathParse(this.ShapeAngle_RBET.Text);
             if(ParseVal != null) { this.ShapeAngle_RBET.Text = (ParseVal + 0.1).ToString(); }
+        }
+
+        private void ShapeAlignDialog_RBPB_Click(object sender,RibbonControlEventArgs e) {
+            
+        }
+
+        private void ShapeArrayDialog_RBPB_Click(object sender,RibbonControlEventArgs e) {
+
         }
     }
 }

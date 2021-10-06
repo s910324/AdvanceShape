@@ -14,14 +14,14 @@ namespace AdvShape
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             Application.WindowSelectionChange += this.test;
-
+               
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
         }
         private void test(PowerPoint.Selection o) {
-            Misc.print("123");
+            /*Microsoft.Office.Core.IRibbonUI.InvalidateControl(String)*/
         }
        
 

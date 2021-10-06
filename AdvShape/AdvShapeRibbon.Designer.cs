@@ -66,23 +66,23 @@
             this.group3 = this.Factory.CreateRibbonGroup();
             this.box2 = this.Factory.CreateRibbonBox();
             this.ShapeWidthDec_RBPB = this.Factory.CreateRibbonButton();
+            this.label4 = this.Factory.CreateRibbonLabel();
             this.ShapeWidth_RBET = this.Factory.CreateRibbonEditBox();
-            this.ShapeWidthInc_RBPB = this.Factory.CreateRibbonButton();
             this.label1 = this.Factory.CreateRibbonLabel();
+            this.ShapeWidthInc_RBPB = this.Factory.CreateRibbonButton();
             this.box3 = this.Factory.CreateRibbonBox();
             this.ShapeHeightDec_RBPB = this.Factory.CreateRibbonButton();
+            this.label5 = this.Factory.CreateRibbonLabel();
             this.ShapeHeight_RBET = this.Factory.CreateRibbonEditBox();
-            this.ShapeHeightInc_RBPB = this.Factory.CreateRibbonButton();
             this.label2 = this.Factory.CreateRibbonLabel();
+            this.ShapeHeightInc_RBPB = this.Factory.CreateRibbonButton();
             this.box4 = this.Factory.CreateRibbonBox();
             this.ShapeAngleDec_RBPB = this.Factory.CreateRibbonButton();
-            this.ShapeAngle_RBET = this.Factory.CreateRibbonEditBox();
-            this.ShapeAngleInc_RBPB = this.Factory.CreateRibbonButton();
-            this.label3 = this.Factory.CreateRibbonLabel();
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.label4 = this.Factory.CreateRibbonLabel();
-            this.label5 = this.Factory.CreateRibbonLabel();
             this.label6 = this.Factory.CreateRibbonLabel();
+            this.ShapeAngle_RBET = this.Factory.CreateRibbonEditBox();
+            this.label3 = this.Factory.CreateRibbonLabel();
+            this.ShapeAngleInc_RBPB = this.Factory.CreateRibbonButton();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.tab1.SuspendLayout();
             this.group2.SuspendLayout();
             this.group1.SuspendLayout();
@@ -99,7 +99,7 @@
             this.tab1.Groups.Add(this.group2);
             this.tab1.Groups.Add(this.group1);
             this.tab1.Groups.Add(this.group3);
-            this.tab1.Label = "TabAddIns";
+            this.tab1.Label = "AdvShape";
             this.tab1.Name = "tab1";
             // 
             // group2
@@ -132,6 +132,7 @@
             // 
             this.ShapeAlignDialog_RBPB.Label = "Shape Align";
             this.ShapeAlignDialog_RBPB.Name = "ShapeAlignDialog_RBPB";
+            this.ShapeAlignDialog_RBPB.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ShapeAlignDialog_RBPB_Click);
             // 
             // ShapeAlignMenu
             // 
@@ -268,6 +269,7 @@
             // 
             this.ShapeArrayDialog_RBPB.Label = "Shape Array";
             this.ShapeArrayDialog_RBPB.Name = "ShapeArrayDialog_RBPB";
+            this.ShapeArrayDialog_RBPB.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ShapeArrayDialog_RBPB_Click);
             // 
             // button1
             // 
@@ -280,7 +282,7 @@
             this.group3.Items.Add(this.box2);
             this.group3.Items.Add(this.box3);
             this.group3.Items.Add(this.box4);
-            this.group3.Label = "Shape";
+            this.group3.Label = "Shape Attributes";
             this.group3.Name = "group3";
             // 
             // box2
@@ -298,6 +300,11 @@
             this.ShapeWidthDec_RBPB.Name = "ShapeWidthDec_RBPB";
             this.ShapeWidthDec_RBPB.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ShapeWidthDec_RBPB_Click);
             // 
+            // label4
+            // 
+            this.label4.Label = "⇆";
+            this.label4.Name = "label4";
+            // 
             // ShapeWidth_RBET
             // 
             this.ShapeWidth_RBET.Label = "editBox1";
@@ -306,16 +313,16 @@
             this.ShapeWidth_RBET.Text = null;
             this.ShapeWidth_RBET.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ShapeWidth_RBET_TextChanged);
             // 
+            // label1
+            // 
+            this.label1.Label = " cm";
+            this.label1.Name = "label1";
+            // 
             // ShapeWidthInc_RBPB
             // 
             this.ShapeWidthInc_RBPB.Label = "▸";
             this.ShapeWidthInc_RBPB.Name = "ShapeWidthInc_RBPB";
             this.ShapeWidthInc_RBPB.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ShapeWidthInc_RBPB_Click);
-            // 
-            // label1
-            // 
-            this.label1.Label = " cm";
-            this.label1.Name = "label1";
             // 
             // box3
             // 
@@ -332,6 +339,11 @@
             this.ShapeHeightDec_RBPB.Name = "ShapeHeightDec_RBPB";
             this.ShapeHeightDec_RBPB.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ShapeHeightDec_RBPB_Click);
             // 
+            // label5
+            // 
+            this.label5.Label = "⇵";
+            this.label5.Name = "label5";
+            // 
             // ShapeHeight_RBET
             // 
             this.ShapeHeight_RBET.Label = "editBox2";
@@ -340,16 +352,16 @@
             this.ShapeHeight_RBET.Text = null;
             this.ShapeHeight_RBET.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ShapeHeight_RBET_TextChanged);
             // 
+            // label2
+            // 
+            this.label2.Label = " cm";
+            this.label2.Name = "label2";
+            // 
             // ShapeHeightInc_RBPB
             // 
             this.ShapeHeightInc_RBPB.Label = "▸";
             this.ShapeHeightInc_RBPB.Name = "ShapeHeightInc_RBPB";
             this.ShapeHeightInc_RBPB.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ShapeHeightInc_RBPB_Click);
-            // 
-            // label2
-            // 
-            this.label2.Label = " cm";
-            this.label2.Name = "label2";
             // 
             // box4
             // 
@@ -366,6 +378,11 @@
             this.ShapeAngleDec_RBPB.Name = "ShapeAngleDec_RBPB";
             this.ShapeAngleDec_RBPB.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ShapeAngleDec_RBPB_Click);
             // 
+            // label6
+            // 
+            this.label6.Label = "⍉";
+            this.label6.Name = "label6";
+            // 
             // ShapeAngle_RBET
             // 
             this.ShapeAngle_RBET.Label = "editBox3";
@@ -374,36 +391,21 @@
             this.ShapeAngle_RBET.Text = null;
             this.ShapeAngle_RBET.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ShapeAngle_RBET_TextChanged);
             // 
+            // label3
+            // 
+            this.label3.Label = "deg";
+            this.label3.Name = "label3";
+            // 
             // ShapeAngleInc_RBPB
             // 
             this.ShapeAngleInc_RBPB.Label = "▸";
             this.ShapeAngleInc_RBPB.Name = "ShapeAngleInc_RBPB";
             this.ShapeAngleInc_RBPB.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ShapeAngleInc_RBPB_Click);
             // 
-            // label3
-            // 
-            this.label3.Label = "deg";
-            this.label3.Name = "label3";
-            // 
             // notifyIcon1
             // 
             this.notifyIcon1.Text = "notifyIcon1";
             this.notifyIcon1.Visible = true;
-            // 
-            // label4
-            // 
-            this.label4.Label = "⇆";
-            this.label4.Name = "label4";
-            // 
-            // label5
-            // 
-            this.label5.Label = "⇵";
-            this.label5.Name = "label5";
-            // 
-            // label6
-            // 
-            this.label6.Label = "⍉";
-            this.label6.Name = "label6";
             // 
             // Ribbon1
             // 
