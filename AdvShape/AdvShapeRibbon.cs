@@ -11,11 +11,17 @@ using RibbonToggleButton = Microsoft.Office.Tools.Ribbon.RibbonToggleButton;
 using RibbonControl = Microsoft.Office.Tools.Ribbon.RibbonControl;
 
 namespace AdvShape {
+    
     public partial class Ribbon1 {
+        private Boolean UI_trigger = true;
         private void Ribbon1_Load(object sender,RibbonUIEventArgs e) {
             this.InitRibbon();
             //WindowSelectionChange
             //SlideSelectionChanged
+            Globals.ThisAddIn.Application.AfterShapeSizeChange += (o) => {
+                this.SelectionRibbonUpdate();
+                this.ShapeRibbonSetValue();
+            };
             Globals.ThisAddIn.Application.WindowSelectionChange += (o)=> {
                 this.SelectionRibbonUpdate();
                 this.ShapeRibbonSetValue();
@@ -30,27 +36,31 @@ namespace AdvShape {
 
         private void InitRibbon() {
             
-            this.ShapeAlignDialog_RBPB.Click += (o,i) => { this.ShowShapeAlignDialig(); };
-            this.ShapeArrayDialog_RBPB.Click += (o,i) => { this.ShowShapeArrayDialig(); };
-            this.AlignLeft_RBPB.Click        += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignLeft); };
-            this.AlignCent_RBPB.Click        += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignCenter); };
-            this.AlignRight_RBPB.Click       += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignRight); };
+            this.ShapeAlignDialog_RBPB.Click  += (o,i) => { this.ShowShapeAlignDialig(); };
+            this.ShapeArrayDialog_RBPB.Click  += (o,i) => { this.ShowShapeArrayDialig(); };
+            this.AlignLeft_RBPB.Click         += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignLeft); };
+            this.AlignCent_RBPB.Click         += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignCenter); };
+            this.AlignRight_RBPB.Click        += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignRight); };
 
-            this.AlignTop_RBPB.Click         += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTop); };
-            this.AlignMid_RBPB.Click         += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMid); };
-            this.AlignBottom_RBPB.Click      += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottom); };
+            this.AlignTop_RBPB.Click          += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTop); };
+            this.AlignMid_RBPB.Click          += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMid); };
+            this.AlignBottom_RBPB.Click       += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottom); };
 
-            this.AlignTopLeft_RBPB.Click     += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTopLeft); };
-            this.AlignTopCent_RBPB.Click     += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTopCenter); };
-            this.AlignTopRight_RBPB.Click    += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTopRight); };
+            this.AlignTopLeft_RBPB.Click      += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTopLeft); };
+            this.AlignTopCent_RBPB.Click      += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTopCenter); };
+            this.AlignTopRight_RBPB.Click     += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTopRight); };
 
-            this.AlignMidLeft_RBPB.Click     += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMidLeft); };
-            this.AlignMidCent_RBPB.Click     += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMidCenter); };
-            this.AlignMidRight_RBPB.Click    += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMidRight); };
+            this.AlignMidLeft_RBPB.Click      += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMidLeft); };
+            this.AlignMidCent_RBPB.Click      += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMidCenter); };
+            this.AlignMidRight_RBPB.Click     += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMidRight); };
 
-            this.AlignBottomLeft_RBPB.Click  += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottomLeft); };
-            this.AlignBottomCent_RBPB.Click  += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottomCenter); };
-            this.AlignBottomRight_RBPB.Click += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottomRight); };
+            this.AlignBottomLeft_RBPB.Click   += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottomLeft); };
+            this.AlignBottomCent_RBPB.Click   += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottomCenter); };
+            this.AlignBottomRight_RBPB.Click  += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottomRight); };
+
+            this.ShapeWidth_RBET.TextChanged  += (o,i) => { if(this.UI_trigger) { this.SetShapeWidth();}};
+            this.ShapeHeight_RBET.TextChanged += (o,i) => { if(this.UI_trigger) { this.SetShapeHeight();}};
+            this.ShapeAngle_RBET.TextChanged  += (o,i) => { if(this.UI_trigger) { this.SetShapeAngle();}};
 
         }
         private void ShowShapeAlignDialig() {
@@ -90,7 +100,33 @@ namespace AdvShape {
             WPF_Tester test = new WPF_Tester();
             test.Show();
         }
+
+        private void SetShapeWidth(double? parse = null) {
+            parse = (parse == null) ? Misc.MathParse(this.ShapeWidth_RBET.Text) : parse;
+            if(parse != null && parse > 0) {
+                foreach(Shape ishape in Misc.SelectedShapes()) { ishape.Width = (float)Misc.CmToPoints((double)parse); }
+            } else {
+                this.ShapeRibbonSetValue();
+            }
+        }
+        private void SetShapeHeight(double? parse = null) {
+            parse = (parse == null) ? Misc.MathParse(this.ShapeHeight_RBET.Text) : parse;
+            if(parse != null && parse > 0) {
+                foreach(Shape ishape in Misc.SelectedShapes()) { ishape.Height = (float)Misc.CmToPoints((double)parse); }
+            } else {
+                this.ShapeRibbonSetValue();
+            }
+        }
+        private void SetShapeAngle(double? parse = null) {
+            parse = (parse == null) ? Misc.MathParse(this.ShapeAngle_RBET.Text) : parse;
+            if(parse != null && parse > 0) {
+                foreach(Shape ishape in Misc.SelectedShapes()) { ishape.Rotation = (float)parse; }
+            } else {
+                this.ShapeRibbonSetValue();
+            }
+        }
         protected void ShapeRibbonSetValue() {
+            this.UI_trigger = false;
             ShapeRange SelectRange = Misc.SelectedShapes();
             if(SelectRange.Count > 0) {
                 List<float> width  = new List<float>();
@@ -110,6 +146,7 @@ namespace AdvShape {
                 this.ShapeHeight_RBET.Text = (hashheight.Count == 1) ? Math.Round(Misc.PointsToCm(hashheight.First()),3).ToString(): "";
                 this.ShapeAngle_RBET.Text  = (hashangle.Count  == 1) ? Math.Round(hashangle.First(), 3).ToString(): "";
             }
+            this.UI_trigger = true;
         }
         protected void SelectionRibbonUpdate() {
             RibbonControl[] UISets = new RibbonControl[] {
@@ -146,39 +183,67 @@ namespace AdvShape {
             Double? ParseVal = Misc.MathParse(this.ShapeAngle_RBET.Text);
             if(ParseVal != null) {
                 foreach(Shape ishape in Misc.SelectedShapes()) {
-                    if(ParseVal != null) { ishape.Rotation = (float)Misc.CmToPoints((double)ParseVal); }
+                    if(ParseVal != null) { ishape.Rotation = (float)ParseVal; }
                 }
             }
         }
 
+
         private void ShapeWidthDec_RBPB_Click(object sender,RibbonControlEventArgs e) {
             Double? ParseVal = Misc.MathParse(this.ShapeWidth_RBET.Text);
-            if(ParseVal != null) {this.ShapeWidth_RBET.Text = (ParseVal - 0.1).ToString();}
+            if(ParseVal != null) {
+                double ChangedVal = (double)(ParseVal - 0.1);
+                ChangedVal = (ChangedVal < 0) ? 0 : ChangedVal;
+                this.ShapeWidth_RBET.Text = (ChangedVal).ToString();
+                this.SetShapeWidth(ChangedVal);
+            }
         }
 
         private void ShapeHeightDec_RBPB_Click(object sender,RibbonControlEventArgs e) {
             Double? ParseVal = Misc.MathParse(this.ShapeHeight_RBET.Text);
-            if(ParseVal != null) { this.ShapeHeight_RBET.Text = (ParseVal - 0.1).ToString(); }
+            if(ParseVal != null) {
+                double ChangedVal = (double)(ParseVal - 0.1);
+                ChangedVal = (ChangedVal < 0) ? 0 : ChangedVal;
+                this.ShapeHeight_RBET.Text = (ChangedVal).ToString();
+                this.SetShapeHeight(ChangedVal);
+            }
         }
 
         private void ShapeAngleDec_RBPB_Click(object sender,RibbonControlEventArgs e) {
             Double? ParseVal = Misc.MathParse(this.ShapeAngle_RBET.Text);
-            if(ParseVal != null) { this.ShapeAngle_RBET.Text = (ParseVal - 0.1).ToString(); }
+            if(ParseVal != null) {
+                double ChangedVal = (double)(ParseVal - 0.1);
+                ChangedVal = (ChangedVal < 0) ? 0 : ChangedVal;
+                this.ShapeAngle_RBET.Text = (ChangedVal).ToString();
+                this.SetShapeAngle(ChangedVal);
+            }
         }
 
         private void ShapeWidthInc_RBPB_Click(object sender,RibbonControlEventArgs e) {
             Double? ParseVal = Misc.MathParse(this.ShapeWidth_RBET.Text);
-            if(ParseVal != null) { this.ShapeWidth_RBET.Text = (ParseVal + 0.1).ToString(); }
+            if(ParseVal != null) {
+                double ChangedVal = (double)(ParseVal + 0.1);
+                this.ShapeWidth_RBET.Text = (ChangedVal).ToString();
+                this.SetShapeWidth(ChangedVal);
+            }
         }
 
         private void ShapeHeightInc_RBPB_Click(object sender,RibbonControlEventArgs e) {
             Double? ParseVal = Misc.MathParse(this.ShapeHeight_RBET.Text);
-            if(ParseVal != null) { this.ShapeHeight_RBET.Text = (ParseVal + 0.1).ToString(); }
+            if(ParseVal != null) {
+                double ChangedVal = (double)(ParseVal + 0.1);
+                this.ShapeHeight_RBET.Text = (ChangedVal).ToString();
+                this.SetShapeHeight(ChangedVal);
+            }
         }
 
         private void ShapeAngleInc_RBPB_Click(object sender,RibbonControlEventArgs e) {
             Double? ParseVal = Misc.MathParse(this.ShapeAngle_RBET.Text);
-            if(ParseVal != null) { this.ShapeAngle_RBET.Text = (ParseVal + 0.1).ToString(); }
+            if(ParseVal != null) {
+                double ChangedVal = (double)(ParseVal + 0.1);
+                this.ShapeAngle_RBET.Text = (ChangedVal).ToString();
+                this.SetShapeAngle(ChangedVal);
+            }
         }
 
         private void ShapeAlignDialog_RBPB_Click(object sender,RibbonControlEventArgs e) {

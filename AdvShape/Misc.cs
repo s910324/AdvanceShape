@@ -20,6 +20,7 @@ namespace AdvShape {
         static public double DegToRad(double deg )  { return (deg / 180 * 3.14159265358979); }
         static public double PointsToCm(double pt ) { return (pt * 0.03527778); }
         static public double CmToPoints(double cm ) { return (cm * 28.34646); }
+
         static public Slide ActiveSlide() { return (Slide)Globals.ThisAddIn.Application.ActiveWindow.View.Slide; }
         static public ShapeRange SelectedShapes() {
             Slide ActiveSlide                = Misc.ActiveSlide();
