@@ -103,7 +103,7 @@ namespace AdvShape {
 
         private void SetShapeWidth(double? parse = null) {
             parse = (parse == null) ? Misc.MathParse(this.ShapeWidth_RBET.Text) : parse;
-            if(parse != null && parse > 0) {
+            if(parse != null && parse >= 0) {
                 foreach(Shape ishape in Misc.SelectedShapes()) { ishape.Width = (float)Misc.CmToPoints((double)parse); }
             } else {
                 this.ShapeRibbonSetValue();
@@ -111,7 +111,7 @@ namespace AdvShape {
         }
         private void SetShapeHeight(double? parse = null) {
             parse = (parse == null) ? Misc.MathParse(this.ShapeHeight_RBET.Text) : parse;
-            if(parse != null && parse > 0) {
+            if(parse != null && parse >= 0) {
                 foreach(Shape ishape in Misc.SelectedShapes()) { ishape.Height = (float)Misc.CmToPoints((double)parse); }
             } else {
                 this.ShapeRibbonSetValue();
@@ -119,7 +119,7 @@ namespace AdvShape {
         }
         private void SetShapeAngle(double? parse = null) {
             parse = (parse == null) ? Misc.MathParse(this.ShapeAngle_RBET.Text) : parse;
-            if(parse != null && parse > 0) {
+            if(parse != null ) {
                 foreach(Shape ishape in Misc.SelectedShapes()) { ishape.Rotation = (float)parse; }
             } else {
                 this.ShapeRibbonSetValue();
@@ -153,9 +153,11 @@ namespace AdvShape {
                 this.ShapeWidth_RBET,       this.ShapeHeight_RBET,      this.ShapeAngle_RBET,
                 this.ShapeWidthDec_RBPB,    this.ShapeHeightDec_RBPB,   this.ShapeAngleDec_RBPB,
                 this.ShapeWidthInc_RBPB,    this.ShapeHeightInc_RBPB,   this.ShapeAngleInc_RBPB,
-                this.ShapeAlignDialog_RBPB, this.ShapeArrayDialog_RBPB, this.ShapeAlignMenu
+                this.ShapeAlignDialog_RBPB, this.ShapeArrayDialog_RBPB, this.ShapeAlignMenu,
+                this.ShapeHeight_RBLB,      this.ShapeHeightUnit_RBLB,  this.ShapeWidth_RBLB,
+                this.ShapeWidthUnit_RBLB,   this.ShapeAngle_RBLB,       this.ShapeAngleUnit_RBLB
             };
-
+            
             ShapeRange SelectRange = Misc.SelectedShapes();
             foreach(RibbonControl UI in UISets) {
                 UI.Enabled = (SelectRange.Count > 0);
@@ -169,7 +171,6 @@ namespace AdvShape {
                 }
             }
         }
-
         private void ShapeHeight_RBET_TextChanged(object sender,RibbonControlEventArgs e) {
             Double? ParseVal = Misc.MathParse(this.ShapeHeight_RBET.Text);
             if(ParseVal != null) {
@@ -178,7 +179,6 @@ namespace AdvShape {
                 }
             }
         }
-
         private void ShapeAngle_RBET_TextChanged(object sender,RibbonControlEventArgs e) {
             Double? ParseVal = Misc.MathParse(this.ShapeAngle_RBET.Text);
             if(ParseVal != null) {
@@ -187,38 +187,32 @@ namespace AdvShape {
                 }
             }
         }
-
-
         private void ShapeWidthDec_RBPB_Click(object sender,RibbonControlEventArgs e) {
             Double? ParseVal = Misc.MathParse(this.ShapeWidth_RBET.Text);
             if(ParseVal != null) {
                 double ChangedVal = (double)(ParseVal - 0.1);
-                ChangedVal = (ChangedVal < 0) ? 0 : ChangedVal;
+                ChangedVal = (double)((ChangedVal < 0) ? 0 : ChangedVal);
                 this.ShapeWidth_RBET.Text = (ChangedVal).ToString();
                 this.SetShapeWidth(ChangedVal);
             }
         }
-
         private void ShapeHeightDec_RBPB_Click(object sender,RibbonControlEventArgs e) {
             Double? ParseVal = Misc.MathParse(this.ShapeHeight_RBET.Text);
             if(ParseVal != null) {
                 double ChangedVal = (double)(ParseVal - 0.1);
-                ChangedVal = (ChangedVal < 0) ? 0 : ChangedVal;
+                ChangedVal = (double)((ChangedVal < 0) ? 0 : ChangedVal);
                 this.ShapeHeight_RBET.Text = (ChangedVal).ToString();
                 this.SetShapeHeight(ChangedVal);
             }
         }
-
         private void ShapeAngleDec_RBPB_Click(object sender,RibbonControlEventArgs e) {
             Double? ParseVal = Misc.MathParse(this.ShapeAngle_RBET.Text);
             if(ParseVal != null) {
-                double ChangedVal = (double)(ParseVal - 0.1);
-                ChangedVal = (ChangedVal < 0) ? 0 : ChangedVal;
+                double ChangedVal = (double)(ParseVal - 1);
                 this.ShapeAngle_RBET.Text = (ChangedVal).ToString();
                 this.SetShapeAngle(ChangedVal);
             }
         }
-
         private void ShapeWidthInc_RBPB_Click(object sender,RibbonControlEventArgs e) {
             Double? ParseVal = Misc.MathParse(this.ShapeWidth_RBET.Text);
             if(ParseVal != null) {
@@ -227,7 +221,6 @@ namespace AdvShape {
                 this.SetShapeWidth(ChangedVal);
             }
         }
-
         private void ShapeHeightInc_RBPB_Click(object sender,RibbonControlEventArgs e) {
             Double? ParseVal = Misc.MathParse(this.ShapeHeight_RBET.Text);
             if(ParseVal != null) {
@@ -236,21 +229,22 @@ namespace AdvShape {
                 this.SetShapeHeight(ChangedVal);
             }
         }
-
         private void ShapeAngleInc_RBPB_Click(object sender,RibbonControlEventArgs e) {
             Double? ParseVal = Misc.MathParse(this.ShapeAngle_RBET.Text);
             if(ParseVal != null) {
-                double ChangedVal = (double)(ParseVal + 0.1);
+                double ChangedVal = (double)(ParseVal + 1.0);
                 this.ShapeAngle_RBET.Text = (ChangedVal).ToString();
                 this.SetShapeAngle(ChangedVal);
             }
         }
-
         private void ShapeAlignDialog_RBPB_Click(object sender,RibbonControlEventArgs e) {
             
         }
-
         private void ShapeArrayDialog_RBPB_Click(object sender,RibbonControlEventArgs e) {
+
+        }
+
+        private void checkBox1_Click(object sender,RibbonControlEventArgs e) {
 
         }
     }

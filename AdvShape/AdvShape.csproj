@@ -170,6 +170,7 @@
   -->
   <ItemGroup>
     <Compile Include="Boundbox.cs" />
+    <Compile Include="ShapeOrder.cs" />
     <Compile Include="WPF_Tester.xaml.cs">
       <DependentUpon>WPF_Tester.xaml</DependentUpon>
     </Compile>
