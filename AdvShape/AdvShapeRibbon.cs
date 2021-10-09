@@ -62,6 +62,12 @@ namespace AdvShape {
             this.ShapeHeight_RBET.TextChanged += (o,i) => { if(this.UI_trigger) { this.SetShapeHeight();}};
             this.ShapeAngle_RBET.TextChanged  += (o,i) => { if(this.UI_trigger) { this.SetShapeAngle();}};
 
+            this.ShapeZTop_RBPB.Click         += (o,i) => { ShapeOrder.ShapeZTop(); };
+            this.ShapeZbottom_RBPB.Click      += (o,i) => { ShapeOrder.ShapeZBottom(); };
+            this.ShapeZUp_RBPB.Click          += (o,i) => { ShapeOrder.ShapeZUp(); };
+            this.ShapeZDown_RBPB.Click        += (o,i) => { ShapeOrder.ShapeZDown(); };
+            this.ShapeZAbove_RBPB.Click       += (o,i) => { ShapeOrder.ShapeZMoveRelative(1); };
+            this.ShapeZBelow_RBPB.Click       += (o,i) => { ShapeOrder.ShapeZMoveRelative(-1); };
         }
         private void ShowShapeAlignDialig() {
             var app = new WPF_ShapeAlign();
@@ -149,18 +155,28 @@ namespace AdvShape {
             this.UI_trigger = true;
         }
         protected void SelectionRibbonUpdate() {
-            RibbonControl[] UISets = new RibbonControl[] {
+            RibbonControl[] UISets1 = new RibbonControl[] {
                 this.ShapeWidth_RBET,       this.ShapeHeight_RBET,      this.ShapeAngle_RBET,
+                this.ShapeHeight_RBLB,      this.ShapeHeightUnit_RBLB,  this.ShapeWidth_RBLB,
                 this.ShapeWidthDec_RBPB,    this.ShapeHeightDec_RBPB,   this.ShapeAngleDec_RBPB,
                 this.ShapeWidthInc_RBPB,    this.ShapeHeightInc_RBPB,   this.ShapeAngleInc_RBPB,
                 this.ShapeAlignDialog_RBPB, this.ShapeArrayDialog_RBPB, this.ShapeAlignMenu,
-                this.ShapeHeight_RBLB,      this.ShapeHeightUnit_RBLB,  this.ShapeWidth_RBLB,
-                this.ShapeWidthUnit_RBLB,   this.ShapeAngle_RBLB,       this.ShapeAngleUnit_RBLB
+                this.ShapeWidthUnit_RBLB,   this.ShapeAngle_RBLB,       this.ShapeAngleUnit_RBLB,
+
+                this.ShapeZTop_RBPB,        this.ShapeZbottom_RBPB,     this.ShapeZUp_RBPB, 
+                this.ShapeZDown_RBPB
             };
-            
+
+            RibbonControl[] UISets2 = new RibbonControl[] {
+                this.ShapeZAbove_RBPB, this.ShapeZBelow_RBPB
+            };
+
             ShapeRange SelectRange = Misc.SelectedShapes();
-            foreach(RibbonControl UI in UISets) {
+            foreach(RibbonControl UI in UISets1) {
                 UI.Enabled = (SelectRange.Count > 0);
+            }
+            foreach(RibbonControl UI in UISets2) {
+                UI.Enabled = (SelectRange.Count > 1);
             }
         }
         private void ShapeWidth_RBET_TextChanged(object sender,RibbonControlEventArgs e) {
@@ -247,5 +263,7 @@ namespace AdvShape {
         private void checkBox1_Click(object sender,RibbonControlEventArgs e) {
 
         }
+
+
     }
 }

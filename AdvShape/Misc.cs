@@ -255,6 +255,15 @@ namespace AdvShape {
             Expression e = new Expression(input);
             if(e.checkSyntax()) { return e.calculate(); } else { return null; }
         }
+        static public int Sign(int value) {
+            return (value == 0) ? 0 : (value > 0) ? 1 : -1;
+        }
+        static public int Sign(float value) {
+            return (value == 0) ? 0 : (value > 0) ? 1 : -1;
+        }
+        static public int Sign(double value) {
+            return (value == 0) ? 0 : (value > 0) ? 1 : -1;
+        }
     }
 }
  

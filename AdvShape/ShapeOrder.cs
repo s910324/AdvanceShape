@@ -4,43 +4,70 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ShapeRange =  Microsoft.Office.Interop.PowerPoint.ShapeRange;
+using Shape = Microsoft.Office.Interop.PowerPoint.Shape;
+using MsoZOrderCmd = Microsoft.Office.Core.MsoZOrderCmd;
 
 namespace AdvShape {
     class ShapeOrder {
-        public void ShapeZTop() {
+        static public void ShapeZTop() {
             ShapeRange Selected = Misc.SelectedShapes();
-            Selected.ZOrder(Microsoft.Office.Core.MsoZOrderCmd.msoBringToFront);
+            Selected.ZOrder(MsoZOrderCmd.msoBringToFront);
         }
-        public void ShapeZBottom() {
+        static public void ShapeZBottom() {
             ShapeRange Selected = Misc.SelectedShapes();
-            Selected.ZOrder(Microsoft.Office.Core.MsoZOrderCmd.msoSendToBack);
+            Selected.ZOrder(MsoZOrderCmd.msoSendToBack);
         }
-        public void ShapeZUp() {
+        static public void ShapeZUp() {
             ShapeRange Selected = Misc.SelectedShapes();
-            Selected.ZOrder(Microsoft.Office.Core.MsoZOrderCmd.msoBringForward);
+            Selected.ZOrder(MsoZOrderCmd.msoBringForward);
         }
-        public void ShapeZDown() {
+        static public void ShapeZDown() {
             ShapeRange Selected = Misc.SelectedShapes();
-            Selected.ZOrder(Microsoft.Office.Core.MsoZOrderCmd.msoSendBackward);
+            Selected.ZOrder(MsoZOrderCmd.msoSendBackward);
         }
-        public void ShapeZAbove() {
+        static public void ShapeZMoveRelative(int ReletiveOrder) {
+            bool       flag     = true;
             ShapeRange Selected = Misc.SelectedShapes();
-            int TargetOrger  = 0;
-            int LowestOrder  = Misc.ActiveSlide().Shapes.Count;
-            int HighestOrder = 0;
+            List<Shape> iShapes = new List<Shape>();
+
             if(Selected.Count > 1) {
-                for(int i = 0; i < Selected.Count; i++) {
-                    int CurrentOrder = Selected[i].ZOrderPosition;
-                    if(i == 0) {
-                        TargetOrger  = CurrentOrder;
+                Shape TargetShape = Selected[1];
+                for(int i = 2;i <= Selected.Count;i++) {iShapes.Add(Selected[i]);}
+
+                while(flag) {
+                    var iOrders      = iShapes.Select(i => i.ZOrderPosition);
+                    int TargetOrder  = TargetShape.ZOrderPosition + ReletiveOrder;
+                    int HighestOrder = iOrders.Max();
+                    int LowestOrder  = iOrders.Min();
+                    int moveOrder    = 0;
+
+                    switch(Misc.Sign(ReletiveOrder)) {
+                        case (1): // ZAbove
+                            moveOrder = Misc.Sign(TargetOrder - LowestOrder);
+                            break;
+                        case (-1): //ZBelow
+                            moveOrder = Misc.Sign(TargetOrder - HighestOrder);
+                            break;
+                        case (0):
+                            flag = false;
+                            break;
+                    }
+                    if(moveOrder != 0) {
+                        foreach(Shape iShape in iShapes) { ShapeZMove(iShape,moveOrder); }
                     } else {
-                        LowestOrder  = (LowestOrder  < CurrentOrder) ? LowestOrder  : CurrentOrder;
-                        HighestOrder = (HighestOrder > CurrentOrder) ? HighestOrder : CurrentOrder;
+                        flag = false;
                     }
                 }
-/*                int DeltaOrder = (LowestOrder > TargetOrger) ? */
             }
-            
+        }
+
+        static public void ShapeZMove(Shape shape,int DeltaOrder) {
+            if(DeltaOrder != 0) {
+                MsoZOrderCmd MoveCMD = (DeltaOrder < 0) ? MsoZOrderCmd.msoSendBackward : MsoZOrderCmd.msoBringForward;
+                for(int i = 0;i < Math.Abs(DeltaOrder);i++) {
+                    shape.ZOrder(MoveCMD);
+                }
+            }
         }
     }
 }
