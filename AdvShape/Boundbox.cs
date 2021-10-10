@@ -12,6 +12,7 @@ using ShapeRange = Microsoft.Office.Interop.PowerPoint.ShapeRange;
 
 namespace AdvShape {
     class Boundbox {
+        private Shape Source = null;
         public double Left    { get; private set; }
         public double Right   { get; private set; }
         public double Top     { get; private set; }
@@ -24,8 +25,9 @@ namespace AdvShape {
         public Boundbox() {
         }
         public Boundbox(Shape ishape) {
-            var ShapeType = ishape.Type;
-            var ShapeAutoType = ishape.AutoShapeType;
+            this.Source = ishape;
+            MsoShapeType     ShapeType     = ishape.Type;
+            MsoAutoShapeType ShapeAutoType = ishape.AutoShapeType;
             switch(ShapeType) {
                 case MsoShapeType.msoGroup:
                     GroupShapeBoundBox(ishape);
@@ -34,7 +36,7 @@ namespace AdvShape {
                     NativeShapeBoundbox(ishape);
                     break;
                 case MsoShapeType.msoAutoShape:
-                    AutoShapeBoundBox(ishape);
+                    NativeShapeBoundbox(ishape);
                     break;
                 default:
                     switch(ShapeAutoType) {
@@ -81,6 +83,9 @@ namespace AdvShape {
         }
 
         public void DebugMode() {
+            if(Source != null) {
+                Misc.print("Boundbox",Source.Name,Source.Type,Source.AutoShapeType);
+            }
             Slide ActiveSlide = Misc.ActiveSlide();
             double R = Math.Pow(Math.Pow(this.Width / 2,2) + Math.Pow(this.Height / 2,2),0.5);
             Shape BoxIndicator = ActiveSlide.Shapes.AddShape(MsoAutoShapeType.msoShapeRectangle,

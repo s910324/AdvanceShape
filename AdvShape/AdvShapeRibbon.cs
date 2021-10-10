@@ -264,6 +264,12 @@ namespace AdvShape {
 
         }
 
+        private void button2_Click(object sender,RibbonControlEventArgs e) {
+            Shape i = Misc.SelectedShapes()[1];
+            Boundbox b =new Boundbox(i);
+            b.DebugMode();
 
+
+        }
     }
 }

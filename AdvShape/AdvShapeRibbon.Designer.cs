@@ -37,6 +37,13 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ribbon1));
             this.tab1 = this.Factory.CreateRibbonTab();
+            this.group4 = this.Factory.CreateRibbonGroup();
+            this.dropDown1 = this.Factory.CreateRibbonDropDown();
+            this.buttonGroup2 = this.Factory.CreateRibbonButtonGroup();
+            this.button4 = this.Factory.CreateRibbonButton();
+            this.button5 = this.Factory.CreateRibbonButton();
+            this.button6 = this.Factory.CreateRibbonButton();
+            this.button7 = this.Factory.CreateRibbonButton();
             this.group2 = this.Factory.CreateRibbonGroup();
             this.editBox4 = this.Factory.CreateRibbonEditBox();
             this.buttonGroup1 = this.Factory.CreateRibbonButtonGroup();
@@ -93,9 +100,10 @@
             this.ShapeZbottom_RBPB = this.Factory.CreateRibbonButton();
             this.ShapeZDown_RBPB = this.Factory.CreateRibbonButton();
             this.ShapeZBelow_RBPB = this.Factory.CreateRibbonButton();
-            this.group4 = this.Factory.CreateRibbonGroup();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.tab1.SuspendLayout();
+            this.group4.SuspendLayout();
+            this.buttonGroup2.SuspendLayout();
             this.group2.SuspendLayout();
             this.buttonGroup1.SuspendLayout();
             this.group1.SuspendLayout();
@@ -110,13 +118,66 @@
             // tab1
             // 
             this.tab1.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office;
+            this.tab1.Groups.Add(this.group4);
             this.tab1.Groups.Add(this.group2);
             this.tab1.Groups.Add(this.group1);
             this.tab1.Groups.Add(this.ShapeAttributeGroup);
             this.tab1.Groups.Add(this.group3);
-            this.tab1.Groups.Add(this.group4);
             this.tab1.Label = "AdvShape";
             this.tab1.Name = "tab1";
+            // 
+            // group4
+            // 
+            this.group4.Items.Add(this.dropDown1);
+            this.group4.Items.Add(this.buttonGroup2);
+            this.group4.Label = "group4";
+            this.group4.Name = "group4";
+            // 
+            // dropDown1
+            // 
+            this.dropDown1.Label = "dropDown1";
+            this.dropDown1.Name = "dropDown1";
+            this.dropDown1.ShowLabel = false;
+            // 
+            // buttonGroup2
+            // 
+            this.buttonGroup2.Items.Add(this.button4);
+            this.buttonGroup2.Items.Add(this.button5);
+            this.buttonGroup2.Items.Add(this.button6);
+            this.buttonGroup2.Items.Add(this.button7);
+            this.buttonGroup2.Name = "buttonGroup2";
+            // 
+            // button4
+            // 
+            this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
+            this.button4.Label = "button4";
+            this.button4.Name = "button4";
+            this.button4.ShowImage = true;
+            this.button4.ShowLabel = false;
+            // 
+            // button5
+            // 
+            this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
+            this.button5.Label = "button5";
+            this.button5.Name = "button5";
+            this.button5.ShowImage = true;
+            this.button5.ShowLabel = false;
+            // 
+            // button6
+            // 
+            this.button6.Image = ((System.Drawing.Image)(resources.GetObject("button6.Image")));
+            this.button6.Label = "button6";
+            this.button6.Name = "button6";
+            this.button6.ShowImage = true;
+            this.button6.ShowLabel = false;
+            // 
+            // button7
+            // 
+            this.button7.Image = ((System.Drawing.Image)(resources.GetObject("button7.Image")));
+            this.button7.Label = "button7";
+            this.button7.Name = "button7";
+            this.button7.ShowImage = true;
+            this.button7.ShowLabel = false;
             // 
             // group2
             // 
@@ -141,6 +202,7 @@
             // 
             this.button2.Label = "button2";
             this.button2.Name = "button2";
+            this.button2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -488,11 +550,6 @@
             this.ShapeZBelow_RBPB.Name = "ShapeZBelow_RBPB";
             this.ShapeZBelow_RBPB.ShowImage = true;
             // 
-            // group4
-            // 
-            this.group4.Label = "group4";
-            this.group4.Name = "group4";
-            // 
             // notifyIcon1
             // 
             this.notifyIcon1.Text = "notifyIcon1";
@@ -506,6 +563,10 @@
             this.Load += new Microsoft.Office.Tools.Ribbon.RibbonUIEventHandler(this.Ribbon1_Load);
             this.tab1.ResumeLayout(false);
             this.tab1.PerformLayout();
+            this.group4.ResumeLayout(false);
+            this.group4.PerformLayout();
+            this.buttonGroup2.ResumeLayout(false);
+            this.buttonGroup2.PerformLayout();
             this.group2.ResumeLayout(false);
             this.group2.PerformLayout();
             this.buttonGroup1.ResumeLayout(false);
@@ -589,6 +650,12 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeZAbove_RBPB;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeZBelow_RBPB;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group4;
+        internal Microsoft.Office.Tools.Ribbon.RibbonDropDown dropDown1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButtonGroup buttonGroup2;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button4;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button5;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button6;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button7;
     }
 
     partial class ThisRibbonCollection {
