@@ -164,15 +164,15 @@ namespace AdvShape {
         }
         private void InitializedComponents() {
             
-            this.grid       = this.GenerateGrid(new string[] { "*","*" },new string[] { "*","25" });
+            this.grid       = this.GenerateGrid(new string[] { "*","*" },new string[] { "*","15" });
             this.Increment = 1;
             this.advTextBox = new AdvTextBox();
             this.buttonUp   = new Button();
             this.buttonDown = new Button();
             this.buttonUp.Content    = "▲";
             this.buttonDown.Content  = "▼";
-            this.buttonUp.FontSize   = 8;
-            this.buttonDown.FontSize = 8;
+            this.buttonUp.FontSize   = 6;
+            this.buttonDown.FontSize = 6;
             this.setRowColumn(grid,advTextBox, 0, 0, 2, 1);
             this.setRowColumn(grid,buttonUp,   0, 1, 1, 1);
             this.setRowColumn(grid,buttonDown, 1, 1, 1, 1);

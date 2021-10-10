@@ -271,5 +271,10 @@ namespace AdvShape {
 
 
         }
+
+        private void button3_Click_1(object sender,RibbonControlEventArgs e) {
+            var w = new WPF_ShapeTranslation();
+            w.Show();
+        }
     }
 }
