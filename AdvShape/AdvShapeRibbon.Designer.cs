@@ -73,7 +73,7 @@
             this.AlignMidRight_RBPB = this.Factory.CreateRibbonButton();
             this.AlignBottomRight_RBPB = this.Factory.CreateRibbonButton();
             this.ShapeArrayDialog_RBPB = this.Factory.CreateRibbonButton();
-            this.button1 = this.Factory.CreateRibbonButton();
+            this.ShapeTransDialog_RBPB = this.Factory.CreateRibbonButton();
             this.ShapeAttributeGroup = this.Factory.CreateRibbonGroup();
             this.box2 = this.Factory.CreateRibbonBox();
             this.ShapeWidthDec_RBPB = this.Factory.CreateRibbonButton();
@@ -130,7 +130,7 @@
             // 
             this.group4.Items.Add(this.dropDown1);
             this.group4.Items.Add(this.buttonGroup2);
-            this.group4.Label = "group4";
+            this.group4.Label = "Font";
             this.group4.Name = "group4";
             // 
             // dropDown1
@@ -214,8 +214,8 @@
             // 
             this.group1.Items.Add(this.box1);
             this.group1.Items.Add(this.ShapeArrayDialog_RBPB);
-            this.group1.Items.Add(this.button1);
-            this.group1.Label = "group1";
+            this.group1.Items.Add(this.ShapeTransDialog_RBPB);
+            this.group1.Label = "Shape Operation";
             this.group1.Name = "group1";
             // 
             // box1
@@ -226,9 +226,8 @@
             // 
             // ShapeAlignDialog_RBPB
             // 
-            this.ShapeAlignDialog_RBPB.Label = "Shape Align";
+            this.ShapeAlignDialog_RBPB.Label = "⥃ Shape Align";
             this.ShapeAlignDialog_RBPB.Name = "ShapeAlignDialog_RBPB";
-            this.ShapeAlignDialog_RBPB.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ShapeAlignDialog_RBPB_Click);
             // 
             // ShapeAlignMenu
             // 
@@ -363,15 +362,14 @@
             // 
             // ShapeArrayDialog_RBPB
             // 
-            this.ShapeArrayDialog_RBPB.Label = "Shape Array";
+            this.ShapeArrayDialog_RBPB.Label = "❖ Shape Array";
             this.ShapeArrayDialog_RBPB.Name = "ShapeArrayDialog_RBPB";
-            this.ShapeArrayDialog_RBPB.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ShapeArrayDialog_RBPB_Click);
             // 
-            // button1
+            // ShapeTransDialog_RBPB
             // 
-            this.button1.Label = "button1";
-            this.button1.Name = "button1";
-            this.button1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click);
+            this.ShapeTransDialog_RBPB.Label = "☩ Shape Translation";
+            this.ShapeTransDialog_RBPB.Name = "ShapeTransDialog_RBPB";
+            this.ShapeTransDialog_RBPB.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ShapeTransDialog_RBPB_Click);
             // 
             // ShapeAttributeGroup
             // 
@@ -620,7 +618,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonSeparator separator4;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup ShapeAttributeGroup;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeTransDialog_RBPB;
         internal Microsoft.Office.Tools.Ribbon.RibbonBox box2;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeWidthDec_RBPB;
         internal Microsoft.Office.Tools.Ribbon.RibbonEditBox ShapeWidth_RBET;

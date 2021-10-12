@@ -38,6 +38,7 @@ namespace AdvShape {
             
             this.ShapeAlignDialog_RBPB.Click  += (o,i) => { this.ShowShapeAlignDialig(); };
             this.ShapeArrayDialog_RBPB.Click  += (o,i) => { this.ShowShapeArrayDialig(); };
+            this.ShapeTransDialog_RBPB.Click  += (o,i) => { this.ShowShapeTransDialig(); };
             this.AlignLeft_RBPB.Click         += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignLeft); };
             this.AlignCent_RBPB.Click         += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignCenter); };
             this.AlignRight_RBPB.Click        += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignRight); };
@@ -95,17 +96,27 @@ namespace AdvShape {
                 app.Show();
             }
         }
-        
+        private void ShowShapeTransDialig() {
+            ShapeRange iRange = Misc.SelectedShapes();
+            if(iRange.Count > 0) {
+                var app = new WPF_ShapeTranslation();
+                app.WindowStartupLocation = System.Windows.WindowStartupLocation.Manual;
+                double w = System.Windows.SystemParameters.WorkArea.Width;
+                double h = System.Windows.SystemParameters.WorkArea.Height;
+
+                app.Left = ((w * 0.1) < 100) ? 100 : (w * 0.1);
+                app.Top = ((h * 0.1) < 100) ? (h - 100 + app.Height) : (h * 0.9 + app.Height);
+                app.Topmost = true;
+                app.Show();
+            }
+        }
 
         private void button3_Click(object sender,RibbonControlEventArgs e) {
             ShapeRange iRange = Misc.SelectedShapes();
             LineBoundBox lbb = new LineBoundBox(iRange[1]);
         }
 
-        private void button1_Click(object sender,RibbonControlEventArgs e) {
-            WPF_Tester test = new WPF_Tester();
-            test.Show();
-        }
+
 
         private void SetShapeWidth(double? parse = null) {
             parse = (parse == null) ? Misc.MathParse(this.ShapeWidth_RBET.Text) : parse;
@@ -160,7 +171,8 @@ namespace AdvShape {
                 this.ShapeHeight_RBLB,      this.ShapeHeightUnit_RBLB,  this.ShapeWidth_RBLB,
                 this.ShapeWidthDec_RBPB,    this.ShapeHeightDec_RBPB,   this.ShapeAngleDec_RBPB,
                 this.ShapeWidthInc_RBPB,    this.ShapeHeightInc_RBPB,   this.ShapeAngleInc_RBPB,
-                this.ShapeAlignDialog_RBPB, this.ShapeArrayDialog_RBPB, this.ShapeAlignMenu,
+                this.ShapeAlignDialog_RBPB, this.ShapeArrayDialog_RBPB, this.ShapeTransDialog_RBPB,
+                this.ShapeAlignMenu,
                 this.ShapeWidthUnit_RBLB,   this.ShapeAngle_RBLB,       this.ShapeAngleUnit_RBLB,
 
                 this.ShapeZTop_RBPB,        this.ShapeZbottom_RBPB,     this.ShapeZUp_RBPB, 
@@ -253,16 +265,7 @@ namespace AdvShape {
                 this.SetShapeAngle(ChangedVal);
             }
         }
-        private void ShapeAlignDialog_RBPB_Click(object sender,RibbonControlEventArgs e) {
-            
-        }
-        private void ShapeArrayDialog_RBPB_Click(object sender,RibbonControlEventArgs e) {
 
-        }
-
-        private void checkBox1_Click(object sender,RibbonControlEventArgs e) {
-
-        }
 
         private void button2_Click(object sender,RibbonControlEventArgs e) {
             Shape i = Misc.SelectedShapes()[1];
@@ -275,6 +278,10 @@ namespace AdvShape {
         private void button3_Click_1(object sender,RibbonControlEventArgs e) {
             var w = new WPF_ShapeTranslation();
             w.Show();
+        }
+
+        private void ShapeTransDialog_RBPB_Click(object sender,RibbonControlEventArgs e) {
+
         }
     }
 }
