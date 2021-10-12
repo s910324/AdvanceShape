@@ -5,7 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AdvShape"
              mc:Ignorable="d" 
-             d:DesignHeight="200" d:DesignWidth="285" Width="285" Height="200" Title="Shape Array">
+             d:DesignHeight="200" d:DesignWidth="285" 
+             Width="285" Height="200" 
+             MaxWidth="285" MaxHeight="200" 
+             MinWidth="285" MinHeight="200" 
+             Title="Shape Array">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width = "*" />
