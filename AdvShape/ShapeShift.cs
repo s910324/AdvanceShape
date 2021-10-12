@@ -17,8 +17,8 @@ namespace AdvShape {
         }
         static public void ShiftTo(Shape ishape, double? X, double? Y) {
             Boundbox Box = new Boundbox(ishape);
-            double dX = X is null ? (double) 0 : (Box.Left - (double) X);
-            double dY = Y is null ? (double) 0 : (Box.Top  - (double) Y);
+            double dX = X is null ? (double) 0 : ((double)X - Box.Left);
+            double dY = Y is null ? (double) 0 : ((double)Y - Box.Top);
             ishape.Left += (float) dX;
             ishape.Top  += (float) dY;
         }
