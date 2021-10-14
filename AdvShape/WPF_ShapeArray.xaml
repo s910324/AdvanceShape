@@ -44,9 +44,9 @@
                            HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
                     <Label Content="dY" Grid.Row ="3" Grid.Column="0" 
                            HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0"/>
-                    
+
                     <local:AdvTextBox Text="1" Grid.Row="1" Grid.Column="1" x:Name="RowCount_TB" HorizontalContentAlignment="Center"
-                             HorizontalAlignment="Center"  VerticalAlignment="Center" Width="90"  Height="23" Margin="0,0,0,0"/>
+                             HorizontalAlignment="Center"  VerticalAlignment="Top" Width="90"  Height="22" Margin="5,2,6,0"/>
                     <local:AdvTextBox Text="1" Grid.Row="1" Grid.Column="2" x:Name="ColCount_TB" HorizontalContentAlignment="Center"
                              HorizontalAlignment="Center"  VerticalAlignment="Center" Width="90"  Height="23" Margin="0,0,0,0"/>
                     <local:AdvTextBox Text="0" Grid.Row="2" Grid.Column="1" x:Name="RowDx_TB" HorizontalContentAlignment="Center"

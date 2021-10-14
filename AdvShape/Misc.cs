@@ -12,6 +12,7 @@ using Shape = Microsoft.Office.Interop.PowerPoint.Shape;
 using Selection = Microsoft.Office.Interop.PowerPoint.Selection;
 using ShapeRange = Microsoft.Office.Interop.PowerPoint.ShapeRange;
 using PpSelectionType = Microsoft.Office.Interop.PowerPoint.PpSelectionType;
+using System.Text.RegularExpressions;
 
 namespace AdvShape {
     class Misc {
@@ -235,6 +236,11 @@ namespace AdvShape {
         static public int ARGB(int r, int g, int b) {
             return System.Drawing.Color.FromArgb(b,g,r).ToArgb();
         }
+
+        static public Color RGB(string color_string) {
+            return (Color)System.Windows.Media.ColorConverter.ConvertFromString(color_string);
+        }
+
         static public Color RGB(int r,int g,int b) {
             byte Byte_r = Convert.ToByte(r);
             byte Byte_g = Convert.ToByte(g);
@@ -264,6 +270,7 @@ namespace AdvShape {
         static public int Sign(double value) {
             return (value == 0) ? 0 : (value > 0) ? 1 : -1;
         }
+        
     }
 }
  

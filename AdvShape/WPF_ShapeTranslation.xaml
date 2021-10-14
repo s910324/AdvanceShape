@@ -10,6 +10,23 @@
              MinWidth="300" MinHeight="350" 
              MaxWidth="300" MaxHeight="350" 
              Title="Shape Translation">
+    
+    <Window.Resources>
+        <Style x:Key="ToggeleButton" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Red" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                        <ContentPresenter />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width = "85" />
@@ -34,15 +51,15 @@
         <Label Grid.Row="1" Grid.Column="1" Content="Δx" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
         <Label Grid.Row="1" Grid.Column="3" Content="Δy" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
         
-        <local:AdvSpinBox Grid.Row="1" Grid.Column="2"  Margin="1 2 1 2 "/>
-        <local:AdvSpinBox Grid.Row="1" Grid.Column="4"  Margin="1 2 1 2 "/>
+        <local:AdvSpinBox x:Name="TransX_TB" Grid.Row="1" Grid.Column="2"  Margin="1 2 1 2 "/>
+        <local:AdvSpinBox x:Name="TransY_TB" Grid.Row="1" Grid.Column="4"  Margin="1 2 1 2 "/>
         
         <Label Grid.Row="3" Grid.Column="1" Content="x" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
         <Label Grid.Row="3" Grid.Column="3" Content="y" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
 
         <Label Grid.Row="3" Grid.Column="0" Content="Location:" HorizontalAlignment="Stretch" HorizontalContentAlignment="Right"/>
-        <local:AdvSpinBox Grid.Row="3" Grid.Column="2"  Margin="1 2 1 2 "/>
-        <local:AdvSpinBox Grid.Row="3" Grid.Column="4"  Margin="1 2 1 2 "/>
+        <local:AdvSpinBox x:Name="LocationX_TB" Grid.Row="3" Grid.Column="2"  Margin="1 2 1 2 "/>
+        <local:AdvSpinBox x:Name="LocationY_TB" Grid.Row="3" Grid.Column="4"  Margin="1 2 1 2 "/>
 
         <Label Grid.Row="5" Grid.Column="0" Content="Reference:" HorizontalAlignment="Stretch" HorizontalContentAlignment="Right"/>
         <Grid  Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="4" HorizontalAlignment="Center">
@@ -56,53 +73,53 @@
                 <RowDefinition Height = "45" />
                 <RowDefinition Height = "45" />
             </Grid.RowDefinitions>
-            <ToggleButton Grid.Row="0" Grid.Column="0" Margin="5 5 5 5">
-                <ToggleButton.Background>
-                    <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/ShapeTrans/originupperleft.png"/>
-                </ToggleButton.Background>
-            </ToggleButton>
-            <ToggleButton Grid.Row="0" Grid.Column="1" Margin="5 5 5 5">
-                <ToggleButton.Background>
+            <Button x:Name="TopLeft_PB" Grid.Row="0" Grid.Column="0" Margin="5 5 5 5" Style="{StaticResource ToggeleButton}">
+                <Button.Content>
+                    <Image Source="pack://siteoforigin:,,,/Resources/ShapeTrans/originupperleft.png"/>
+                </Button.Content>
+            </Button>
+            <Button x:Name="TopCent_PB" Grid.Row="0" Grid.Column="1" Margin="5 5 5 5" Style="{StaticResource ToggeleButton}">
+                <Button.Background>
                     <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/ShapeTrans/origincentmid.png"/>
-                </ToggleButton.Background>
-            </ToggleButton>
-            <ToggleButton Grid.Row="0" Grid.Column="2" Margin="5 5 5 5">
-                <ToggleButton.Background>
+                </Button.Background>
+            </Button>
+            <Button x:Name="TopRight_PB" Grid.Row="0" Grid.Column="2" Margin="5 5 5 5" Style="{StaticResource ToggeleButton}">
+                <Button.Background>
                     <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/ShapeTrans/originupperright.png"/>
-                </ToggleButton.Background>
-            </ToggleButton>
+                </Button.Background>
+            </Button>
 
-            <ToggleButton Grid.Row="1" Grid.Column="0" Margin="5 5 5 5">
-                <ToggleButton.Background>
+            <Button x:Name="MidLeft_PB" Grid.Row="1" Grid.Column="0" Margin="5 5 5 5" Style="{StaticResource ToggeleButton}">
+                <Button.Background>
                     <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/ShapeTrans/originmidleft.png"/>
-                </ToggleButton.Background>
-            </ToggleButton>
-            <ToggleButton Grid.Row="1" Grid.Column="1" Margin="5 5 5 5">
-                <ToggleButton.Background>
+                </Button.Background>
+            </Button>
+            <Button x:Name="MidCent_PB" Grid.Row="1" Grid.Column="1" Margin="5 5 5 5" Style="{StaticResource ToggeleButton}">
+                <Button.Background>
                     <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/ShapeTrans/originmidcenter.png"/>
-                </ToggleButton.Background>
-            </ToggleButton>
-            <ToggleButton Grid.Row="1" Grid.Column="2" Margin="5 5 5 5">
-                <ToggleButton.Background>
+                </Button.Background>
+            </Button>
+            <Button x:Name="MidRight_PB" Grid.Row="1" Grid.Column="2" Margin="5 5 5 5" Style="{StaticResource ToggeleButton}">
+                <Button.Background>
                     <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/ShapeTrans/originmidright.png"/>
-                </ToggleButton.Background>
-            </ToggleButton>
+                </Button.Background>
+            </Button>
 
-            <ToggleButton  Grid.Row="2" Grid.Column="0" Margin="5 5 5 5">
-                <ToggleButton.Background>
+            <Button x:Name="BottomLeft_PB" Grid.Row="2" Grid.Column="0" Margin="5 5 5 5" Style="{StaticResource ToggeleButton}">
+                <Button.Background>
                     <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/ShapeTrans/originleftleft.png"/>
-                </ToggleButton.Background>
-            </ToggleButton>
-            <ToggleButton  Grid.Row="2" Grid.Column="1" Margin="5 5 5 5">
-                <ToggleButton.Background>
+                </Button.Background>
+            </Button>
+            <Button x:Name="BottomCent_PB" Grid.Row="2" Grid.Column="1" Margin="5 5 5 5" Style="{StaticResource ToggeleButton}">
+                <Button.Background>
                     <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/ShapeTrans/origincentbottom.png"/>
-                </ToggleButton.Background>
-            </ToggleButton>
-            <ToggleButton Grid.Row="2" Grid.Column="2" Margin="5 5 5 5">
-                <ToggleButton.Background>
+                </Button.Background>
+            </Button>
+            <Button x:Name="BottomRight_PB" Grid.Row="2" Grid.Column="2" Margin="5 5 5 5" Style="{StaticResource ToggeleButton}">
+                <Button.Background>
                     <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/ShapeTrans/originlowerright.png"/>
-                </ToggleButton.Background>
-            </ToggleButton>
+                </Button.Background>
+            </Button>
         </Grid>
         <Grid Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="4">
             <Grid.ColumnDefinitions>
@@ -113,8 +130,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height = "*" />
             </Grid.RowDefinitions>
-            
-            <Button Content="Apply" Grid.Row="0" Grid.Column="2" Margin="5 5 5 5"/>
+
+            <Button x:Name="Apply_PB" Content="Apply" Grid.Row="0" Grid.Column="2" Margin="5 5 5 5"/>
         </Grid>
         
     </Grid>
