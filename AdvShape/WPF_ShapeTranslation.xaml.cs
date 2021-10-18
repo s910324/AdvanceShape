@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ShapeRange = Microsoft.Office.Interop.PowerPoint.ShapeRange;
+using Shape = Microsoft.Office.Interop.PowerPoint.Shape;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,6 +43,24 @@ namespace AdvShape {
 
 
         }
+        private void UpdateSpinBox() {
+            ShapeRange     shaperange = Misc.SelectedShapes();
+            List<Boundbox> boundboxes = new List<Boundbox>();
+
+            foreach(Shape shape in shaperange) {
+                boundboxes.Add(new Boundbox(shape));
+            }
+            HashSet<double> XSet = boundboxes.Select(box => box.Left).ToHashSet();
+            HashSet<double> YSet = boundboxes.Select(box =>  box.Top).ToHashSet();
+            string Xo = (XSet.Count == 1) ? Math.Round(XSet.First(), 3).ToString() : "";
+            string Yo = (YSet.Count == 1) ? Math.Round(YSet.First(), 3).ToString() : "";
+            this.LocationX_TB.Text =  Xo;
+            this.LocationY_TB.Text =  Yo;
+            this.TransX_TB.Text    = "0";
+            this.TransY_TB.Text    = "0";
+        }
+
+        
         private void test(Button trigger) {
             foreach(Button button in this.ButtonCollections) {
                 button.BorderBrush = new SolidColorBrush(Misc.RGB(70, 70, 70));
