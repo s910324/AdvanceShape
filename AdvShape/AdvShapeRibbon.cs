@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls.Ribbon;
+using MemoryStream= System.IO.MemoryStream;
 
 using RibbonButton = Microsoft.Office.Tools.Ribbon.RibbonButton;
 using RibbonToggleButton = Microsoft.Office.Tools.Ribbon.RibbonToggleButton;
 using RibbonControl = Microsoft.Office.Tools.Ribbon.RibbonControl;
+using System.Drawing;
 
 namespace AdvShape {
     
@@ -26,6 +28,8 @@ namespace AdvShape {
                 this.SelectionRibbonUpdate();
                 this.ShapeRibbonSetValue();
             };
+
+
         }
 
         private ShapeRange GetSelectedShapes() {
@@ -282,6 +286,10 @@ namespace AdvShape {
 
         private void ShapeTransDialog_RBPB_Click(object sender,RibbonControlEventArgs e) {
 
+        }
+
+        private void button1_Click(object sender,RibbonControlEventArgs e) {
+            
         }
     }
 }

@@ -247,6 +247,7 @@ namespace AdvShape {
             byte Byte_b = Convert.ToByte(b);
             return System.Windows.Media.Color.FromRgb(Byte_r, Byte_g, Byte_b);
         }
+        
         static public void print( params dynamic[] values) {
             String Result = "";
             foreach(var v in values) {
