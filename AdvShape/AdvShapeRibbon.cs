@@ -24,11 +24,14 @@ namespace AdvShape {
                 this.SelectionRibbonUpdate();
                 this.ShapeRibbonSetValue();
             };
-            Globals.ThisAddIn.Application.WindowSelectionChange += (o)=> {
+            Globals.ThisAddIn.Application.WindowSelectionChange += (o) => {
                 this.SelectionRibbonUpdate();
                 this.ShapeRibbonSetValue();
             };
 
+
+            Texture texture = DefaultTexture.TextureDict[35];
+            this.button1.Image = texture.RenderBitmap(32, 32, 1, Color.White, Color.Red, Color.Black);
 
         }
 

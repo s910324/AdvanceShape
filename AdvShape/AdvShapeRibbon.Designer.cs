@@ -49,6 +49,11 @@
             this.buttonGroup1 = this.Factory.CreateRibbonButtonGroup();
             this.button2 = this.Factory.CreateRibbonButton();
             this.button3 = this.Factory.CreateRibbonButton();
+            this.group5 = this.Factory.CreateRibbonGroup();
+            this.box5 = this.Factory.CreateRibbonBox();
+            this.label1 = this.Factory.CreateRibbonLabel();
+            this.button1 = this.Factory.CreateRibbonButton();
+            this.editBox1 = this.Factory.CreateRibbonEditBox();
             this.group1 = this.Factory.CreateRibbonGroup();
             this.box1 = this.Factory.CreateRibbonBox();
             this.ShapeAlignDialog_RBPB = this.Factory.CreateRibbonButton();
@@ -101,16 +106,13 @@
             this.ShapeZDown_RBPB = this.Factory.CreateRibbonButton();
             this.ShapeZBelow_RBPB = this.Factory.CreateRibbonButton();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.group5 = this.Factory.CreateRibbonGroup();
-            this.box5 = this.Factory.CreateRibbonBox();
-            this.editBox1 = this.Factory.CreateRibbonEditBox();
-            this.label1 = this.Factory.CreateRibbonLabel();
-            this.button1 = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group4.SuspendLayout();
             this.buttonGroup2.SuspendLayout();
             this.group2.SuspendLayout();
             this.buttonGroup1.SuspendLayout();
+            this.group5.SuspendLayout();
+            this.box5.SuspendLayout();
             this.group1.SuspendLayout();
             this.box1.SuspendLayout();
             this.ShapeAttributeGroup.SuspendLayout();
@@ -118,8 +120,6 @@
             this.box3.SuspendLayout();
             this.box4.SuspendLayout();
             this.group3.SuspendLayout();
-            this.group5.SuspendLayout();
-            this.box5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tab1
@@ -217,6 +217,39 @@
             this.button3.Label = "button3";
             this.button3.Name = "button3";
             this.button3.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button3_Click_1);
+            // 
+            // group5
+            // 
+            this.group5.Items.Add(this.box5);
+            this.group5.Label = "Shape Opacity";
+            this.group5.Name = "group5";
+            // 
+            // box5
+            // 
+            this.box5.Items.Add(this.label1);
+            this.box5.Items.Add(this.button1);
+            this.box5.Items.Add(this.editBox1);
+            this.box5.Name = "box5";
+            // 
+            // label1
+            // 
+            this.label1.Label = "label1";
+            this.label1.Name = "label1";
+            // 
+            // button1
+            // 
+            this.button1.Label = "button1";
+            this.button1.Name = "button1";
+            this.button1.ShowImage = true;
+            this.button1.ShowLabel = false;
+            this.button1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click);
+            // 
+            // editBox1
+            // 
+            this.editBox1.Label = "editBox1";
+            this.editBox1.Name = "editBox1";
+            this.editBox1.ShowLabel = false;
+            this.editBox1.Text = null;
             // 
             // group1
             // 
@@ -562,36 +595,6 @@
             this.notifyIcon1.Text = "notifyIcon1";
             this.notifyIcon1.Visible = true;
             // 
-            // group5
-            // 
-            this.group5.Items.Add(this.box5);
-            this.group5.Label = "Shape Opacity";
-            this.group5.Name = "group5";
-            // 
-            // box5
-            // 
-            this.box5.Items.Add(this.label1);
-            this.box5.Items.Add(this.button1);
-            this.box5.Items.Add(this.editBox1);
-            this.box5.Name = "box5";
-            // 
-            // editBox1
-            // 
-            this.editBox1.Label = "editBox1";
-            this.editBox1.Name = "editBox1";
-            this.editBox1.ShowLabel = false;
-            // 
-            // label1
-            // 
-            this.label1.Label = "label1";
-            this.label1.Name = "label1";
-            // 
-            // button1
-            // 
-            this.button1.Label = "button1";
-            this.button1.Name = "button1";
-            this.button1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click);
-            // 
             // Ribbon1
             // 
             this.Name = "Ribbon1";
@@ -608,6 +611,10 @@
             this.group2.PerformLayout();
             this.buttonGroup1.ResumeLayout(false);
             this.buttonGroup1.PerformLayout();
+            this.group5.ResumeLayout(false);
+            this.group5.PerformLayout();
+            this.box5.ResumeLayout(false);
+            this.box5.PerformLayout();
             this.group1.ResumeLayout(false);
             this.group1.PerformLayout();
             this.box1.ResumeLayout(false);
@@ -622,10 +629,6 @@
             this.box4.PerformLayout();
             this.group3.ResumeLayout(false);
             this.group3.PerformLayout();
-            this.group5.ResumeLayout(false);
-            this.group5.PerformLayout();
-            this.box5.ResumeLayout(false);
-            this.box5.PerformLayout();
             this.ResumeLayout(false);
 
         }
