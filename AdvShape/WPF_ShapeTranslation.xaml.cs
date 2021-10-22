@@ -17,8 +17,10 @@ using System.Windows.Shapes;
 
 namespace AdvShape {
     public partial class WPF_ShapeTranslation:Window {
-        Button[] ButtonCollections;
-        AdvSpinBox[] SpinBoxCollections;
+        RadioButton[] ButtonCollections;
+        AdvSpinBox[]  SpinBoxCollections;
+        bool Location_X_changed;
+        bool Location_Y_changed;
         public WPF_ShapeTranslation() {
             InitializeComponent();
             this.Init_UI();
@@ -29,20 +31,45 @@ namespace AdvShape {
             SpinBoxCollections = new AdvSpinBox[]{
                 this.TransX_TB, this.TransY_TB, this.LocationX_TB, this.LocationY_TB};
 
-            ButtonCollections = new Button[] {
-                this.TopLeft_PB,    this.TopCent_PB,    this.TopRight_PB,
-                this.MidLeft_PB,    this.MidCent_PB,    this.MidRight_PB,
-                this.BottomLeft_PB, this.BottomCent_PB, this.BottomRight_PB };
+            ButtonCollections = new RadioButton[] {
+                this.TopLeft_RB,    this.TopCent_RB,    this.TopRight_RB,
+                this.MidLeft_RB,    this.MidCent_RB,    this.MidRight_RB,
+                this.BottomLeft_RB, this.BottomCent_RB, this.BottomRight_RB };
 
             foreach(AdvSpinBox advSpinBox in SpinBoxCollections) { 
                 advSpinBox.setParseProperty(AdvTextBox.ParseDataType.Decimal,null,null); 
             }
-            foreach(Button button in ButtonCollections) {
-                button.Click += (o,e) => { this.test((Button)o); };
+            foreach(RadioButton button in ButtonCollections) {
+                button.Click += (o,e) => { this.test((RadioButton)o); };
             }
-
-
+            this.UpdateSpinBox();
         }
+
+        public void ApplyTranslation() {
+            ShapeRange shaperange = Misc.SelectedShapes();
+            bool ChangeApplied    = false;
+            if(this.TransX_TB.InputValid && this.TransX_TB.InputValid) {
+                double dx = (float)Misc.CmToPoints((double)this.TransX_TB.NumericValue);
+                double dy = (float)Misc.CmToPoints((double)this.TransY_TB.NumericValue);
+
+                if(dx != 0) {shaperange.Left += (float)dx; ChangeApplied = true; }
+                if(dy != 0) {shaperange.Top  += (float)dy; ChangeApplied = true; }
+                if(dx == 0 && dy == 0 && this.LocationX_TB.InputValid && this.LocationY_TB.InputValid) {
+
+                    double? x = Misc.CmToPoints((double)this.LocationX_TB.NumericValue);
+                    double? y = Misc.CmToPoints((double)this.LocationY_TB.NumericValue);
+                    x = this.Location_X_changed ? x : null;
+                    y = this.Location_Y_changed ? y : null;
+
+                    if(x != null || y != null) {
+                        foreach(Shape shape in shaperange) {ShapeShift.ShiftTo(shape,x,y);}
+                        ChangeApplied = true;
+                    }
+                }
+            }
+            if(ChangeApplied) {this.UpdateSpinBox();}
+        }
+
         private void UpdateSpinBox() {
             ShapeRange     shaperange = Misc.SelectedShapes();
             List<Boundbox> boundboxes = new List<Boundbox>();
@@ -61,8 +88,8 @@ namespace AdvShape {
         }
 
         
-        private void test(Button trigger) {
-            foreach(Button button in this.ButtonCollections) {
+        private void test(RadioButton trigger) {
+            foreach(RadioButton button in this.ButtonCollections) {
                 button.BorderBrush = new SolidColorBrush(Misc.RGB(70, 70, 70));
             }
             trigger.BorderBrush = new SolidColorBrush(Misc.RGB(240,70,70));

@@ -292,7 +292,7 @@ namespace AdvShape {
         }
 
         private void button1_Click(object sender,RibbonControlEventArgs e) {
-            
+
         }
 
         private void dropDown2_SelectionChanged(object sender,RibbonControlEventArgs e) {

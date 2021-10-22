@@ -73,53 +73,18 @@
                 <RowDefinition Height = "45" />
                 <RowDefinition Height = "45" />
             </Grid.RowDefinitions>
-            <Button x:Name="TopLeft_PB" Grid.Row="0" Grid.Column="0" Margin="5 5 5 5" Style="{StaticResource ToggeleButton}">
-                <Button.Content>
-                    <Image Source="pack://siteoforigin:,,,/Resources/ShapeTrans/originupperleft.png"/>
-                </Button.Content>
-            </Button>
-            <Button x:Name="TopCent_PB" Grid.Row="0" Grid.Column="1" Margin="5 5 5 5" Style="{StaticResource ToggeleButton}">
-                <Button.Background>
-                    <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/ShapeTrans/origincentmid.png"/>
-                </Button.Background>
-            </Button>
-            <Button x:Name="TopRight_PB" Grid.Row="0" Grid.Column="2" Margin="5 5 5 5" Style="{StaticResource ToggeleButton}">
-                <Button.Background>
-                    <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/ShapeTrans/originupperright.png"/>
-                </Button.Background>
-            </Button>
+            <RadioButton x:Name="TopLeft_RB"     Content="LT" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <RadioButton x:Name="TopCent_RB"     Content="CT" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <RadioButton x:Name="TopRight_RB"    Content="RT" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-            <Button x:Name="MidLeft_PB" Grid.Row="1" Grid.Column="0" Margin="5 5 5 5" Style="{StaticResource ToggeleButton}">
-                <Button.Background>
-                    <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/ShapeTrans/originmidleft.png"/>
-                </Button.Background>
-            </Button>
-            <Button x:Name="MidCent_PB" Grid.Row="1" Grid.Column="1" Margin="5 5 5 5" Style="{StaticResource ToggeleButton}">
-                <Button.Background>
-                    <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/ShapeTrans/originmidcenter.png"/>
-                </Button.Background>
-            </Button>
-            <Button x:Name="MidRight_PB" Grid.Row="1" Grid.Column="2" Margin="5 5 5 5" Style="{StaticResource ToggeleButton}">
-                <Button.Background>
-                    <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/ShapeTrans/originmidright.png"/>
-                </Button.Background>
-            </Button>
+            <RadioButton x:Name="MidLeft_RB"     Content="LM" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <RadioButton x:Name="MidCent_RB"     Content="CM" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <RadioButton x:Name="MidRight_RB"    Content="RM" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
-            <Button x:Name="BottomLeft_PB" Grid.Row="2" Grid.Column="0" Margin="5 5 5 5" Style="{StaticResource ToggeleButton}">
-                <Button.Background>
-                    <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/ShapeTrans/originleftleft.png"/>
-                </Button.Background>
-            </Button>
-            <Button x:Name="BottomCent_PB" Grid.Row="2" Grid.Column="1" Margin="5 5 5 5" Style="{StaticResource ToggeleButton}">
-                <Button.Background>
-                    <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/ShapeTrans/origincentbottom.png"/>
-                </Button.Background>
-            </Button>
-            <Button x:Name="BottomRight_PB" Grid.Row="2" Grid.Column="2" Margin="5 5 5 5" Style="{StaticResource ToggeleButton}">
-                <Button.Background>
-                    <ImageBrush ImageSource="pack://siteoforigin:,,,/Resources/ShapeTrans/originlowerright.png"/>
-                </Button.Background>
-            </Button>
+            <RadioButton x:Name="BottomLeft_RB"  Content="LB" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <RadioButton x:Name="BottomCent_RB"  Content="CB" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <RadioButton x:Name="BottomRight_RB" Content="RB" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            
         </Grid>
         <Grid Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="4">
             <Grid.ColumnDefinitions>

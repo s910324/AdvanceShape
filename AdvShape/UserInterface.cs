@@ -131,6 +131,8 @@ namespace AdvShape {
         private Button     buttonDown;
         private AdvTextBox advTextBox;
         public  Double     Increment;
+
+
         Dictionary<string,Color> Theme { 
             get { return this.advTextBox.Theme; }
             set { this.advTextBox.Theme = value; }

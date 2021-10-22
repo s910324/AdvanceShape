@@ -22,5 +22,6 @@ namespace AdvShape {
             ishape.Left += (float) dX;
             ishape.Top  += (float) dY;
         }
+
     }
 }
