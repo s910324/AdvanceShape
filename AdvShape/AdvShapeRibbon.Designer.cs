@@ -77,19 +77,19 @@
             this.ShapeTransDialog_RBPB = this.Factory.CreateRibbonButton();
             this.group5 = this.Factory.CreateRibbonGroup();
             this.box5 = this.Factory.CreateRibbonBox();
-            this.button1 = this.Factory.CreateRibbonButton();
-            this.button14 = this.Factory.CreateRibbonButton();
-            this.label3 = this.Factory.CreateRibbonLabel();
-            this.editBox1 = this.Factory.CreateRibbonEditBox();
-            this.label1 = this.Factory.CreateRibbonLabel();
-            this.button15 = this.Factory.CreateRibbonButton();
+            this.ShapeFillOpacity_RBPB = this.Factory.CreateRibbonButton();
+            this.ShapeFillOpacityDec_RBPB = this.Factory.CreateRibbonButton();
+            this.ShapeFillOpacity_RBLB = this.Factory.CreateRibbonLabel();
+            this.ShapeFillOpacity_RBET = this.Factory.CreateRibbonEditBox();
+            this.ShapeFillOpacityUnit_RBLB = this.Factory.CreateRibbonLabel();
+            this.ShapeFillOpacityInc_RBPB = this.Factory.CreateRibbonButton();
             this.box7 = this.Factory.CreateRibbonBox();
-            this.button11 = this.Factory.CreateRibbonButton();
-            this.button12 = this.Factory.CreateRibbonButton();
-            this.label4 = this.Factory.CreateRibbonLabel();
-            this.editBox2 = this.Factory.CreateRibbonEditBox();
-            this.label2 = this.Factory.CreateRibbonLabel();
-            this.button13 = this.Factory.CreateRibbonButton();
+            this.ShapeLineOpacity_RBPB = this.Factory.CreateRibbonButton();
+            this.ShapeLineOpacityDec_RBPB = this.Factory.CreateRibbonButton();
+            this.ShapeLineOpacity_RBLB = this.Factory.CreateRibbonLabel();
+            this.ShapeLineOpacity_RBET = this.Factory.CreateRibbonEditBox();
+            this.ShapeLineOpacityUnit_RBLB = this.Factory.CreateRibbonLabel();
+            this.ShapeLineOpacityInc_RBPB = this.Factory.CreateRibbonButton();
             this.box6 = this.Factory.CreateRibbonBox();
             this.button8 = this.Factory.CreateRibbonButton();
             this.button9 = this.Factory.CreateRibbonButton();
@@ -408,92 +408,92 @@
             // 
             // box5
             // 
-            this.box5.Items.Add(this.button1);
-            this.box5.Items.Add(this.button14);
-            this.box5.Items.Add(this.label3);
-            this.box5.Items.Add(this.editBox1);
-            this.box5.Items.Add(this.label1);
-            this.box5.Items.Add(this.button15);
+            this.box5.Items.Add(this.ShapeFillOpacity_RBPB);
+            this.box5.Items.Add(this.ShapeFillOpacityDec_RBPB);
+            this.box5.Items.Add(this.ShapeFillOpacity_RBLB);
+            this.box5.Items.Add(this.ShapeFillOpacity_RBET);
+            this.box5.Items.Add(this.ShapeFillOpacityUnit_RBLB);
+            this.box5.Items.Add(this.ShapeFillOpacityInc_RBPB);
             this.box5.Name = "box5";
             // 
-            // button1
+            // ShapeFillOpacity_RBPB
             // 
-            this.button1.Label = "button1";
-            this.button1.Name = "button1";
-            this.button1.ShowImage = true;
-            this.button1.ShowLabel = false;
-            this.button1.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click);
+            this.ShapeFillOpacity_RBPB.Label = "button1";
+            this.ShapeFillOpacity_RBPB.Name = "ShapeFillOpacity_RBPB";
+            this.ShapeFillOpacity_RBPB.ShowImage = true;
+            this.ShapeFillOpacity_RBPB.ShowLabel = false;
+            this.ShapeFillOpacity_RBPB.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click);
             // 
-            // button14
+            // ShapeFillOpacityDec_RBPB
             // 
-            this.button14.Label = "◃";
-            this.button14.Name = "button14";
+            this.ShapeFillOpacityDec_RBPB.Label = "◃";
+            this.ShapeFillOpacityDec_RBPB.Name = "ShapeFillOpacityDec_RBPB";
             // 
-            // label3
+            // ShapeFillOpacity_RBLB
             // 
-            this.label3.Label = "⍶";
-            this.label3.Name = "label3";
+            this.ShapeFillOpacity_RBLB.Label = "⍶";
+            this.ShapeFillOpacity_RBLB.Name = "ShapeFillOpacity_RBLB";
             // 
-            // editBox1
+            // ShapeFillOpacity_RBET
             // 
-            this.editBox1.Label = "editBox1";
-            this.editBox1.Name = "editBox1";
-            this.editBox1.ShowLabel = false;
-            this.editBox1.Text = null;
+            this.ShapeFillOpacity_RBET.Label = "editBox1";
+            this.ShapeFillOpacity_RBET.Name = "ShapeFillOpacity_RBET";
+            this.ShapeFillOpacity_RBET.ShowLabel = false;
+            this.ShapeFillOpacity_RBET.Text = null;
             // 
-            // label1
+            // ShapeFillOpacityUnit_RBLB
             // 
-            this.label1.Label = "%";
-            this.label1.Name = "label1";
+            this.ShapeFillOpacityUnit_RBLB.Label = "%";
+            this.ShapeFillOpacityUnit_RBLB.Name = "ShapeFillOpacityUnit_RBLB";
             // 
-            // button15
+            // ShapeFillOpacityInc_RBPB
             // 
-            this.button15.Label = "▸";
-            this.button15.Name = "button15";
+            this.ShapeFillOpacityInc_RBPB.Label = "▸";
+            this.ShapeFillOpacityInc_RBPB.Name = "ShapeFillOpacityInc_RBPB";
             // 
             // box7
             // 
-            this.box7.Items.Add(this.button11);
-            this.box7.Items.Add(this.button12);
-            this.box7.Items.Add(this.label4);
-            this.box7.Items.Add(this.editBox2);
-            this.box7.Items.Add(this.label2);
-            this.box7.Items.Add(this.button13);
+            this.box7.Items.Add(this.ShapeLineOpacity_RBPB);
+            this.box7.Items.Add(this.ShapeLineOpacityDec_RBPB);
+            this.box7.Items.Add(this.ShapeLineOpacity_RBLB);
+            this.box7.Items.Add(this.ShapeLineOpacity_RBET);
+            this.box7.Items.Add(this.ShapeLineOpacityUnit_RBLB);
+            this.box7.Items.Add(this.ShapeLineOpacityInc_RBPB);
             this.box7.Name = "box7";
             // 
-            // button11
+            // ShapeLineOpacity_RBPB
             // 
-            this.button11.Label = "button11";
-            this.button11.Name = "button11";
-            this.button11.ShowImage = true;
-            this.button11.ShowLabel = false;
+            this.ShapeLineOpacity_RBPB.Label = "button11";
+            this.ShapeLineOpacity_RBPB.Name = "ShapeLineOpacity_RBPB";
+            this.ShapeLineOpacity_RBPB.ShowImage = true;
+            this.ShapeLineOpacity_RBPB.ShowLabel = false;
             // 
-            // button12
+            // ShapeLineOpacityDec_RBPB
             // 
-            this.button12.Label = "◃";
-            this.button12.Name = "button12";
+            this.ShapeLineOpacityDec_RBPB.Label = "◃";
+            this.ShapeLineOpacityDec_RBPB.Name = "ShapeLineOpacityDec_RBPB";
             // 
-            // label4
+            // ShapeLineOpacity_RBLB
             // 
-            this.label4.Label = "⍶";
-            this.label4.Name = "label4";
+            this.ShapeLineOpacity_RBLB.Label = "⍶";
+            this.ShapeLineOpacity_RBLB.Name = "ShapeLineOpacity_RBLB";
             // 
-            // editBox2
+            // ShapeLineOpacity_RBET
             // 
-            this.editBox2.Label = "editBox2";
-            this.editBox2.Name = "editBox2";
-            this.editBox2.ShowLabel = false;
-            this.editBox2.Text = null;
+            this.ShapeLineOpacity_RBET.Label = "editBox2";
+            this.ShapeLineOpacity_RBET.Name = "ShapeLineOpacity_RBET";
+            this.ShapeLineOpacity_RBET.ShowLabel = false;
+            this.ShapeLineOpacity_RBET.Text = null;
             // 
-            // label2
+            // ShapeLineOpacityUnit_RBLB
             // 
-            this.label2.Label = "%";
-            this.label2.Name = "label2";
+            this.ShapeLineOpacityUnit_RBLB.Label = "%";
+            this.ShapeLineOpacityUnit_RBLB.Name = "ShapeLineOpacityUnit_RBLB";
             // 
-            // button13
+            // ShapeLineOpacityInc_RBPB
             // 
-            this.button13.Label = "▸";
-            this.button13.Name = "button13";
+            this.ShapeLineOpacityInc_RBPB.Label = "▸";
+            this.ShapeLineOpacityInc_RBPB.Name = "ShapeLineOpacityInc_RBPB";
             // 
             // box6
             // 
@@ -817,24 +817,24 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button7;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group5;
         internal Microsoft.Office.Tools.Ribbon.RibbonBox box5;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonEditBox editBox1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeFillOpacity_RBPB;
+        internal Microsoft.Office.Tools.Ribbon.RibbonEditBox ShapeFillOpacity_RBET;
         internal Microsoft.Office.Tools.Ribbon.RibbonBox box6;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button8;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button9;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button10;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button14;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button15;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeFillOpacityDec_RBPB;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeFillOpacityInc_RBPB;
         internal Microsoft.Office.Tools.Ribbon.RibbonBox box7;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button11;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button12;
-        internal Microsoft.Office.Tools.Ribbon.RibbonEditBox editBox2;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button13;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeLineOpacity_RBPB;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeLineOpacityDec_RBPB;
+        internal Microsoft.Office.Tools.Ribbon.RibbonEditBox ShapeLineOpacity_RBET;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeLineOpacityInc_RBPB;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group6;
-        internal Microsoft.Office.Tools.Ribbon.RibbonLabel label3;
-        internal Microsoft.Office.Tools.Ribbon.RibbonLabel label1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonLabel label4;
-        internal Microsoft.Office.Tools.Ribbon.RibbonLabel label2;
+        internal Microsoft.Office.Tools.Ribbon.RibbonLabel ShapeFillOpacity_RBLB;
+        internal Microsoft.Office.Tools.Ribbon.RibbonLabel ShapeFillOpacityUnit_RBLB;
+        internal Microsoft.Office.Tools.Ribbon.RibbonLabel ShapeLineOpacity_RBLB;
+        internal Microsoft.Office.Tools.Ribbon.RibbonLabel ShapeLineOpacityUnit_RBLB;
         private System.Windows.Forms.ColorDialog colorDialog1;
     }
 

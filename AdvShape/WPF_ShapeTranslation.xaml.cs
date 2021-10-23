@@ -96,35 +96,40 @@ namespace AdvShape {
             HashSet<double> YSet;
             switch(OriginX) {
                 case  1:
-                    XSet = boundboxes.Select(box => box.Right).ToHashSet();
+                    XSet = boundboxes.Select(box => Math.Round(Misc.PointsToCm(box.Right), 3)).ToHashSet();
                     break;
                 case  0:
-                    XSet = boundboxes.Select(box => box.Xc).ToHashSet();
+                    XSet = boundboxes.Select(box => Math.Round(Misc.PointsToCm(box.Xc),3)).ToHashSet();
                     break;
                 case -1:
-                    XSet = boundboxes.Select(box => box.Left).ToHashSet();
+                    XSet = boundboxes.Select(box => Math.Round(Misc.PointsToCm(box.Left),3)).ToHashSet();
                     break;
                 default:
-                    XSet = boundboxes.Select(box => box.Left).ToHashSet();
+                    XSet = boundboxes.Select(box => Math.Round(Misc.PointsToCm(box.Left),3)).ToHashSet();
                     break;
             }
             switch(OriginX) {
                 case  1:
-                     YSet= boundboxes.Select(box => box.Top).ToHashSet();
+                     YSet= boundboxes.Select(box => Math.Round(Misc.PointsToCm(box.Top),3)).ToHashSet();
                     break;
                 case  0:
-                    YSet = boundboxes.Select(box => box.Yc).ToHashSet();
+                    YSet = boundboxes.Select(box => Math.Round(Misc.PointsToCm(box.Yc),3)).ToHashSet();
                     break;
                 case -1:
-                    YSet = boundboxes.Select(box => box.Bottom).ToHashSet();
+                    YSet = boundboxes.Select(box => Math.Round(Misc.PointsToCm(box.Bottom),3)).ToHashSet();
                     break;
                 default:
-                    YSet = boundboxes.Select(box => box.Top).ToHashSet();
+                    YSet = boundboxes.Select(box => Math.Round(Misc.PointsToCm(box.Top),3)).ToHashSet();
                     break;
             }
-            
-            string Xo = (XSet.Count == 1) ? Math.Round(Misc.PointsToCm(XSet.First()), 3).ToString() : "";
-            string Yo = (YSet.Count == 1) ? Math.Round(Misc.PointsToCm(YSet.First()), 3).ToString() : "";
+            foreach(double b in XSet) {
+                Misc.print(b);
+            }
+            foreach(double b in YSet) {
+                Misc.print(b);
+            }
+            string Xo = (XSet.Count == 1) ? Math.Round(Misc.PointsToCm(XSet.First()), 3).ToString() : "--";
+            string Yo = (YSet.Count == 1) ? Math.Round(Misc.PointsToCm(YSet.First()), 3).ToString() : "--";
             this.LocationX_TB.Text =  Xo;
             this.LocationY_TB.Text =  Yo;
             this.TransX_TB.Text    = "0";

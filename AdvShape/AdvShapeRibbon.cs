@@ -31,7 +31,7 @@ namespace AdvShape {
 
 
             Texture texture = DefaultTexture.TextureDict[35];
-            this.button1.Image = texture.RenderBitmap(32, 32, 1, Color.White, Color.Red, Color.Black);
+            this.ShapeFillOpacity_RBPB.Image = texture.RenderBitmap(32, 32, 1, Color.White, Color.Red, Color.Black);
 
         }
 
@@ -150,41 +150,59 @@ namespace AdvShape {
                 this.ShapeRibbonSetValue();
             }
         }
+        private void SetShapeFIllOpacity(double? parse = null) { 
+        
+        }
         protected void ShapeRibbonSetValue() {
             this.UI_trigger = false;
             ShapeRange SelectRange = Misc.SelectedShapes();
             if(SelectRange.Count > 0) {
-                List<float> width  = new List<float>();
-                List<float> height = new List<float>();
-                List<float> angle  = new List<float>();
+                List<float> width       = new List<float>();
+                List<float> height      = new List<float>();
+                List<float> angle       = new List<float>();
+                List<float> fillOpacity = new List<float>();
+                List<float> lineOpacity = new List<float>();
 
                 foreach(Shape ishape in Misc.SelectedShapes()) {
                     width.Add(ishape.Width);
                     height.Add(ishape.Height);
                     angle.Add(ishape.Rotation);
+                    fillOpacity.Add(ishape.Fill.Transparency);
+                    lineOpacity.Add(ishape.Line.Transparency);
                 }
 
-                HashSet<float> hashWidth   = width.ToHashSet();
-                HashSet<float> hashheight  = height.ToHashSet();
-                HashSet<float> hashangle   = angle.ToHashSet();
-                this.ShapeWidth_RBET.Text  = (hashWidth.Count  == 1) ? Math.Round(Misc.PointsToCm(hashWidth.First()), 3).ToString(): "";
-                this.ShapeHeight_RBET.Text = (hashheight.Count == 1) ? Math.Round(Misc.PointsToCm(hashheight.First()),3).ToString(): "";
-                this.ShapeAngle_RBET.Text  = (hashangle.Count  == 1) ? Math.Round(hashangle.First(), 3).ToString(): "";
+                HashSet<float> hashWidth       = width.ToHashSet();
+                HashSet<float> hashheight      = height.ToHashSet();
+                HashSet<float> hashangle       = angle.ToHashSet();
+                HashSet<float> hashfillOpacity = fillOpacity.ToHashSet();
+                HashSet<float> hashlineOpacity = lineOpacity.ToHashSet();
+
+                this.ShapeWidth_RBET.Text       = (hashWidth.Count  == 1)      ? Math.Round(Misc.PointsToCm(hashWidth.First()), 3).ToString(): "";
+                this.ShapeHeight_RBET.Text      = (hashheight.Count == 1)      ? Math.Round(Misc.PointsToCm(hashheight.First()),3).ToString(): "";
+                this.ShapeAngle_RBET.Text       = (hashangle.Count  == 1)      ? Math.Round(hashangle.First(), 3).ToString(): "";
+                this.ShapeFillOpacity_RBET.Text = (hashfillOpacity.Count == 1) ? Math.Round(hashfillOpacity.First(),2).ToString() : "";
+                this.ShapeLineOpacity_RBET.Text = (hashlineOpacity.Count == 1) ? Math.Round(hashlineOpacity.First(),2).ToString() : "";
             }
             this.UI_trigger = true;
         }
         protected void SelectionRibbonUpdate() {
             RibbonControl[] UISets1 = new RibbonControl[] {
-                this.ShapeWidth_RBET,       this.ShapeHeight_RBET,      this.ShapeAngle_RBET,
-                this.ShapeHeight_RBLB,      this.ShapeHeightUnit_RBLB,  this.ShapeWidth_RBLB,
-                this.ShapeWidthDec_RBPB,    this.ShapeHeightDec_RBPB,   this.ShapeAngleDec_RBPB,
-                this.ShapeWidthInc_RBPB,    this.ShapeHeightInc_RBPB,   this.ShapeAngleInc_RBPB,
-                this.ShapeAlignDialog_RBPB, this.ShapeArrayDialog_RBPB, this.ShapeTransDialog_RBPB,
+                this.ShapeWidth_RBET,           this.ShapeHeight_RBET,         this.ShapeAngle_RBET,
+                this.ShapeHeight_RBLB,          this.ShapeHeightUnit_RBLB,     this.ShapeWidth_RBLB,
+                this.ShapeWidthDec_RBPB,        this.ShapeHeightDec_RBPB,      this.ShapeAngleDec_RBPB,
+                this.ShapeWidthInc_RBPB,        this.ShapeHeightInc_RBPB,      this.ShapeAngleInc_RBPB,
+                this.ShapeAlignDialog_RBPB,     this.ShapeArrayDialog_RBPB,    this.ShapeTransDialog_RBPB,
                 this.ShapeAlignMenu,
-                this.ShapeWidthUnit_RBLB,   this.ShapeAngle_RBLB,       this.ShapeAngleUnit_RBLB,
+                this.ShapeWidthUnit_RBLB,       this.ShapeAngle_RBLB,          this.ShapeAngleUnit_RBLB,
+                this.ShapeZTop_RBPB,            this.ShapeZbottom_RBPB,        this.ShapeZUp_RBPB,
+                this.ShapeZDown_RBPB,
 
-                this.ShapeZTop_RBPB,        this.ShapeZbottom_RBPB,     this.ShapeZUp_RBPB, 
-                this.ShapeZDown_RBPB
+                this.ShapeFillOpacity_RBET,     this.ShapeFillOpacityInc_RBPB, this.ShapeFillOpacityDec_RBPB,
+                this.ShapeFillOpacityUnit_RBLB, this.ShapeFillOpacity_RBPB,
+
+                this.ShapeLineOpacity_RBET,     this.ShapeLineOpacityInc_RBPB, this.ShapeLineOpacityDec_RBPB,
+                this.ShapeLineOpacityUnit_RBLB, this.ShapeLineOpacity_RBPB
+
             };
 
             RibbonControl[] UISets2 = new RibbonControl[] {
