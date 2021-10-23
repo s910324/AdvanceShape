@@ -397,7 +397,6 @@
             // 
             this.ShapeTransDialog_RBPB.Label = "☩ Shape Translation";
             this.ShapeTransDialog_RBPB.Name = "ShapeTransDialog_RBPB";
-            this.ShapeTransDialog_RBPB.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ShapeTransDialog_RBPB_Click);
             // 
             // group5
             // 

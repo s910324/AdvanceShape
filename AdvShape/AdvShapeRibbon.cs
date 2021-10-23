@@ -46,6 +46,7 @@ namespace AdvShape {
             this.ShapeAlignDialog_RBPB.Click  += (o,i) => { this.ShowShapeAlignDialig(); };
             this.ShapeArrayDialog_RBPB.Click  += (o,i) => { this.ShowShapeArrayDialig(); };
             this.ShapeTransDialog_RBPB.Click  += (o,i) => { this.ShowShapeTransDialig(); };
+
             this.AlignLeft_RBPB.Click         += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignLeft); };
             this.AlignCent_RBPB.Click         += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignCenter); };
             this.AlignRight_RBPB.Click        += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignRight); };
@@ -79,13 +80,13 @@ namespace AdvShape {
         }
         private void ShowShapeAlignDialig() {
             var app = new WPF_ShapeAlign();
-            app.WindowStartupLocation = System.Windows.WindowStartupLocation.Manual;
+/*            app.WindowStartupLocation = System.Windows.WindowStartupLocation.Manual;
             double w = System.Windows.SystemParameters.WorkArea.Width;
             double h = System.Windows.SystemParameters.WorkArea.Height;
 
             app.Left = ((w * 0.1) < 100) ? 100 : (w * 0.1);
             app.Top = ((h * 0.1) < 100) ? (h - 100 + app.Height) : (h * 0.9 + app.Height);
-            app.Topmost = true;
+            app.Topmost = true;*/
             app.Show();
         }
 
@@ -93,13 +94,13 @@ namespace AdvShape {
             ShapeRange iRange = Misc.SelectedShapes();
             if(iRange.Count > 0) {
                 var app = new WPF_ShapeArray();
-                app.WindowStartupLocation = System.Windows.WindowStartupLocation.Manual;
+/*                app.WindowStartupLocation = System.Windows.WindowStartupLocation.Manual;
                 double w    = System.Windows.SystemParameters.WorkArea.Width;
                 double h    = System.Windows.SystemParameters.WorkArea.Height;
                 
                 app.Left    = ((w * 0.1) < 100) ?       100 : (w * 0.1);
                 app.Top     = ((h * 0.1) < 100) ? (h - 100 + app.Height) : (h * 0.9 + app.Height);
-                app.Topmost = true;
+                app.Topmost = true;*/
                 app.Show();
             }
         }
@@ -107,13 +108,13 @@ namespace AdvShape {
             ShapeRange iRange = Misc.SelectedShapes();
             if(iRange.Count > 0) {
                 var app = new WPF_ShapeTranslation();
-                app.WindowStartupLocation = System.Windows.WindowStartupLocation.Manual;
+ /*               app.WindowStartupLocation = System.Windows.WindowStartupLocation.Manual;
                 double w = System.Windows.SystemParameters.WorkArea.Width;
                 double h = System.Windows.SystemParameters.WorkArea.Height;
 
                 app.Left = ((w * 0.1) < 100) ? 100 : (w * 0.1);
                 app.Top = ((h * 0.1) < 100) ? (h - 100 + app.Height) : (h * 0.9 + app.Height);
-                app.Topmost = true;
+                app.Topmost = true;*/
                 app.Show();
             }
         }
@@ -287,9 +288,7 @@ namespace AdvShape {
             w.Show();
         }
 
-        private void ShapeTransDialog_RBPB_Click(object sender,RibbonControlEventArgs e) {
 
-        }
 
         private void button1_Click(object sender,RibbonControlEventArgs e) {
 
