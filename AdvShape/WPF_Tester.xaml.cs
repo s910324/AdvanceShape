@@ -31,7 +31,7 @@ namespace AdvShape {
                 Texture texture = item.Value;
                 Image  i = new System.Windows.Controls.Image();
                 Label  l = new Label();
-                BitmapImage b = texture.RenderBitmapImage(w*2,h*2,1,Color.Black,Color.Red,Color.Black);
+                BitmapImage b = texture.RenderBitmapImage(w*2,h*2,1,2, Color.Black,Color.Red,Color.Black);
                 l.Content = (rowIndex + 1).ToString();
                 i.Width   = w;
                 i.Height  = h;

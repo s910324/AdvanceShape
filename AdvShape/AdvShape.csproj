@@ -214,6 +214,9 @@
     <Compile Include="Boundbox.cs" />
     <Compile Include="ImageGenerate.cs" />
     <Compile Include="ShapeOrder.cs" />
+    <Compile Include="WPF_ShapeTexture.xaml.cs">
+      <DependentUpon>WPF_ShapeTexture.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPF_ShapeTranslation.xaml.cs">
       <DependentUpon>WPF_ShapeTranslation.xaml</DependentUpon>
     </Compile>
@@ -279,6 +282,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="WPF_ShapeTexture.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WPF_ShapeTranslation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
