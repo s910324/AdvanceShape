@@ -77,14 +77,14 @@
             this.ShapeTransDialog_RBPB = this.Factory.CreateRibbonButton();
             this.group5 = this.Factory.CreateRibbonGroup();
             this.box5 = this.Factory.CreateRibbonBox();
-            this.ShapeFillOpacity_RBPB = this.Factory.CreateRibbonButton();
+            this.ShapeFill_RBPB = this.Factory.CreateRibbonButton();
             this.ShapeFillOpacityDec_RBPB = this.Factory.CreateRibbonButton();
             this.ShapeFillOpacity_RBLB = this.Factory.CreateRibbonLabel();
             this.ShapeFillOpacity_RBET = this.Factory.CreateRibbonEditBox();
             this.ShapeFillOpacityUnit_RBLB = this.Factory.CreateRibbonLabel();
             this.ShapeFillOpacityInc_RBPB = this.Factory.CreateRibbonButton();
             this.box7 = this.Factory.CreateRibbonBox();
-            this.ShapeLineOpacity_RBPB = this.Factory.CreateRibbonButton();
+            this.ShapeLine_RBPB = this.Factory.CreateRibbonButton();
             this.ShapeLineOpacityDec_RBPB = this.Factory.CreateRibbonButton();
             this.ShapeLineOpacity_RBLB = this.Factory.CreateRibbonLabel();
             this.ShapeLineOpacity_RBET = this.Factory.CreateRibbonEditBox();
@@ -408,7 +408,7 @@
             // 
             // box5
             // 
-            this.box5.Items.Add(this.ShapeFillOpacity_RBPB);
+            this.box5.Items.Add(this.ShapeFill_RBPB);
             this.box5.Items.Add(this.ShapeFillOpacityDec_RBPB);
             this.box5.Items.Add(this.ShapeFillOpacity_RBLB);
             this.box5.Items.Add(this.ShapeFillOpacity_RBET);
@@ -416,18 +416,18 @@
             this.box5.Items.Add(this.ShapeFillOpacityInc_RBPB);
             this.box5.Name = "box5";
             // 
-            // ShapeFillOpacity_RBPB
+            // ShapeFill_RBPB
             // 
-            this.ShapeFillOpacity_RBPB.Label = "button1";
-            this.ShapeFillOpacity_RBPB.Name = "ShapeFillOpacity_RBPB";
-            this.ShapeFillOpacity_RBPB.ShowImage = true;
-            this.ShapeFillOpacity_RBPB.ShowLabel = false;
-            this.ShapeFillOpacity_RBPB.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button1_Click);
+            this.ShapeFill_RBPB.Label = "button1";
+            this.ShapeFill_RBPB.Name = "ShapeFill_RBPB";
+            this.ShapeFill_RBPB.ShowImage = true;
+            this.ShapeFill_RBPB.ShowLabel = false;
             // 
             // ShapeFillOpacityDec_RBPB
             // 
             this.ShapeFillOpacityDec_RBPB.Label = "◃";
             this.ShapeFillOpacityDec_RBPB.Name = "ShapeFillOpacityDec_RBPB";
+            this.ShapeFillOpacityDec_RBPB.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ShapeFillOpacityDec_RBPB_Click);
             // 
             // ShapeFillOpacity_RBLB
             // 
@@ -450,10 +450,11 @@
             // 
             this.ShapeFillOpacityInc_RBPB.Label = "▸";
             this.ShapeFillOpacityInc_RBPB.Name = "ShapeFillOpacityInc_RBPB";
+            this.ShapeFillOpacityInc_RBPB.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ShapeFillOpacityInc_RBPB_Click);
             // 
             // box7
             // 
-            this.box7.Items.Add(this.ShapeLineOpacity_RBPB);
+            this.box7.Items.Add(this.ShapeLine_RBPB);
             this.box7.Items.Add(this.ShapeLineOpacityDec_RBPB);
             this.box7.Items.Add(this.ShapeLineOpacity_RBLB);
             this.box7.Items.Add(this.ShapeLineOpacity_RBET);
@@ -461,17 +462,18 @@
             this.box7.Items.Add(this.ShapeLineOpacityInc_RBPB);
             this.box7.Name = "box7";
             // 
-            // ShapeLineOpacity_RBPB
+            // ShapeLine_RBPB
             // 
-            this.ShapeLineOpacity_RBPB.Label = "button11";
-            this.ShapeLineOpacity_RBPB.Name = "ShapeLineOpacity_RBPB";
-            this.ShapeLineOpacity_RBPB.ShowImage = true;
-            this.ShapeLineOpacity_RBPB.ShowLabel = false;
+            this.ShapeLine_RBPB.Label = "button11";
+            this.ShapeLine_RBPB.Name = "ShapeLine_RBPB";
+            this.ShapeLine_RBPB.ShowImage = true;
+            this.ShapeLine_RBPB.ShowLabel = false;
             // 
             // ShapeLineOpacityDec_RBPB
             // 
             this.ShapeLineOpacityDec_RBPB.Label = "◃";
             this.ShapeLineOpacityDec_RBPB.Name = "ShapeLineOpacityDec_RBPB";
+            this.ShapeLineOpacityDec_RBPB.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ShapeLineOpacityDec_RBPB_Click);
             // 
             // ShapeLineOpacity_RBLB
             // 
@@ -494,6 +496,7 @@
             // 
             this.ShapeLineOpacityInc_RBPB.Label = "▸";
             this.ShapeLineOpacityInc_RBPB.Name = "ShapeLineOpacityInc_RBPB";
+            this.ShapeLineOpacityInc_RBPB.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ShapeLineOpacityInc_RBPB_Click);
             // 
             // box6
             // 
@@ -817,7 +820,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button7;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group5;
         internal Microsoft.Office.Tools.Ribbon.RibbonBox box5;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeFillOpacity_RBPB;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeFill_RBPB;
         internal Microsoft.Office.Tools.Ribbon.RibbonEditBox ShapeFillOpacity_RBET;
         internal Microsoft.Office.Tools.Ribbon.RibbonBox box6;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button8;
@@ -826,7 +829,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeFillOpacityDec_RBPB;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeFillOpacityInc_RBPB;
         internal Microsoft.Office.Tools.Ribbon.RibbonBox box7;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeLineOpacity_RBPB;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeLine_RBPB;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeLineOpacityDec_RBPB;
         internal Microsoft.Office.Tools.Ribbon.RibbonEditBox ShapeLineOpacity_RBET;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeLineOpacityInc_RBPB;

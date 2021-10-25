@@ -21,10 +21,58 @@ using HorizontalAlignment = System.Windows.HorizontalAlignment;
 namespace AdvShape {
 
     public class UserInterface {
+        static public Grid GenerateGrid(string[] RowDimParas,string[] ColDomParas) {
+            Grid grid = new Grid();
+            foreach(string RowDim in RowDimParas) {
+                int Dimension = 1;
+                GridUnitType UnitType = GridUnitType.Auto;
 
+                if(RowDim.ToLower() == "auto") {
+                    UnitType = GridUnitType.Auto;
+                } else if(RowDim == "*") {
+                    UnitType = GridUnitType.Star;
+                } else if(RowDim.Contains("*")) {
+                    UnitType = GridUnitType.Star;
+                    Dimension = int.Parse(RowDim.Replace("*",""));
+                } else if(int.TryParse(RowDim,out Dimension)) {
+                    UnitType = GridUnitType.Pixel;
+                }
 
+                RowDefinition RowDef = new RowDefinition();
+                RowDef.Height = new GridLength(Dimension,UnitType);
+                grid.RowDefinitions.Add(RowDef);
+            }
+            foreach(string ColDim in ColDomParas) {
+                int Dimension = 1;
+                GridUnitType UnitType = GridUnitType.Auto;
 
+                if(ColDim.ToLower() == "auto") {
+                    UnitType = GridUnitType.Auto;
+                } else if(ColDim == "*") {
+                    UnitType = GridUnitType.Star;
+                } else if(ColDim.Contains("*")) {
+                    UnitType = GridUnitType.Star;
+                    Dimension = int.Parse(ColDim.Replace("*",""));
+                } else if(int.TryParse(ColDim,out Dimension)) {
+                    UnitType = GridUnitType.Pixel;
+                }
 
+                ColumnDefinition ColDef = new ColumnDefinition();
+                ColDef.Width = new GridLength(Dimension,UnitType);
+                grid.ColumnDefinitions.Add(ColDef);
+            }
+            return grid;
+        }
+        static public void setRowColumn(
+            Grid grid,UIElement element,
+            int rowIndex,int columnIndex,int rowSpan = 1,int colSpan = 1) {
+
+            Grid.SetRow(element,rowIndex);
+            Grid.SetRowSpan(element,rowSpan);
+            Grid.SetColumn(element,columnIndex);
+            Grid.SetColumnSpan(element,colSpan);
+            grid.Children.Add(element);
+        }
     }
     public class AdvTextBox:TextBox {
         public enum ParseDataType {
@@ -166,7 +214,7 @@ namespace AdvShape {
         }
         private void InitializedComponents() {
             
-            this.grid       = this.GenerateGrid(new string[] { "*","*" },new string[] { "*","15" });
+            this.grid       = UserInterface.GenerateGrid(new string[] { "*","*" },new string[] { "*","15" });
             this.Increment = 1;
             this.advTextBox = new AdvTextBox();
             this.buttonUp   = new Button();
@@ -175,9 +223,9 @@ namespace AdvShape {
             this.buttonDown.Content  = "▼";
             this.buttonUp.FontSize   = 6;
             this.buttonDown.FontSize = 6;
-            this.setRowColumn(grid,advTextBox, 0, 0, 2, 1);
-            this.setRowColumn(grid,buttonUp,   0, 1, 1, 1);
-            this.setRowColumn(grid,buttonDown, 1, 1, 1, 1);
+            UserInterface.setRowColumn(grid,advTextBox, 0, 0, 2, 1);
+            UserInterface.setRowColumn(grid,buttonUp,   0, 1, 1, 1);
+            UserInterface.setRowColumn(grid,buttonDown, 1, 1, 1, 1);
             this.AddChild(grid);
             this.buttonUp.Click   += (o,i) => { if(this.advTextBox.NumericValue != null) 
                 { this.Text = (this.advTextBox.NumericValue + this.Increment).ToString(); }
@@ -194,55 +242,7 @@ namespace AdvShape {
             return this;
         }
 
-        private void setRowColumn(Grid grid, UIElement element,
-            int rowIndex,int columnIndex,int rowSpan = 1,int colSpan = 1) {
-            Grid.SetRow(element,rowIndex);
-            Grid.SetRowSpan(element,rowSpan);
-            Grid.SetColumn(element,columnIndex);
-            Grid.SetColumnSpan(element,colSpan);
-            grid.Children.Add(element);
-        }
-        private Grid GenerateGrid(string[] RowDimParas,string[] ColDomParas) {
-            Grid grid = new Grid();
-            foreach(string RowDim in RowDimParas) {
-                int Dimension = 1;
-                GridUnitType UnitType = GridUnitType.Auto;
 
-                if(RowDim.ToLower() == "auto") {
-                    UnitType = GridUnitType.Auto;
-                } else if(RowDim == "*") {
-                    UnitType = GridUnitType.Star;
-                } else if(RowDim.Contains("*")) {
-                    UnitType = GridUnitType.Star;
-                    Dimension = int.Parse(RowDim.Replace("*",""));
-                } else if(int.TryParse(RowDim,out Dimension)) {
-                    UnitType = GridUnitType.Pixel;
-                }
-
-                RowDefinition RowDef = new RowDefinition();
-                RowDef.Height = new GridLength(Dimension,UnitType);
-                grid.RowDefinitions.Add(RowDef);
-            }
-            foreach(string ColDim in ColDomParas) {
-                int Dimension = 1;
-                GridUnitType UnitType = GridUnitType.Auto;
-
-                if(ColDim.ToLower() == "auto") {
-                    UnitType = GridUnitType.Auto;
-                } else if(ColDim == "*") {
-                    UnitType = GridUnitType.Star;
-                } else if(ColDim.Contains("*")) {
-                    UnitType = GridUnitType.Star;
-                    Dimension = int.Parse(ColDim.Replace("*",""));
-                } else if(int.TryParse(ColDim,out Dimension)) {
-                    UnitType = GridUnitType.Pixel;
-                }
-
-                ColumnDefinition ColDef = new ColumnDefinition();
-                ColDef.Width = new GridLength(Dimension,UnitType);
-                grid.ColumnDefinitions.Add(ColDef);
-            }
-            return grid;
-        }
     }
+
 }

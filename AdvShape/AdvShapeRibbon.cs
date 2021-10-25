@@ -16,6 +16,9 @@ namespace AdvShape {
     
     public partial class Ribbon1 {
         private Boolean UI_trigger = true;
+        private Color ShapeForeGroundColor;
+        private Color ShapeBackGroundColor;
+        private Color ShapeTexture;
         private void Ribbon1_Load(object sender,RibbonUIEventArgs e) {
             this.InitRibbon();
             //WindowSelectionChange
@@ -31,7 +34,7 @@ namespace AdvShape {
 
 
             Texture texture = DefaultTexture.TextureDict[35];
-            this.ShapeFillOpacity_RBPB.Image = texture.RenderBitmap(32, 32, 1, Color.White, Color.Red, Color.Black);
+            this.ShapeFill_RBPB.Image = texture.RenderBitmap(32, 32, 1, Color.White, Color.Red, Color.Black);
 
         }
 
@@ -43,40 +46,43 @@ namespace AdvShape {
 
         private void InitRibbon() {
             
-            this.ShapeAlignDialog_RBPB.Click  += (o,i) => { this.ShowShapeAlignDialig(); };
-            this.ShapeArrayDialog_RBPB.Click  += (o,i) => { this.ShowShapeArrayDialig(); };
-            this.ShapeTransDialog_RBPB.Click  += (o,i) => { this.ShowShapeTransDialig(); };
+            this.ShapeAlignDialog_RBPB.Click       += (o,i) => { this.ShowShapeAlignDialig(); };
+            this.ShapeArrayDialog_RBPB.Click       += (o,i) => { this.ShowShapeArrayDialig(); };
+            this.ShapeTransDialog_RBPB.Click       += (o,i) => { this.ShowShapeTransDialig(); };
 
-            this.AlignLeft_RBPB.Click         += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignLeft); };
-            this.AlignCent_RBPB.Click         += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignCenter); };
-            this.AlignRight_RBPB.Click        += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignRight); };
+            this.AlignLeft_RBPB.Click              += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignLeft); };
+            this.AlignCent_RBPB.Click              += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignCenter); };
+            this.AlignRight_RBPB.Click             += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignRight); };
 
-            this.AlignTop_RBPB.Click          += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTop); };
-            this.AlignMid_RBPB.Click          += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMid); };
-            this.AlignBottom_RBPB.Click       += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottom); };
+            this.AlignTop_RBPB.Click               += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTop); };
+            this.AlignMid_RBPB.Click               += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMid); };
+            this.AlignBottom_RBPB.Click            += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottom); };
 
-            this.AlignTopLeft_RBPB.Click      += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTopLeft); };
-            this.AlignTopCent_RBPB.Click      += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTopCenter); };
-            this.AlignTopRight_RBPB.Click     += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTopRight); };
+            this.AlignTopLeft_RBPB.Click           += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTopLeft); };
+            this.AlignTopCent_RBPB.Click           += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTopCenter); };
+            this.AlignTopRight_RBPB.Click          += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignTopRight); };
 
-            this.AlignMidLeft_RBPB.Click      += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMidLeft); };
-            this.AlignMidCent_RBPB.Click      += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMidCenter); };
-            this.AlignMidRight_RBPB.Click     += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMidRight); };
+            this.AlignMidLeft_RBPB.Click           += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMidLeft); };
+            this.AlignMidCent_RBPB.Click           += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMidCenter); };
+            this.AlignMidRight_RBPB.Click          += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignMidRight); };
 
-            this.AlignBottomLeft_RBPB.Click   += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottomLeft); };
-            this.AlignBottomCent_RBPB.Click   += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottomCenter); };
-            this.AlignBottomRight_RBPB.Click  += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottomRight); };
+            this.AlignBottomLeft_RBPB.Click        += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottomLeft); };
+            this.AlignBottomCent_RBPB.Click        += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottomCenter); };
+            this.AlignBottomRight_RBPB.Click       += (o,i) => { ShapeAlign.AlignSelectedShapes(ShapeAlign.Mode.ShapeAlignBottomRight); };
 
-            this.ShapeWidth_RBET.TextChanged  += (o,i) => { if(this.UI_trigger) { this.SetShapeWidth();}};
-            this.ShapeHeight_RBET.TextChanged += (o,i) => { if(this.UI_trigger) { this.SetShapeHeight();}};
-            this.ShapeAngle_RBET.TextChanged  += (o,i) => { if(this.UI_trigger) { this.SetShapeAngle();}};
+            this.ShapeWidth_RBET.TextChanged       += (o,i) => { if(this.UI_trigger) { this.SetShapeWidth();}};
+            this.ShapeHeight_RBET.TextChanged      += (o,i) => { if(this.UI_trigger) { this.SetShapeHeight();}};
+            this.ShapeAngle_RBET.TextChanged       += (o,i) => { if(this.UI_trigger) { this.SetShapeAngle();}};
 
-            this.ShapeZTop_RBPB.Click         += (o,i) => { ShapeOrder.ShapeZTop(); };
-            this.ShapeZbottom_RBPB.Click      += (o,i) => { ShapeOrder.ShapeZBottom(); };
-            this.ShapeZUp_RBPB.Click          += (o,i) => { ShapeOrder.ShapeZUp(); };
-            this.ShapeZDown_RBPB.Click        += (o,i) => { ShapeOrder.ShapeZDown(); };
-            this.ShapeZAbove_RBPB.Click       += (o,i) => { ShapeOrder.ShapeZMoveRelative(1); };
-            this.ShapeZBelow_RBPB.Click       += (o,i) => { ShapeOrder.ShapeZMoveRelative(-1); };
+            this.ShapeFillOpacity_RBET.TextChanged += (o,i) => { if(this.UI_trigger) { this.SetShapeFillOpacity(); } };
+            this.ShapeLineOpacity_RBET.TextChanged += (o,i) => { if(this.UI_trigger) { this.SetShapeLineOpacity(); } };
+
+            this.ShapeZTop_RBPB.Click              += (o,i) => { ShapeOrder.ShapeZTop(); };
+            this.ShapeZbottom_RBPB.Click           += (o,i) => { ShapeOrder.ShapeZBottom(); };
+            this.ShapeZUp_RBPB.Click               += (o,i) => { ShapeOrder.ShapeZUp(); };
+            this.ShapeZDown_RBPB.Click             += (o,i) => { ShapeOrder.ShapeZDown(); };
+            this.ShapeZAbove_RBPB.Click            += (o,i) => { ShapeOrder.ShapeZMoveRelative(1); };
+            this.ShapeZBelow_RBPB.Click            += (o,i) => { ShapeOrder.ShapeZMoveRelative(-1); };
         }
         private void ShowShapeAlignDialig() {
             var app = new WPF_ShapeAlign();
@@ -150,8 +156,28 @@ namespace AdvShape {
                 this.ShapeRibbonSetValue();
             }
         }
-        private void SetShapeFIllOpacity(double? parse = null) { 
-        
+        private void SetShapeFillOpacity(double? parse = null) {
+            parse = (parse == null) ? Misc.MathParse(this.ShapeFillOpacity_RBET.Text) : parse;
+            if(parse != null) {
+                foreach(Shape ishape in Misc.SelectedShapes()) {
+                    if(ishape.Fill != null) { ishape.Fill.Transparency = (float)(parse / 100); }
+                }
+            } else {
+                this.ShapeRibbonSetValue();
+            }
+        }
+        private void SetShapeLineOpacity(double? parse = null) {
+            parse = (parse == null) ? Misc.MathParse(this.ShapeLineOpacity_RBET.Text) : parse;
+            if(parse != null) {
+                foreach(Shape ishape in Misc.SelectedShapes()) {
+                    if(ishape.Line != null) { ishape.Line.Transparency = (float)(parse / 100); }
+                }
+            } else {
+                this.ShapeRibbonSetValue();
+            }
+        }
+        private void SetShapeTexture() { 
+
         }
         protected void ShapeRibbonSetValue() {
             this.UI_trigger = false;
@@ -167,8 +193,9 @@ namespace AdvShape {
                     width.Add(ishape.Width);
                     height.Add(ishape.Height);
                     angle.Add(ishape.Rotation);
-                    fillOpacity.Add(ishape.Fill.Transparency);
-                    lineOpacity.Add(ishape.Line.Transparency);
+
+                    if(ishape.Fill != null) { if(ishape.Fill.Transparency >= 0) { fillOpacity.Add(ishape.Fill.Transparency * 100); } }
+                    if(ishape.Line != null) { if(ishape.Line.Transparency >= 0) { lineOpacity.Add(ishape.Line.Transparency * 100); } }
                 }
 
                 HashSet<float> hashWidth       = width.ToHashSet();
@@ -177,11 +204,11 @@ namespace AdvShape {
                 HashSet<float> hashfillOpacity = fillOpacity.ToHashSet();
                 HashSet<float> hashlineOpacity = lineOpacity.ToHashSet();
 
-                this.ShapeWidth_RBET.Text       = (hashWidth.Count  == 1)      ? Math.Round(Misc.PointsToCm(hashWidth.First()), 3).ToString(): "";
-                this.ShapeHeight_RBET.Text      = (hashheight.Count == 1)      ? Math.Round(Misc.PointsToCm(hashheight.First()),3).ToString(): "";
-                this.ShapeAngle_RBET.Text       = (hashangle.Count  == 1)      ? Math.Round(hashangle.First(), 3).ToString(): "";
-                this.ShapeFillOpacity_RBET.Text = (hashfillOpacity.Count == 1) ? Math.Round(hashfillOpacity.First(),2).ToString() : "";
-                this.ShapeLineOpacity_RBET.Text = (hashlineOpacity.Count == 1) ? Math.Round(hashlineOpacity.First(),2).ToString() : "";
+                this.ShapeWidth_RBET.Text       = (hashWidth.Count  == 1)      ? Math.Round(Misc.PointsToCm(hashWidth.First()), 3).ToString(): "--";
+                this.ShapeHeight_RBET.Text      = (hashheight.Count == 1)      ? Math.Round(Misc.PointsToCm(hashheight.First()),3).ToString(): "--";
+                this.ShapeAngle_RBET.Text       = (hashangle.Count  == 1)      ? Math.Round(hashangle.First(), 3).ToString(): "--";
+                this.ShapeFillOpacity_RBET.Text = (hashfillOpacity.Count == 1) ? Math.Round(hashfillOpacity.First(),0).ToString() : "--";
+                this.ShapeLineOpacity_RBET.Text = (hashlineOpacity.Count == 1) ? Math.Round(hashlineOpacity.First(),0).ToString() : "--";
             }
             this.UI_trigger = true;
         }
@@ -198,10 +225,10 @@ namespace AdvShape {
                 this.ShapeZDown_RBPB,
 
                 this.ShapeFillOpacity_RBET,     this.ShapeFillOpacityInc_RBPB, this.ShapeFillOpacityDec_RBPB,
-                this.ShapeFillOpacityUnit_RBLB, this.ShapeFillOpacity_RBPB,
+                this.ShapeFillOpacityUnit_RBLB, this.ShapeFill_RBPB,
 
                 this.ShapeLineOpacity_RBET,     this.ShapeLineOpacityInc_RBPB, this.ShapeLineOpacityDec_RBPB,
-                this.ShapeLineOpacityUnit_RBLB, this.ShapeLineOpacity_RBPB
+                this.ShapeLineOpacityUnit_RBLB, this.ShapeLine_RBPB
 
             };
 
@@ -293,6 +320,57 @@ namespace AdvShape {
         }
 
 
+        private void ShapeFillOpacityInc_RBPB_Click(object sender,RibbonControlEventArgs e) {
+            Double? ParseVal = Misc.MathParse(this.ShapeFillOpacity_RBET.Text);
+            if(ParseVal != null) {
+                double ChangedVal = (double)(((ParseVal + 5)>100) ? 100: (ParseVal + 5));
+                this.ShapeFillOpacity_RBET.Text = (ChangedVal).ToString();
+                this.SetShapeFillOpacity(ChangedVal);
+            } else {
+                this.ShapeFillOpacity_RBET.Text = "0";
+                this.SetShapeFillOpacity(0);
+            }
+        }
+
+        
+
+        private void ShapeFillOpacityDec_RBPB_Click(object sender,RibbonControlEventArgs e) {
+            Double? ParseVal = Misc.MathParse(this.ShapeFillOpacity_RBET.Text);
+            if(ParseVal != null) {
+                double ChangedVal = (double)(((ParseVal - 5) < 0) ? 0 : (ParseVal - 5));
+                this.ShapeFillOpacity_RBET.Text = (ChangedVal).ToString();
+                this.SetShapeFillOpacity(ChangedVal);
+            } else {
+                this.ShapeFillOpacity_RBET.Text = "100";
+                this.SetShapeFillOpacity(100);
+            }
+        }
+
+        private void ShapeLineOpacityInc_RBPB_Click(object sender,RibbonControlEventArgs e) {
+            Double? ParseVal = Misc.MathParse(this.ShapeLineOpacity_RBET.Text);
+            if(ParseVal != null) {
+                double ChangedVal = (double)(((ParseVal + 5) > 100) ? 100 : (ParseVal + 5));
+                this.ShapeLineOpacity_RBET.Text = (ChangedVal).ToString();
+                this.SetShapeLineOpacity(ChangedVal);
+            } else {
+                this.ShapeLineOpacity_RBET.Text = "0";
+                this.SetShapeLineOpacity(0);
+            }
+        }
+
+        private void ShapeLineOpacityDec_RBPB_Click(object sender,RibbonControlEventArgs e) {
+            Double? ParseVal = Misc.MathParse(this.ShapeLineOpacity_RBET.Text);
+            if(ParseVal != null) {
+                double ChangedVal = (double)(((ParseVal - 5) < 0) ? 0 : (ParseVal - 5));
+                this.ShapeLineOpacity_RBET.Text = (ChangedVal).ToString();
+                this.SetShapeLineOpacity(ChangedVal);
+            } else {
+                this.ShapeLineOpacity_RBET.Text = "100";
+                this.SetShapeLineOpacity(100);
+            }
+        }
+
+        
         private void button2_Click(object sender,RibbonControlEventArgs e) {
             Shape i = Misc.SelectedShapes()[1];
             Boundbox b =new Boundbox(i);
@@ -302,18 +380,15 @@ namespace AdvShape {
         }
 
         private void button3_Click_1(object sender,RibbonControlEventArgs e) {
-            var w = new WPF_ShapeTranslation();
+            var w = new WPF_Tester();
             w.Show();
         }
 
 
 
-        private void button1_Click(object sender,RibbonControlEventArgs e) {
-
-        }
-
         private void dropDown2_SelectionChanged(object sender,RibbonControlEventArgs e) {
 
         }
+
     }
 }
