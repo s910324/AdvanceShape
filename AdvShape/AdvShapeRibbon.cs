@@ -33,9 +33,22 @@ namespace AdvShape {
             };
 
 
-            Texture texture = DefaultTexture.TextureDict[(int)Microsoft.Office.Core.MsoPatternType.msoPatternSmallCheckerBoard];
-            this.ShapeFill_RBPB.Image = texture.RenderBitmap(32, 32, 1, 2, Color.White, Color.Red, Color.Black);
+            //Texture texture = DefaultTexture.TextureDict[(int)Microsoft.Office.Core.MsoPatternType.msoPatternSmallCheckerBoard];
+            Texture texture_solid_line = DefaultTexture.DashDict[(int)Microsoft.Office.Core.MsoLineDashStyle.msoLineSolid];
+            Texture texture_round_dot  = DefaultTexture.DashDict[(int)Microsoft.Office.Core.MsoLineDashStyle.msoLineRoundDot];
+            Texture texture_square_dot = DefaultTexture.DashDict[(int)Microsoft.Office.Core.MsoLineDashStyle.msoLineSquareDot];
+            Texture texture_dash       = DefaultTexture.DashDict[(int)Microsoft.Office.Core.MsoLineDashStyle.msoLineDash];
+            Texture texture_dash_dot   = DefaultTexture.DashDict[(int)Microsoft.Office.Core.MsoLineDashStyle.msoLineDashDot];
 
+            Texture texture = DefaultTexture.DashDict[(int)Microsoft.Office.Core.MsoLineDashStyle.msoLineDash];
+            this.ShapeFill_RBPB.Image = texture.RenderBitmap(32, 32, 1, 1, Color.White, Color.Red, Color.Black);
+            this.comboBox1.Image = texture.RenderBitmap(32,32,1,2,Color.White,Color.Red,Color.Black);
+            this.menu1.Image = texture.RenderBitmap(32,32,1,2,Color.White,Color.Red,Color.Black);
+            this.LineSolidLine_RBPB.Image = texture_solid_line.RenderBitmap(32,32,1,1,Color.White,Color.Red,Color.Black);
+            this.LineRoundDot_RBPB.Image = texture_round_dot.RenderBitmap(32,32,1,1,Color.White,Color.Red,Color.Black);
+            this.LineSquareDot_RBPB.Image = texture_square_dot.RenderBitmap(32,32,1,1,Color.White,Color.Red,Color.Black);
+            this.LineDash_RBPB.Image = texture_dash.RenderBitmap(32,32,1,1,Color.White,Color.Red,Color.Black);
+            this.LineDashDot_RBPB.Image = texture_dash_dot.RenderBitmap(32,32,1,1,Color.White,Color.Red,Color.Black);
         }
 
         private ShapeRange GetSelectedShapes() {
@@ -390,5 +403,8 @@ namespace AdvShape {
 
         }
 
+        private void comboBox1_TextChanged(object sender,RibbonControlEventArgs e) {
+
+        }
     }
 }

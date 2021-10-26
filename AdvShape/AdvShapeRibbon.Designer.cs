@@ -92,7 +92,6 @@
             this.ShapeLineOpacityInc_RBPB = this.Factory.CreateRibbonButton();
             this.box6 = this.Factory.CreateRibbonBox();
             this.button8 = this.Factory.CreateRibbonButton();
-            this.button9 = this.Factory.CreateRibbonButton();
             this.button10 = this.Factory.CreateRibbonButton();
             this.ShapeAttributeGroup = this.Factory.CreateRibbonGroup();
             this.box2 = this.Factory.CreateRibbonBox();
@@ -123,6 +122,26 @@
             this.group6 = this.Factory.CreateRibbonGroup();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.comboBox1 = this.Factory.CreateRibbonComboBox();
+            this.dropDown2 = this.Factory.CreateRibbonDropDown();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.menu1 = this.Factory.CreateRibbonMenu();
+            this.menu2 = this.Factory.CreateRibbonMenu();
+            this.menu3 = this.Factory.CreateRibbonMenu();
+            this.button1 = this.Factory.CreateRibbonButton();
+            this.button11 = this.Factory.CreateRibbonButton();
+            this.button12 = this.Factory.CreateRibbonButton();
+            this.button13 = this.Factory.CreateRibbonButton();
+            this.button14 = this.Factory.CreateRibbonButton();
+            this.button15 = this.Factory.CreateRibbonButton();
+            this.LineSolidLine_RBPB = this.Factory.CreateRibbonButton();
+            this.LineRoundDot_RBPB = this.Factory.CreateRibbonButton();
+            this.LineSquareDot_RBPB = this.Factory.CreateRibbonButton();
+            this.LineDash_RBPB = this.Factory.CreateRibbonButton();
+            this.LineDashDot_RBPB = this.Factory.CreateRibbonButton();
+            this.button21 = this.Factory.CreateRibbonButton();
+            this.button22 = this.Factory.CreateRibbonButton();
+            this.button23 = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group4.SuspendLayout();
             this.buttonGroup2.SuspendLayout();
@@ -211,6 +230,8 @@
             // 
             this.group2.Items.Add(this.editBox4);
             this.group2.Items.Add(this.buttonGroup1);
+            this.group2.Items.Add(this.comboBox1);
+            this.group2.Items.Add(this.dropDown2);
             this.group2.Label = "group2";
             this.group2.Name = "group2";
             // 
@@ -501,19 +522,16 @@
             // box6
             // 
             this.box6.Items.Add(this.button8);
-            this.box6.Items.Add(this.button9);
+            this.box6.Items.Add(this.menu3);
+            this.box6.Items.Add(this.menu1);
             this.box6.Items.Add(this.button10);
+            this.box6.Items.Add(this.menu2);
             this.box6.Name = "box6";
             // 
             // button8
             // 
             this.button8.Label = "⟻";
             this.button8.Name = "button8";
-            // 
-            // button9
-            // 
-            this.button9.Label = "‒";
-            this.button9.Name = "button9";
             // 
             // button10
             // 
@@ -709,6 +727,140 @@
             this.notifyIcon1.Text = "notifyIcon1";
             this.notifyIcon1.Visible = true;
             // 
+            // comboBox1
+            // 
+            this.comboBox1.Label = "comboBox1";
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.ShowLabel = false;
+            this.comboBox1.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.comboBox1_TextChanged);
+            // 
+            // dropDown2
+            // 
+            this.dropDown2.Label = "dropDown2";
+            this.dropDown2.Name = "dropDown2";
+            // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // menu1
+            // 
+            this.menu1.Items.Add(this.LineSolidLine_RBPB);
+            this.menu1.Items.Add(this.LineRoundDot_RBPB);
+            this.menu1.Items.Add(this.LineSquareDot_RBPB);
+            this.menu1.Items.Add(this.LineDash_RBPB);
+            this.menu1.Items.Add(this.LineDashDot_RBPB);
+            this.menu1.Items.Add(this.button21);
+            this.menu1.Items.Add(this.button22);
+            this.menu1.Items.Add(this.button23);
+            this.menu1.Label = "menu1";
+            this.menu1.Name = "menu1";
+            this.menu1.ShowImage = true;
+            // 
+            // menu2
+            // 
+            this.menu2.Items.Add(this.button1);
+            this.menu2.Items.Add(this.button11);
+            this.menu2.Items.Add(this.button12);
+            this.menu2.Items.Add(this.button13);
+            this.menu2.Items.Add(this.button14);
+            this.menu2.Items.Add(this.button15);
+            this.menu2.Label = "menu2";
+            this.menu2.Name = "menu2";
+            this.menu2.ShowLabel = false;
+            // 
+            // menu3
+            // 
+            this.menu3.Label = "menu3";
+            this.menu3.Name = "menu3";
+            this.menu3.ShowLabel = false;
+            // 
+            // button1
+            // 
+            this.button1.Label = "button1";
+            this.button1.Name = "button1";
+            this.button1.ShowImage = true;
+            // 
+            // button11
+            // 
+            this.button11.Label = "button11";
+            this.button11.Name = "button11";
+            this.button11.ShowImage = true;
+            // 
+            // button12
+            // 
+            this.button12.Label = "button12";
+            this.button12.Name = "button12";
+            this.button12.ShowImage = true;
+            // 
+            // button13
+            // 
+            this.button13.Label = "button13";
+            this.button13.Name = "button13";
+            this.button13.ShowImage = true;
+            // 
+            // button14
+            // 
+            this.button14.Label = "button14";
+            this.button14.Name = "button14";
+            this.button14.ShowImage = true;
+            // 
+            // button15
+            // 
+            this.button15.Label = "button15";
+            this.button15.Name = "button15";
+            this.button15.ShowImage = true;
+            // 
+            // LineSolidLine_RBPB
+            // 
+            this.LineSolidLine_RBPB.Label = "Solid Line";
+            this.LineSolidLine_RBPB.Name = "LineSolidLine_RBPB";
+            this.LineSolidLine_RBPB.ShowImage = true;
+            // 
+            // LineRoundDot_RBPB
+            // 
+            this.LineRoundDot_RBPB.Label = "Round Dot";
+            this.LineRoundDot_RBPB.Name = "LineRoundDot_RBPB";
+            this.LineRoundDot_RBPB.ShowImage = true;
+            // 
+            // LineSquareDot_RBPB
+            // 
+            this.LineSquareDot_RBPB.Label = "Square Dot";
+            this.LineSquareDot_RBPB.Name = "LineSquareDot_RBPB";
+            this.LineSquareDot_RBPB.ShowImage = true;
+            // 
+            // LineDash_RBPB
+            // 
+            this.LineDash_RBPB.Label = "Dash";
+            this.LineDash_RBPB.Name = "LineDash_RBPB";
+            this.LineDash_RBPB.ShowImage = true;
+            // 
+            // LineDashDot_RBPB
+            // 
+            this.LineDashDot_RBPB.Label = "Dash Dot";
+            this.LineDashDot_RBPB.Name = "LineDashDot_RBPB";
+            this.LineDashDot_RBPB.ShowImage = true;
+            // 
+            // button21
+            // 
+            this.button21.Label = "button21";
+            this.button21.Name = "button21";
+            this.button21.ShowImage = true;
+            // 
+            // button22
+            // 
+            this.button22.Label = "button22";
+            this.button22.Name = "button22";
+            this.button22.ShowImage = true;
+            // 
+            // button23
+            // 
+            this.button23.Label = "button23";
+            this.button23.Name = "button23";
+            this.button23.ShowImage = true;
+            // 
             // Ribbon1
             // 
             this.Name = "Ribbon1";
@@ -824,7 +976,6 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonEditBox ShapeFillOpacity_RBET;
         internal Microsoft.Office.Tools.Ribbon.RibbonBox box6;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button8;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button9;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button10;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeFillOpacityDec_RBPB;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeFillOpacityInc_RBPB;
@@ -839,6 +990,26 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonLabel ShapeLineOpacity_RBLB;
         internal Microsoft.Office.Tools.Ribbon.RibbonLabel ShapeLineOpacityUnit_RBLB;
         private System.Windows.Forms.ColorDialog colorDialog1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonComboBox comboBox1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonDropDown dropDown2;
+        private System.Windows.Forms.ImageList imageList1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonMenu menu3;
+        internal Microsoft.Office.Tools.Ribbon.RibbonMenu menu1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton LineSolidLine_RBPB;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton LineRoundDot_RBPB;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton LineSquareDot_RBPB;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton LineDash_RBPB;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton LineDashDot_RBPB;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button21;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button22;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button23;
+        internal Microsoft.Office.Tools.Ribbon.RibbonMenu menu2;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button11;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button12;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button13;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button14;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton button15;
     }
 
     partial class ThisRibbonCollection {

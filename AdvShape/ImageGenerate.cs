@@ -30,6 +30,8 @@ namespace AdvShape {
     }
 	
     class DefaultTexture{
+		
+
 		static public Dictionary<int,Texture> DashDict = new Dictionary<int,Texture> {
 			{ 1, new Texture(1, -1, false, new int[][]{
 				new int[]{1, 1, 0, -1}
