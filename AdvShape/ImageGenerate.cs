@@ -28,8 +28,43 @@ namespace AdvShape {
 			
         }
     }
-
+	
     class DefaultTexture{
+		static public Dictionary<int,Texture> DashDict = new Dictionary<int,Texture> {
+			{ 1, new Texture(1, -1, false, new int[][]{
+				new int[]{1, 1, 0, -1}
+			})},
+
+			{ 3, new Texture(4, -1, false, new int[][]{
+				new int[]{1, 1, 0, -1}
+			})},
+
+			{ 2, new Texture(4, -1, false, new int[][]{
+				new int[]{2, 2, 0, -1}
+			})},
+
+			{ 4, new Texture(12, -1, false, new int[][]{
+				new int[]{8, 2, 0, -1}
+			})},
+
+			{ 5, new Texture(20, -1, false, new int[][]{
+				new int[]{8, 2, 0, -1},new int[]{4, 2, 12, -1}
+			})},
+
+			{ 7, new Texture(20, -1, false, new int[][]{
+				new int[]{16, 2, 0, -1}
+			})},
+
+			{ 8, new Texture(28, -1, false, new int[][]{
+				new int[]{16, 2, 0, -1},new int[]{4, 2,20, -1},
+			})},
+
+			{ 6, new Texture(36, -1, false, new int[][]{
+				new int[]{16, 2, 0, -1},new int[]{4, 2,20, -1},
+				new int[]{ 4, 2,28, -1}
+			})}
+		};
+
 		static public Dictionary<int,Texture> TextureDict = new Dictionary<int,Texture>{
 			{1 , new Texture(8, 8,  false, new int[][]{
 				new int[]{1, 1, 0, 0},new int[]{1, 1, 4, 4}})},
@@ -315,8 +350,8 @@ namespace AdvShape {
             int ImageWidth, int ImageHeight, int BorderWidth, int magnified,
             Color ForColor, Color BackColor, Color BorderColor) {
 
-			int RenderTexturewidth  = this.Texturewidth  * magnified;
-			int RenderTextureHeight = this.TextureHeight * magnified;
+			int RenderTexturewidth  = (this.Texturewidth  == -1) ? ImageWidth  : this.Texturewidth  * magnified;
+			int RenderTextureHeight = (this.TextureHeight == -1) ? ImageHeight : this.TextureHeight * magnified;
 
 			if(this.TextureReverse) {
                 Color temp = BackColor;
@@ -331,15 +366,16 @@ namespace AdvShape {
             SolidBrush BorderBrush = new SolidBrush(BorderColor);
             graphics.FillRectangle(BackBrush,0,0,ImageWidth,ImageHeight);
             
-            for(var x = 0; x < (int)(ImageWidth / RenderTexturewidth) +1; x++) {
-                for(var y = 0;y < (int)(ImageHeight / RenderTextureHeight) +1;y++) {
+
+			for(var x = 0; x < (int)(ImageWidth / RenderTexturewidth)+1; x++) {
+                for(var y = 0;y < (int)(ImageHeight / RenderTextureHeight)+1;y++) {
                     foreach(int[] TextureUnit in this.TextureArray) {
                         int UnitWidth  = TextureUnit[0] * magnified;
                         int UnitHeight = TextureUnit[1] * magnified;
-                        int UnitX      = TextureUnit[2] * magnified;
-                        int UnitY      = TextureUnit[3] * magnified;
+                        int UnitX      = (TextureUnit[2] == -1) ? (int)ImageWidth/2  : TextureUnit[2] * magnified;
+                        int UnitY      = (TextureUnit[3] == -1) ? (int)ImageHeight/2 : TextureUnit[3] * magnified;
 
-                        int PixelX     = (x * RenderTexturewidth)  + UnitX;
+						int PixelX     = (x * RenderTexturewidth)  + UnitX;
                         int PixelY     = (y * RenderTextureHeight) + UnitY;
                         graphics.FillRectangle(ForeBrush,PixelX,PixelY,UnitWidth,UnitHeight);
                     }

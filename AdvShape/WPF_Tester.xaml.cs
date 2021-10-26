@@ -23,11 +23,11 @@ namespace AdvShape {
             InitializeComponent();
             int h = 30;
             int w = 96;
-            int rowcounts     = DefaultTexture.TextureDict.Count;
+            int rowcounts     = DefaultTexture.DashDict.Count;
             string [] rowconf = Enumerable.Range(0,rowcounts).Select(n => h.ToString()).ToArray();
             Grid grid         = UserInterface.GenerateGrid(rowconf,new string[] { "128", w.ToString() });
             int rowIndex      = 0;
-            foreach(KeyValuePair<int,Texture> item in DefaultTexture.TextureDict) { 
+   /*         foreach(KeyValuePair<int,Texture> item in DefaultTexture.TextureDict) { 
                 Texture texture = item.Value;
                 Image  i = new System.Windows.Controls.Image();
                 Label  l = new Label();
@@ -40,7 +40,21 @@ namespace AdvShape {
                 UserInterface.setRowColumn(grid, i, rowIndex, 1);
                 UserInterface.setRowColumn(grid, l, rowIndex, 0);
                 rowIndex++;
+            }*/
 
+            foreach(KeyValuePair<int,Texture> item in DefaultTexture.DashDict) {
+                Texture texture = item.Value;
+                Image i = new System.Windows.Controls.Image();
+                Label l = new Label();
+                BitmapImage b = texture.RenderBitmapImage(w * 2,h * 2,1,3,Color.Black,Color.Red,Color.Black);
+                l.Content = (rowIndex + 1).ToString();
+                i.Width = w;
+                i.Height = h;
+                i.Source = b;
+
+                UserInterface.setRowColumn(grid,i,rowIndex,1);
+                UserInterface.setRowColumn(grid,l,rowIndex,0);
+                rowIndex++;
             }
             ScrollViewer sv = new ScrollViewer();
             sv.Content = grid;
