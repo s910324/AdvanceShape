@@ -10,6 +10,7 @@ using MemoryStream= System.IO.MemoryStream;
 using RibbonButton = Microsoft.Office.Tools.Ribbon.RibbonButton;
 using RibbonToggleButton = Microsoft.Office.Tools.Ribbon.RibbonToggleButton;
 using RibbonControl = Microsoft.Office.Tools.Ribbon.RibbonControl;
+using MsoLineDashStyle = Microsoft.Office.Core.MsoLineDashStyle;
 using System.Drawing;
 
 namespace AdvShape {
@@ -19,6 +20,7 @@ namespace AdvShape {
         private Color ShapeForeGroundColor;
         private Color ShapeBackGroundColor;
         private Color ShapeTexture;
+        private MsoLineDashStyle LineDashStyle;
         private void Ribbon1_Load(object sender,RibbonUIEventArgs e) {
             this.InitRibbon();
             //WindowSelectionChange
@@ -31,24 +33,75 @@ namespace AdvShape {
                 this.SelectionRibbonUpdate();
                 this.ShapeRibbonSetValue();
             };
+            Globals.ThisAddIn.Application.PresentationOpen += (o) => {
+                this.SetLineStyle(MsoLineDashStyle.msoLineSolid);
+            };
 
-
+            
             //Texture texture = DefaultTexture.TextureDict[(int)Microsoft.Office.Core.MsoPatternType.msoPatternSmallCheckerBoard];
-            Texture texture_solid_line = DefaultTexture.DashDict[(int)Microsoft.Office.Core.MsoLineDashStyle.msoLineSolid];
-            Texture texture_round_dot  = DefaultTexture.DashDict[(int)Microsoft.Office.Core.MsoLineDashStyle.msoLineRoundDot];
-            Texture texture_square_dot = DefaultTexture.DashDict[(int)Microsoft.Office.Core.MsoLineDashStyle.msoLineSquareDot];
-            Texture texture_dash       = DefaultTexture.DashDict[(int)Microsoft.Office.Core.MsoLineDashStyle.msoLineDash];
-            Texture texture_dash_dot   = DefaultTexture.DashDict[(int)Microsoft.Office.Core.MsoLineDashStyle.msoLineDashDot];
-
-            Texture texture = DefaultTexture.DashDict[(int)Microsoft.Office.Core.MsoLineDashStyle.msoLineDash];
-            this.ShapeFill_RBPB.Image = texture.RenderBitmap(32, 32, 1, 1, Color.White, Color.Red, Color.Black);
+            Texture texture = DefaultTexture.DashDict[(int)MsoLineDashStyle.msoLineDash];
+            this.ShapeFill_RBPB.Image = texture.RenderBitmap(32,32,1,1,Color.White,Color.Red,Color.Black);
             this.comboBox1.Image = texture.RenderBitmap(32,32,1,2,Color.White,Color.Red,Color.Black);
-            this.menu1.Image = texture.RenderBitmap(32,32,1,2,Color.White,Color.Red,Color.Black);
-            this.LineSolidLine_RBPB.Image = texture_solid_line.RenderBitmap(32,32,1,1,Color.White,Color.Red,Color.Black);
-            this.LineRoundDot_RBPB.Image = texture_round_dot.RenderBitmap(32,32,1,1,Color.White,Color.Red,Color.Black);
-            this.LineSquareDot_RBPB.Image = texture_square_dot.RenderBitmap(32,32,1,1,Color.White,Color.Red,Color.Black);
-            this.LineDash_RBPB.Image = texture_dash.RenderBitmap(32,32,1,1,Color.White,Color.Red,Color.Black);
-            this.LineDashDot_RBPB.Image = texture_dash_dot.RenderBitmap(32,32,1,1,Color.White,Color.Red,Color.Black);
+            this.LineDashMenu.Image = texture.RenderBitmap(32,32,1,2,Color.White,Color.Red,Color.Black);
+            this.test();
+        }
+
+        private void test() {
+            Texture texture_solid_line        = DefaultTexture.DashDict[(int)MsoLineDashStyle.msoLineSolid];
+            Texture texture_round_dot         = DefaultTexture.DashDict[(int)MsoLineDashStyle.msoLineRoundDot];
+            Texture texture_square_dot        = DefaultTexture.DashDict[(int)MsoLineDashStyle.msoLineSquareDot];
+            Texture texture_dash              = DefaultTexture.DashDict[(int)MsoLineDashStyle.msoLineDash];
+            Texture texture_dash_dot          = DefaultTexture.DashDict[(int)MsoLineDashStyle.msoLineDashDot];
+            Texture texture_long_dash_dot     = DefaultTexture.DashDict[(int)MsoLineDashStyle.msoLineLongDashDot];
+            Texture texture_long_dash_dot_dot = DefaultTexture.DashDict[(int)MsoLineDashStyle.msoLineLongDashDotDot];
+
+            int ImagwWidth    = 32;
+            int ImageHeight   = 32;
+            int BorderWidth   = 1;
+            int Magnify       = 1;
+            Color ForeColor   = Color.Black;
+            Color BackColor   = Color.Transparent;
+            Color BorderColor = Color.Gray;
+
+            this.LineSolidLine_RBPB.Image      = texture_solid_line.RenderBitmap(ImagwWidth,ImageHeight,BorderWidth,Magnify,ForeColor,BackColor,BorderColor);
+            this.LineRoundDot_RBPB.Image       = texture_round_dot.RenderBitmap(ImagwWidth,ImageHeight,BorderWidth,Magnify,ForeColor,BackColor,BorderColor);
+            this.LineSquareDot_RBPB.Image      = texture_square_dot.RenderBitmap(ImagwWidth,ImageHeight,BorderWidth,Magnify,ForeColor,BackColor,BorderColor);
+            this.LineDash_RBPB.Image           = texture_dash.RenderBitmap(ImagwWidth,ImageHeight,BorderWidth,Magnify,ForeColor,BackColor,BorderColor);
+            this.LineDashDot_RBPB.Image        = texture_dash_dot.RenderBitmap(ImagwWidth,ImageHeight,BorderWidth,Magnify,ForeColor,BackColor,BorderColor);
+            this.LineLongDashDot_RBPB.Image    = texture_long_dash_dot.RenderBitmap(ImagwWidth,ImageHeight,BorderWidth,Magnify,ForeColor,BackColor,BorderColor);
+            this.LineLongDashDotDot_RBPB.Image = texture_long_dash_dot_dot.RenderBitmap(ImagwWidth,ImageHeight,BorderWidth,Magnify,ForeColor,BackColor,BorderColor);
+            
+            this.LineSolidLine_RBPB.Click      += (o,e) => {this.SetLineStyle(MsoLineDashStyle.msoLineSolid);};
+            this.LineRoundDot_RBPB.Click       += (o,e) => {this.SetLineStyle(MsoLineDashStyle.msoLineRoundDot);};
+            this.LineSquareDot_RBPB.Click      += (o,e) => {this.SetLineStyle(MsoLineDashStyle.msoLineSquareDot);};
+            this.LineDash_RBPB.Click           += (o,e) => {this.SetLineStyle(MsoLineDashStyle.msoLineDash);};
+            this.LineDashDot_RBPB.Click        += (o,e) => {this.SetLineStyle(MsoLineDashStyle.msoLineDashDot);};
+            this.LineLongDashDot_RBPB.Click    += (o,e) => {this.SetLineStyle(MsoLineDashStyle.msoLineLongDashDot);};
+            this.LineLongDashDotDot_RBPB.Click += (o,e) => {this.SetLineStyle(MsoLineDashStyle.msoLineLongDashDotDot);};
+            this.LineDashStyle_RBPB.Click      += (o,e) => {this.SetLineStyle(this.LineDashStyle);};
+        }
+
+        private void SetLineStyle(MsoLineDashStyle style) {
+            if(this.LineDashStyle != style) {
+                this.LineDashStyle = style;
+                int ImagwWidth     = 32;
+                int ImageHeight    = 32;
+                int BorderWidth    = 1;
+                int Magnify        = 1;
+                Color ForeColor    = Color.Black;
+                Color BackColor    = Color.Transparent;
+                Color BorderColor  = Color.Gray;
+
+                Texture texture_current_line  = DefaultTexture.DashDict[(int)style];
+                this.LineDashStyle_RBPB.Image = texture_current_line.RenderBitmap(ImagwWidth,ImageHeight,BorderWidth,Magnify,ForeColor,BackColor,BorderColor);
+            }
+
+            ShapeRange shaperange = Misc.SelectedShapes();
+            if(shaperange.Count > 0) {
+                foreach(Shape shape in shaperange) {
+                    if(shape.Line != null) { shape.Line.DashStyle = this.LineDashStyle; }
+                }
+            }
         }
 
         private ShapeRange GetSelectedShapes() {

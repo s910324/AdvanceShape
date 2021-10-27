@@ -61,7 +61,7 @@ namespace AdvShape {
 				new int[]{16, 2, 0, -1},new int[]{4, 2,20, -1},
 			})},
 
-			{ 6, new Texture(36, -1, false, new int[][]{
+			{ 9, new Texture(36, -1, false, new int[][]{
 				new int[]{16, 2, 0, -1},new int[]{4, 2,20, -1},
 				new int[]{ 4, 2,28, -1}
 			})}
