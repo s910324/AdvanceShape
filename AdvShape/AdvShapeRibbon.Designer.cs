@@ -95,6 +95,7 @@
             this.box6 = this.Factory.CreateRibbonBox();
             this.button8 = this.Factory.CreateRibbonButton();
             this.menu3 = this.Factory.CreateRibbonMenu();
+            this.LineDashStyle_RBPB = this.Factory.CreateRibbonButton();
             this.LineDashMenu = this.Factory.CreateRibbonMenu();
             this.LineSolidLine_RBPB = this.Factory.CreateRibbonButton();
             this.LineRoundDot_RBPB = this.Factory.CreateRibbonButton();
@@ -141,7 +142,6 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.LineDashStyle_RBPB = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.group4.SuspendLayout();
             this.buttonGroup2.SuspendLayout();
@@ -553,6 +553,13 @@
             this.menu3.Name = "menu3";
             this.menu3.ShowLabel = false;
             // 
+            // LineDashStyle_RBPB
+            // 
+            this.LineDashStyle_RBPB.Label = "Set Line Srtle";
+            this.LineDashStyle_RBPB.Name = "LineDashStyle_RBPB";
+            this.LineDashStyle_RBPB.ShowImage = true;
+            this.LineDashStyle_RBPB.ShowLabel = false;
+            // 
             // LineDashMenu
             // 
             this.LineDashMenu.Items.Add(this.LineSolidLine_RBPB);
@@ -855,13 +862,6 @@
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // LineDashStyle_RBPB
-            // 
-            this.LineDashStyle_RBPB.Label = "Set Line Srtle";
-            this.LineDashStyle_RBPB.Name = "LineDashStyle_RBPB";
-            this.LineDashStyle_RBPB.ShowImage = true;
-            this.LineDashStyle_RBPB.ShowLabel = false;
             // 
             // Ribbon1
             // 

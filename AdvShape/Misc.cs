@@ -13,14 +13,39 @@ using Selection = Microsoft.Office.Interop.PowerPoint.Selection;
 using ShapeRange = Microsoft.Office.Interop.PowerPoint.ShapeRange;
 using PpSelectionType = Microsoft.Office.Interop.PowerPoint.PpSelectionType;
 using System.Text.RegularExpressions;
+using System.Runtime.InteropServices;
+using Point = System.Windows.Point;
 
 namespace AdvShape {
+    [StructLayout(LayoutKind.Sequential)]
+    public struct POINT {
+        public int X;
+        public int Y;
+
+        public static implicit operator Point(POINT point) {
+            return new Point(point.X,point.Y);
+        }
+    }
+
+    
+    
     class Misc {
 
         static public double RadToDeg(double rad )  { return (rad / 3.14159265358979 * 180); }
         static public double DegToRad(double deg )  { return (deg / 180 * 3.14159265358979); }
         static public double PointsToCm(double pt ) { return (pt * 0.03527778); }
         static public double CmToPoints(double cm ) { return (cm * 28.34646); }
+
+        [DllImport("user32.dll")]
+        static public extern bool GetCursorPos(out POINT lpPoint);
+        static public Point GetCursorPosition() {
+            POINT lpPoint;
+            GetCursorPos(out lpPoint);
+            // NOTE: If you need error handling
+            // bool success = GetCursorPos(out lpPoint);
+            // if (!success)
+            return lpPoint;
+        }
 
         static public Slide ActiveSlide() { return (Slide)Globals.ThisAddIn.Application.ActiveWindow.View.Slide;}
         static public ShapeRange SelectedShapes() {

@@ -21,44 +21,34 @@ namespace AdvShape {
     public partial class WPF_Tester:Window {
         public WPF_Tester() {
             InitializeComponent();
-            int h = 30;
-            int w = 96;
-            int rowcounts     = DefaultTexture.DashDict.Count;
-            string [] rowconf = Enumerable.Range(0,rowcounts).Select(n => h.ToString()).ToArray();
-            Grid grid         = UserInterface.GenerateGrid(rowconf,new string[] { "128", w.ToString() });
-            int rowIndex      = 0;
-   /*         foreach(KeyValuePair<int,Texture> item in DefaultTexture.TextureDict) { 
-                Texture texture = item.Value;
-                Image  i = new System.Windows.Controls.Image();
-                Label  l = new Label();
-                BitmapImage b = texture.RenderBitmapImage(w*2,h*2,1,2, Color.Black,Color.Red,Color.Black);
-                l.Content = (rowIndex + 1).ToString();
-                i.Width   = w;
-                i.Height  = h;
-                i.Source  = b;
+            double h = 12;
+            double w = 50;
 
-                UserInterface.setRowColumn(grid, i, rowIndex, 1);
-                UserInterface.setRowColumn(grid, l, rowIndex, 0);
-                rowIndex++;
-            }*/
+            FrameworkElementFactory factory = new FrameworkElementFactory(typeof(Image));
+            List<LineDashClass>  sourcelist = new List<LineDashClass>();
+            ListView     listview = new ListView();
+            GridView     gridview = new GridView();
+            DataTemplate template = new DataTemplate { VisualTree = factory };
+            
+            factory.SetValue(Image.SourceProperty, new Binding(nameof(LineDashClass.image)));
+            factory.SetValue(Image.WidthProperty,  w);
+            factory.SetValue(Image.HeightProperty, h);
+            gridview.Columns.Add(new GridViewColumn { Header = "line style", CellTemplate = template });
 
-            foreach(KeyValuePair<int,Texture> item in DefaultTexture.DashDict) {
-                Texture texture = item.Value;
-                Image i = new System.Windows.Controls.Image();
-                Label l = new Label();
-                BitmapImage b = texture.RenderBitmapImage(w * 2,h * 2,1,3,Color.Black,Color.Red,Color.Black);
-                l.Content = (rowIndex + 1).ToString();
-                i.Width = w;
-                i.Height = h;
-                i.Source = b;
-
-                UserInterface.setRowColumn(grid,i,rowIndex,1);
-                UserInterface.setRowColumn(grid,l,rowIndex,0);
-                rowIndex++;
+            foreach(KeyValuePair<int, Texture> texture in DefaultTexture.DashDict) {
+                BitmapImage bitmap = texture.Value.RenderBitmapImage((int)w,(int)h,1,1,Color.Black,Color.Transparent,Color.Gray);
+                sourcelist.Add(new LineDashClass { image = bitmap });
             }
-            ScrollViewer sv = new ScrollViewer();
-            sv.Content = grid;
-            this.AddChild(sv);
+
+            listview.View        = gridview;
+            listview.ItemsSource = sourcelist;
+/*            foreach(ItemsControl i in listview.Items) {
+                i.MouseEnter += (o,e) => { };
+            }*/
+            this.AddChild(listview);
+            this.Width = w * 2.0;
+            this.Height= h* listview.Items.Count * 1.9;
         }
     }
+    class LineDashClass {public BitmapImage image { get; set; }}
 }

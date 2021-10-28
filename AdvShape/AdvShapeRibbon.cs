@@ -79,6 +79,7 @@ namespace AdvShape {
             this.LineLongDashDot_RBPB.Click    += (o,e) => {this.SetLineStyle(MsoLineDashStyle.msoLineLongDashDot);};
             this.LineLongDashDotDot_RBPB.Click += (o,e) => {this.SetLineStyle(MsoLineDashStyle.msoLineLongDashDotDot);};
             this.LineDashStyle_RBPB.Click      += (o,e) => {this.SetLineStyle(this.LineDashStyle);};
+            
         }
 
         private void SetLineStyle(MsoLineDashStyle style) {
@@ -447,6 +448,13 @@ namespace AdvShape {
 
         private void button3_Click_1(object sender,RibbonControlEventArgs e) {
             var w = new WPF_Tester();
+            System.Windows.Point p = Misc.GetCursorPosition();
+            /*System.Windows.Point pointToWindow = System.Windows.Input.Mouse.GetPosition(this.button3);
+            int x = Globals.ThisAddIn.Application.ActiveWindow.PointsToScreenPixelsX((float)pointToWindow.X);
+            int y = Globals.ThisAddIn.Application.ActiveWindow.PointsToScreenPixelsY((float)pointToWindow.Y);*/
+            w.WindowStartupLocation = System.Windows.WindowStartupLocation.Manual;
+            w.Top = p.Y;
+            w.Left = p.X;
             w.Show();
         }
 
