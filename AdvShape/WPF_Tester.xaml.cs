@@ -21,6 +21,9 @@ namespace AdvShape {
     public partial class WPF_Tester:Window {
         public WPF_Tester() {
             InitializeComponent();
+            this.KeyDown     += (o,e) => { if(e.Key == Key.Escape) { this.Close(); } };
+            this.Deactivated += (o,e) => { this.Close(); };
+
             double h = 12;
             double w = 50;
 
@@ -42,13 +45,21 @@ namespace AdvShape {
 
             listview.View        = gridview;
             listview.ItemsSource = sourcelist;
-/*            foreach(ItemsControl i in listview.Items) {
-                i.MouseEnter += (o,e) => { };
-            }*/
+            listview.AddHandler(ListViewItem.MouseEnterEvent, new RoutedEventHandler(ItemSelected),true);
             this.AddChild(listview);
             this.Width = w * 2.0;
             this.Height= h* listview.Items.Count * 1.9;
+            
         }
+        private void ItemSelected(object sender,RoutedEventArgs e) {
+
+            ListViewItem lvi = e.OriginalSource as ListViewItem;
+
+            // add your code here
+
+        }
+
+
     }
     class LineDashClass {public BitmapImage image { get; set; }}
 }
