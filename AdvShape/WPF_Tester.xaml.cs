@@ -19,11 +19,12 @@ using Image = System.Windows.Controls.Image;
 
 namespace AdvShape {
     public partial class WPF_Tester:Window {
+        private LineDashClass CurrentHover=null;
         public WPF_Tester() {
             InitializeComponent();
             this.KeyDown     += (o,e) => { if(e.Key == Key.Escape) { this.Close(); } };
             this.Deactivated += (o,e) => { this.Close(); };
-
+            
             double h = 12;
             double w = 50;
 
@@ -38,28 +39,48 @@ namespace AdvShape {
             factory.SetValue(Image.HeightProperty, h);
             gridview.Columns.Add(new GridViewColumn { Header = "line style", CellTemplate = template });
 
-            foreach(KeyValuePair<int, Texture> texture in DefaultTexture.DashDict) {
-                BitmapImage bitmap = texture.Value.RenderBitmapImage((int)w,(int)h,1,1,Color.Black,Color.Transparent,Color.Gray);
-                sourcelist.Add(new LineDashClass { image = bitmap });
+            foreach(KeyValuePair<int, Texture> texturePair in DefaultTexture.DashDict) {
+                BitmapImage bitmap = texturePair.Value.RenderBitmapImage((int)w,(int)h,1,1,Color.Black,Color.Transparent,Color.Gray);
+                sourcelist.Add(new LineDashClass { image = bitmap, texture = texturePair.Value, a = texturePair.Key});
             }
+            
+            listview.View               = gridview;
+            listview.ItemsSource        = sourcelist;
+            listview.MouseMove         += (o,e) => { this.ItemHovered(o,e); };
+            listview.MouseLeftButtonUp += (o,e) => { this.ItemClicked(o,e); };
 
-            listview.View        = gridview;
-            listview.ItemsSource = sourcelist;
-            listview.AddHandler(ListViewItem.MouseEnterEvent, new RoutedEventHandler(ItemSelected),true);
+
             this.AddChild(listview);
             this.Width = w * 2.0;
             this.Height= h* listview.Items.Count * 1.9;
             
         }
-        private void ItemSelected(object sender,RoutedEventArgs e) {
+        private void ItemHovered(object sender,RoutedEventArgs e) {
+            DependencyObject dep = (DependencyObject)e.OriginalSource;
+            while((dep != null) && !(dep is ListViewItem)) {dep = VisualTreeHelper.GetParent(dep);}
+            if(dep == null) {return;}
 
-            ListViewItem lvi = e.OriginalSource as ListViewItem;
-
-            // add your code here
-
+            ListViewItem item = (ListViewItem)dep;
+            if(this.CurrentHover == null || !(this.CurrentHover.Equals((LineDashClass)item.Content))) {
+                this.CurrentHover = (LineDashClass)item.Content;
+                Misc.print("hovered", this.CurrentHover.a);
+            }
         }
+        private void ItemClicked(object sender,RoutedEventArgs e) {
+            DependencyObject dep = (DependencyObject)e.OriginalSource;
+            while((dep != null) && !(dep is ListViewItem)) { dep = VisualTreeHelper.GetParent(dep); }
+            if(dep == null) { return; }
 
+            ListViewItem item = (ListViewItem)dep;
+            Misc.print("clicked",((LineDashClass)item.Content).a);
+            this.Close();
+        }
+ 
 
     }
-    class LineDashClass {public BitmapImage image { get; set; }}
+    class LineDashClass {
+        public BitmapImage image  { get; set; }
+        public Texture     texture{ get; set; }
+        public int a { get; set; }
+    }
 }
