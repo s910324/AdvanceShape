@@ -16,13 +16,16 @@ using Microsoft.Office.Interop.PowerPoint;
 using Bitmap = System.Drawing.Bitmap;
 using Color = System.Drawing.Color;
 using Image = System.Windows.Controls.Image;
-
+using Shape = Microsoft.Office.Interop.PowerPoint.Shape;
+using MsoLineDashStyle  = Microsoft.Office.Core.MsoLineDashStyle;
 namespace AdvShape {
     public partial class WPF_Tester:Window {
         private LineDashClass CurrentHover=null;
+        List<MsoLineDashStyle?> PreviewStyleList = new List<MsoLineDashStyle?>();
         public WPF_Tester() {
             InitializeComponent();
             this.KeyDown     += (o,e) => { if(e.Key == Key.Escape) { this.Close(); } };
+            this.MouseLeave  += (o,e) => { this.CancelPreview(); };
             this.Deactivated += (o,e) => { this.Close(); };
             
             double h = 12;
@@ -63,6 +66,7 @@ namespace AdvShape {
             ListViewItem item = (ListViewItem)dep;
             if(this.CurrentHover == null || !(this.CurrentHover.Equals((LineDashClass)item.Content))) {
                 this.CurrentHover = (LineDashClass)item.Content;
+                this.Preview();
                 Misc.print("hovered", this.CurrentHover.a);
             }
         }
@@ -75,7 +79,41 @@ namespace AdvShape {
             Misc.print("clicked",((LineDashClass)item.Content).a);
             this.Close();
         }
- 
+
+        private void Preview() {
+            this.CollectStyle();
+            ShapeRange shaperange = Misc.SelectedShapes();
+            foreach(Shape shape in shaperange){
+                if(shape.Line != null) {
+                    shape.Line.DashStyle = (MsoLineDashStyle)this.CurrentHover.a;
+                }
+            }
+        }
+        private void CollectStyle() {
+            ShapeRange shaperange = Misc.SelectedShapes();
+            if(this.PreviewStyleList.Count == 0) {
+                foreach(Shape shape in shaperange) {
+                    if(shape.Line != null) {
+                        this.PreviewStyleList.Add(shape.Line.DashStyle);
+                    } else {
+                        this.PreviewStyleList.Add(null);
+                    }
+                }
+            }
+        }
+
+        private void CancelPreview() {
+            ShapeRange shaperange = Misc.SelectedShapes();
+            if(this.PreviewStyleList.Count != 0) {
+                int index = 0;
+                foreach(Shape shape in shaperange) {
+                    MsoLineDashStyle? style = this.PreviewStyleList[index];
+                    if(style != null && shape.Line != null) {
+                        shape.Line.DashStyle = (MsoLineDashStyle)style;
+                    }
+                }
+            }
+        }
 
     }
     class LineDashClass {
