@@ -69,8 +69,8 @@ namespace AdvShape {
         }
         private void test(ShapeArray.Mode mode) {
             this.RemovePreview();
-            ShapeRange Selection = Misc.SelectedShapes();
-            if(Selection.Count > 0) {
+            if(Misc.WithActiveSelection()) {
+                ShapeRange Selection = Misc.SelectedShapes();
                 string Header = ((TabItem)this.Tab.SelectedItem).Header.ToString();
                 switch(Header) {
                     case "Parallelogram":

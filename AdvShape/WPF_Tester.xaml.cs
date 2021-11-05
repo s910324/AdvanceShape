@@ -82,39 +82,45 @@ namespace AdvShape {
 
         private void Preview() {
             this.CollectStyle();
-            ShapeRange shaperange = Misc.SelectedShapes();
-            foreach(Shape shape in shaperange){
-                if(shape.Line != null) {
-                    shape.Line.DashStyle = (MsoLineDashStyle)this.CurrentHover.a;
+            if(Misc.WithActiveSelection()) {
+                ShapeRange shaperange = Misc.SelectedShapes();
+                foreach(Shape shape in shaperange) {
+                    if(shape.Line != null) {
+                        shape.Line.DashStyle = (MsoLineDashStyle)this.CurrentHover.a;
+                    }
                 }
             }
         }
         private void CollectStyle() {
-            ShapeRange shaperange = Misc.SelectedShapes();
-            if(this.PreviewStyleList.Count == 0) {
-                foreach(Shape shape in shaperange) {
-                    if(shape.Line != null) {
-                        this.PreviewStyleList.Add(shape.Line.DashStyle);
-                    } else {
-                        this.PreviewStyleList.Add(null);
+            if(Misc.WithActiveSelection()) {
+                ShapeRange shaperange = Misc.SelectedShapes();
+                if(this.PreviewStyleList.Count == 0) {
+                    foreach(Shape shape in shaperange) {
+                        if(shape.Line != null) {
+                            this.PreviewStyleList.Add(shape.Line.DashStyle);
+                        } else {
+                            this.PreviewStyleList.Add(null);
+                        }
                     }
                 }
             }
         }
 
         private void CancelPreview() {
-            ShapeRange shaperange = Misc.SelectedShapes();
-            if(this.PreviewStyleList.Count != 0) {
-                int index = 0;
-                foreach(Shape shape in shaperange) {
-                    MsoLineDashStyle? style = this.PreviewStyleList[index];
-                    if(style != null && shape.Line != null) {
-                        shape.Line.DashStyle = (MsoLineDashStyle)style;
+            if(Misc.WithActiveSelection()) {
+                ShapeRange shaperange = Misc.SelectedShapes();
+                if(this.PreviewStyleList.Count != 0) {
+                    int index = 0;
+                    foreach(Shape shape in shaperange) {
+                        MsoLineDashStyle? style = this.PreviewStyleList[index];
+                        if(style != null && shape.Line != null) {
+                            shape.Line.DashStyle = (MsoLineDashStyle)style;
+                        }
+                        index++;
                     }
                 }
             }
         }
-
     }
     class LineDashClass {
         public BitmapImage image  { get; set; }

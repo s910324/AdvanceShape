@@ -15,6 +15,7 @@ using PpSelectionType = Microsoft.Office.Interop.PowerPoint.PpSelectionType;
 using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
 using Point = System.Windows.Point;
+using Microsoft.Office.Interop.PowerPoint;
 
 namespace AdvShape {
     [StructLayout(LayoutKind.Sequential)]
@@ -46,14 +47,42 @@ namespace AdvShape {
             // if (!success)
             return lpPoint;
         }
-
-        static public Slide ActiveSlide() { return (Slide)Globals.ThisAddIn.Application.ActiveWindow.View.Slide;}
-        static public ShapeRange SelectedShapes() {
-            Slide ActiveSlide                = Misc.ActiveSlide();
-            Selection CurrentSelection       = (Selection)Globals.ThisAddIn.Application.ActiveWindow.Selection;
-            PpSelectionType[] validSelection = new PpSelectionType[] { PpSelectionType.ppSelectionText,PpSelectionType.ppSelectionShapes };
-            return validSelection.Contains(CurrentSelection.Type) ? CurrentSelection.ShapeRange : ActiveSlide.Shapes.Range(0);
+        static public bool WithActiveSlide() {
+            View view = Globals.ThisAddIn.Application.ActiveWindow.View;
+            Misc.print("with active slide:",view.Type == PpViewType.ppViewSlide,(int)view.Type);
+            if(view.Type == PpViewType.ppViewNormal) {
+                try {
+                    Slide slide = (Slide)view.Slide;
+                    return true;
+                } catch(Exception e) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
         }
+        static public Slide ActiveSlide() {
+            View view = Globals.ThisAddIn.Application.ActiveWindow.View;
+            return (Slide)view.Slide;
+        }
+
+        static public bool WithActiveSelection() {
+            if(Misc.WithActiveSlide()) {
+                Slide ActiveSlide = Misc.ActiveSlide();
+                Selection CurrentSelection = (Selection)Globals.ThisAddIn.Application.ActiveWindow.Selection;
+                PpSelectionType[] validSelection = new PpSelectionType[] { PpSelectionType.ppSelectionText,PpSelectionType.ppSelectionShapes };
+                Misc.print("with active selection:",validSelection.Contains(CurrentSelection.Type));
+                return validSelection.Contains(CurrentSelection.Type);
+            } else {
+                return false;
+            }
+        }
+        static public ShapeRange SelectedShapes() {
+            Slide ActiveSlide = Misc.ActiveSlide();
+            Selection CurrentSelection       = (Selection)Globals.ThisAddIn.Application.ActiveWindow.Selection;
+            return CurrentSelection.ShapeRange;
+        }
+
         static public float ActiveSlideWidth() { return Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideWidth; }
         static public float ActiveSlideHeight() {return Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideHeight;}
 

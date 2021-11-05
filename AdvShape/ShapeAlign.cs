@@ -112,34 +112,38 @@ namespace AdvShape {
             }
         }
         static public void AlignSelectedShapes(ShapeAlign.Mode Mode) {
-            ShapeRange SRange = Misc.SelectedShapes();
-            int ShapeCount = SRange.Count;
-            switch(ShapeCount) {
-                case 0:
-                    break;
-                case 1:
-                    ShapeAlign.Align(SRange[1],Mode);
-                    break;
-                default:
-                    Shape AnchorShape = SRange[1];
-                    for(int Index = 2;Index <= ShapeCount;Index++) {
-                        Shape FloatShape = SRange[Index];
-                        ShapeAlign.Align(AnchorShape,FloatShape,Mode);
-                    }
-                    break;
+            if(Misc.WithActiveSelection()) {
+                ShapeRange SRange = Misc.SelectedShapes();
+                int ShapeCount = SRange.Count;
+                switch(ShapeCount) {
+                    case 0:
+                        break;
+                    case 1:
+                        ShapeAlign.Align(SRange[1],Mode);
+                        break;
+                    default:
+                        Shape AnchorShape = SRange[1];
+                        for(int Index = 2;Index <= ShapeCount;Index++) {
+                            Shape FloatShape = SRange[Index];
+                            ShapeAlign.Align(AnchorShape,FloatShape,Mode);
+                        }
+                        break;
+                }
             }
         }
         static public void ShapeDist(Microsoft.Office.Core.MsoDistributeCmd Mode) {
-            ShapeRange SRange = Misc.SelectedShapes();
-            int ShapeCount = SRange.Count;
-            switch(ShapeCount) {
-                case 0:
-                    break;
-                case 1:
-                    break;
-                default:
-                    SRange.Distribute(Mode,Microsoft.Office.Core.MsoTriState.msoFalse);
-                    break;
+            if(Misc.WithActiveSelection()) {
+                ShapeRange SRange = Misc.SelectedShapes();
+                int ShapeCount = SRange.Count;
+                switch(ShapeCount) {
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                    default:
+                        SRange.Distribute(Mode,Microsoft.Office.Core.MsoTriState.msoFalse);
+                        break;
+                }
             }
         }
         static private bool ModeContain(Mode InputMode,Mode MatchMode) {

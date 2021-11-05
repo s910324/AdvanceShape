@@ -97,18 +97,13 @@ namespace AdvShape {
                 this.LineDashStyle_RBPB.Image = texture_current_line.RenderBitmap(ImagwWidth,ImageHeight,BorderWidth,Magnify,ForeColor,BackColor,BorderColor);
             }
 
-            ShapeRange shaperange = Misc.SelectedShapes();
-            if(shaperange.Count > 0) {
+            
+            if(Misc.WithActiveSelection()) {
+                ShapeRange shaperange = Misc.SelectedShapes();
                 foreach(Shape shape in shaperange) {
                     if(shape.Line != null) { shape.Line.DashStyle = this.LineDashStyle; }
                 }
             }
-        }
-
-        private ShapeRange GetSelectedShapes() {
-            var ActiveSlide = (Slide)Globals.ThisAddIn.Application.ActiveWindow.View.Slide;
-            var CurrentSelection = (Selection)Globals.ThisAddIn.Application.ActiveWindow.Selection;
-            return CurrentSelection.Type == 0 ? ActiveSlide.Shapes.Range(0) : CurrentSelection.ShapeRange;
         }
 
         private void InitRibbon() {
@@ -164,8 +159,9 @@ namespace AdvShape {
         }
 
         private void ShowShapeArrayDialig() {
-            ShapeRange iRange = Misc.SelectedShapes();
-            if(iRange.Count > 0) {
+            
+            if(Misc.WithActiveSelection()) {
+                ShapeRange iRange = Misc.SelectedShapes();
                 var app = new WPF_ShapeArray();
 /*                app.WindowStartupLocation = System.Windows.WindowStartupLocation.Manual;
                 double w    = System.Windows.SystemParameters.WorkArea.Width;
@@ -178,8 +174,9 @@ namespace AdvShape {
             }
         }
         private void ShowShapeTransDialig() {
-            ShapeRange iRange = Misc.SelectedShapes();
-            if(iRange.Count > 0) {
+            
+            if(Misc.WithActiveSelection()) {
+                ShapeRange iRange = Misc.SelectedShapes();
                 var app = new WPF_ShapeTranslation();
  /*               app.WindowStartupLocation = System.Windows.WindowStartupLocation.Manual;
                 double w = System.Windows.SystemParameters.WorkArea.Width;
@@ -193,15 +190,17 @@ namespace AdvShape {
         }
 
         private void button3_Click(object sender,RibbonControlEventArgs e) {
-            ShapeRange iRange = Misc.SelectedShapes();
-            LineBoundBox lbb = new LineBoundBox(iRange[1]);
+            if(Misc.WithActiveSelection()){
+                ShapeRange iRange = Misc.SelectedShapes();
+                LineBoundBox lbb = new LineBoundBox(iRange[1]);
+            }
         }
 
 
 
         private void SetShapeWidth(double? parse = null) {
             parse = (parse == null) ? Misc.MathParse(this.ShapeWidth_RBET.Text) : parse;
-            if(parse != null && parse >= 0) {
+            if(parse != null && parse >= 0 && Misc.WithActiveSelection()) {
                 foreach(Shape ishape in Misc.SelectedShapes()) { ishape.Width = (float)Misc.CmToPoints((double)parse); }
             } else {
                 this.ShapeRibbonSetValue();
@@ -209,7 +208,7 @@ namespace AdvShape {
         }
         private void SetShapeHeight(double? parse = null) {
             parse = (parse == null) ? Misc.MathParse(this.ShapeHeight_RBET.Text) : parse;
-            if(parse != null && parse >= 0) {
+            if(parse != null && parse >= 0 && Misc.WithActiveSelection()) {
                 foreach(Shape ishape in Misc.SelectedShapes()) { ishape.Height = (float)Misc.CmToPoints((double)parse); }
             } else {
                 this.ShapeRibbonSetValue();
@@ -217,7 +216,7 @@ namespace AdvShape {
         }
         private void SetShapeAngle(double? parse = null) {
             parse = (parse == null) ? Misc.MathParse(this.ShapeAngle_RBET.Text) : parse;
-            if(parse != null ) {
+            if(parse != null && Misc.WithActiveSelection()) {
                 foreach(Shape ishape in Misc.SelectedShapes()) { ishape.Rotation = (float)parse; }
             } else {
                 this.ShapeRibbonSetValue();
@@ -225,7 +224,7 @@ namespace AdvShape {
         }
         private void SetShapeFillOpacity(double? parse = null) {
             parse = (parse == null) ? Misc.MathParse(this.ShapeFillOpacity_RBET.Text) : parse;
-            if(parse != null) {
+            if(parse != null && Misc.WithActiveSelection()) {
                 foreach(Shape ishape in Misc.SelectedShapes()) {
                     if(ishape.Fill != null) { ishape.Fill.Transparency = (float)(parse / 100); }
                 }
@@ -235,7 +234,7 @@ namespace AdvShape {
         }
         private void SetShapeLineOpacity(double? parse = null) {
             parse = (parse == null) ? Misc.MathParse(this.ShapeLineOpacity_RBET.Text) : parse;
-            if(parse != null) {
+            if(parse != null && Misc.WithActiveSelection()) {
                 foreach(Shape ishape in Misc.SelectedShapes()) {
                     if(ishape.Line != null) { ishape.Line.Transparency = (float)(parse / 100); }
                 }
@@ -248,8 +247,8 @@ namespace AdvShape {
         }
         protected void ShapeRibbonSetValue() {
             this.UI_trigger = false;
-            ShapeRange SelectRange = Misc.SelectedShapes();
-            if(SelectRange.Count > 0) {
+            
+            if(Misc.WithActiveSelection()) {
                 List<float> width       = new List<float>();
                 List<float> height      = new List<float>();
                 List<float> angle       = new List<float>();
@@ -302,18 +301,19 @@ namespace AdvShape {
             RibbonControl[] UISets2 = new RibbonControl[] {
                 this.ShapeZAbove_RBPB, this.ShapeZBelow_RBPB
             };
-
-            ShapeRange SelectRange = Misc.SelectedShapes();
-            foreach(RibbonControl UI in UISets1) {
-                UI.Enabled = (SelectRange.Count > 0);
-            }
-            foreach(RibbonControl UI in UISets2) {
-                UI.Enabled = (SelectRange.Count > 1);
+            if(Misc.WithActiveSelection()) {
+                ShapeRange SelectRange = Misc.SelectedShapes();
+                foreach(RibbonControl UI in UISets1) {
+                    UI.Enabled = (SelectRange.Count > 0);
+                }
+                foreach(RibbonControl UI in UISets2) {
+                    UI.Enabled = (SelectRange.Count > 1);
+                }
             }
         }
         private void ShapeWidth_RBET_TextChanged(object sender,RibbonControlEventArgs e) {
             Double? ParseVal = Misc.MathParse(this.ShapeWidth_RBET.Text);
-            if(ParseVal != null) {
+            if(ParseVal != null && Misc.WithActiveSelection()) {
                 foreach(Shape ishape in Misc.SelectedShapes()) {
                     if(ParseVal != null) { ishape.Width = (float)Misc.CmToPoints((double)ParseVal); }
                 }
@@ -321,7 +321,7 @@ namespace AdvShape {
         }
         private void ShapeHeight_RBET_TextChanged(object sender,RibbonControlEventArgs e) {
             Double? ParseVal = Misc.MathParse(this.ShapeHeight_RBET.Text);
-            if(ParseVal != null) {
+            if(ParseVal != null && Misc.WithActiveSelection()) {
                 foreach(Shape ishape in Misc.SelectedShapes()) {
                     if(ParseVal != null) { ishape.Height = (float)Misc.CmToPoints((double)ParseVal); }
                 }
@@ -329,7 +329,7 @@ namespace AdvShape {
         }
         private void ShapeAngle_RBET_TextChanged(object sender,RibbonControlEventArgs e) {
             Double? ParseVal = Misc.MathParse(this.ShapeAngle_RBET.Text);
-            if(ParseVal != null) {
+            if(ParseVal != null && Misc.WithActiveSelection()) {
                 foreach(Shape ishape in Misc.SelectedShapes()) {
                     if(ParseVal != null) { ishape.Rotation = (float)ParseVal; }
                 }

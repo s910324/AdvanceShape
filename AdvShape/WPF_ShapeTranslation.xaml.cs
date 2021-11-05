@@ -61,84 +61,84 @@ namespace AdvShape {
         }
 
         public void ApplyTranslation() {
-            ShapeRange shaperange = Misc.SelectedShapes();
+            if(Misc.WithActiveSelection()) {
+                ShapeRange shaperange = Misc.SelectedShapes();
 
-            if(this.TransX_TB.InputValid && this.TransX_TB.InputValid) {
-                double dx = (float)Misc.CmToPoints((double)this.TransX_TB.NumericValue);
-                double dy = (float)Misc.CmToPoints((double)this.TransY_TB.NumericValue);
+                if(this.TransX_TB.InputValid && this.TransX_TB.InputValid) {
+                    double dx = (float)Misc.CmToPoints((double)this.TransX_TB.NumericValue);
+                    double dy = (float)Misc.CmToPoints((double)this.TransY_TB.NumericValue);
 
-                if(dx != 0) {shaperange.Left += (float)dx; this.ChangeApplied = true; }
-                if(dy != 0) {shaperange.Top  -= (float)dy; this.ChangeApplied = true; }
-                if(dx == 0 && dy == 0 ) {
-                    double? x = null;
-                    double? y = null;
+                    if(dx != 0) { shaperange.Left += (float)dx; this.ChangeApplied = true; }
+                    if(dy != 0) { shaperange.Top -= (float)dy; this.ChangeApplied = true; }
+                    if(dx == 0 && dy == 0) {
+                        double? x = null;
+                        double? y = null;
 
-                    if(this.LocationX_TB.InputValid) { x = Misc.CmToPoints((double)this.LocationX_TB.NumericValue); }
-                    if(this.LocationY_TB.InputValid) { y = Misc.CmToPoints((double)this.LocationY_TB.NumericValue); }
+                        if(this.LocationX_TB.InputValid) { x = Misc.CmToPoints((double)this.LocationX_TB.NumericValue); }
+                        if(this.LocationY_TB.InputValid) { y = Misc.CmToPoints((double)this.LocationY_TB.NumericValue); }
 
-                    if(x != null || y != null) {
-                        foreach(Shape shape in shaperange) {ShapeShift.ShiftTo(shape,x,y, this.RefX, this.RefY);}
-                        this.ChangeApplied = true;
+                        if(x != null || y != null) {
+                            foreach(Shape shape in shaperange) { ShapeShift.ShiftTo(shape,x,y,this.RefX,this.RefY); }
+                            this.ChangeApplied = true;
+                        }
                     }
                 }
+                if(ChangeApplied) { this.UpdateSpinBox(this.RefX,this.RefY); }
             }
-            if(ChangeApplied) {this.UpdateSpinBox(this.RefX, this.RefY);}
         }
 
         private void UpdateSpinBox(int OriginX = -1, int OriginY = 1) {
-            ShapeRange     shaperange = Misc.SelectedShapes();
-            List<Boundbox> boundboxes = new List<Boundbox>();
+            if(Misc.WithActiveSelection()) {
+                ShapeRange shaperange = Misc.SelectedShapes();
+                List<Boundbox> boundboxes = new List<Boundbox>();
 
-            foreach(Shape shape in shaperange) {
-                boundboxes.Add(new Boundbox(shape));
+                foreach(Shape shape in shaperange) {
+                    boundboxes.Add(new Boundbox(shape));
+                }
+                HashSet<double> XSet;
+                HashSet<double> YSet;
+                switch(OriginX) {
+                    case 1:
+                        XSet = boundboxes.Select(box => Math.Round(Misc.PointsToCm(box.Right),3)).ToHashSet();
+                        break;
+                    case 0:
+                        XSet = boundboxes.Select(box => Math.Round(Misc.PointsToCm(box.Xc),3)).ToHashSet();
+                        break;
+                    case -1:
+                        XSet = boundboxes.Select(box => Math.Round(Misc.PointsToCm(box.Left),3)).ToHashSet();
+                        break;
+                    default:
+                        XSet = boundboxes.Select(box => Math.Round(Misc.PointsToCm(box.Left),3)).ToHashSet();
+                        break;
+                }
+                switch(OriginX) {
+                    case 1:
+                        YSet = boundboxes.Select(box => Math.Round(Misc.PointsToCm(box.Top),3)).ToHashSet();
+                        break;
+                    case 0:
+                        YSet = boundboxes.Select(box => Math.Round(Misc.PointsToCm(box.Yc),3)).ToHashSet();
+                        break;
+                    case -1:
+                        YSet = boundboxes.Select(box => Math.Round(Misc.PointsToCm(box.Bottom),3)).ToHashSet();
+                        break;
+                    default:
+                        YSet = boundboxes.Select(box => Math.Round(Misc.PointsToCm(box.Top),3)).ToHashSet();
+                        break;
+                }
+                foreach(double b in XSet) {
+                    Misc.print(b);
+                }
+                foreach(double b in YSet) {
+                    Misc.print(b);
+                }
+                string Xo = (XSet.Count == 1) ? Math.Round(Misc.PointsToCm(XSet.First()),3).ToString() : "--";
+                string Yo = (YSet.Count == 1) ? Math.Round(Misc.PointsToCm(YSet.First()),3).ToString() : "--";
+                this.LocationX_TB.Text = Xo;
+                this.LocationY_TB.Text = Yo;
+                this.TransX_TB.Text = "0";
+                this.TransY_TB.Text = "0";
+                this.ChangeApplied = false;
             }
-            HashSet<double> XSet;
-            HashSet<double> YSet;
-            switch(OriginX) {
-                case  1:
-                    XSet = boundboxes.Select(box => Math.Round(Misc.PointsToCm(box.Right), 3)).ToHashSet();
-                    break;
-                case  0:
-                    XSet = boundboxes.Select(box => Math.Round(Misc.PointsToCm(box.Xc),3)).ToHashSet();
-                    break;
-                case -1:
-                    XSet = boundboxes.Select(box => Math.Round(Misc.PointsToCm(box.Left),3)).ToHashSet();
-                    break;
-                default:
-                    XSet = boundboxes.Select(box => Math.Round(Misc.PointsToCm(box.Left),3)).ToHashSet();
-                    break;
-            }
-            switch(OriginX) {
-                case  1:
-                     YSet= boundboxes.Select(box => Math.Round(Misc.PointsToCm(box.Top),3)).ToHashSet();
-                    break;
-                case  0:
-                    YSet = boundboxes.Select(box => Math.Round(Misc.PointsToCm(box.Yc),3)).ToHashSet();
-                    break;
-                case -1:
-                    YSet = boundboxes.Select(box => Math.Round(Misc.PointsToCm(box.Bottom),3)).ToHashSet();
-                    break;
-                default:
-                    YSet = boundboxes.Select(box => Math.Round(Misc.PointsToCm(box.Top),3)).ToHashSet();
-                    break;
-            }
-            foreach(double b in XSet) {
-                Misc.print(b);
-            }
-            foreach(double b in YSet) {
-                Misc.print(b);
-            }
-            string Xo = (XSet.Count == 1) ? Math.Round(Misc.PointsToCm(XSet.First()), 3).ToString() : "--";
-            string Yo = (YSet.Count == 1) ? Math.Round(Misc.PointsToCm(YSet.First()), 3).ToString() : "--";
-            this.LocationX_TB.Text =  Xo;
-            this.LocationY_TB.Text =  Yo;
-            this.TransX_TB.Text    = "0";
-            this.TransY_TB.Text    = "0";
-            this.ChangeApplied     = false;
-
         }
-
     }
-
-
 }

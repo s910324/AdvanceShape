@@ -10,27 +10,36 @@ using MsoZOrderCmd = Microsoft.Office.Core.MsoZOrderCmd;
 namespace AdvShape {
     class ShapeOrder {
         static public void ShapeZTop() {
-            ShapeRange Selected = Misc.SelectedShapes();
-            Selected.ZOrder(MsoZOrderCmd.msoBringToFront);
+            if(Misc.WithActiveSelection()) {
+                ShapeRange Selected = Misc.SelectedShapes();
+                Selected.ZOrder(MsoZOrderCmd.msoBringToFront);
+            }
         }
         static public void ShapeZBottom() {
-            ShapeRange Selected = Misc.SelectedShapes();
-            Selected.ZOrder(MsoZOrderCmd.msoSendToBack);
+            if(Misc.WithActiveSelection()) {
+                ShapeRange Selected = Misc.SelectedShapes();
+                Selected.ZOrder(MsoZOrderCmd.msoSendToBack);
+            }
         }
         static public void ShapeZUp() {
-            ShapeRange Selected = Misc.SelectedShapes();
-            Selected.ZOrder(MsoZOrderCmd.msoBringForward);
+            if(Misc.WithActiveSelection()) {
+                ShapeRange Selected = Misc.SelectedShapes();
+                Selected.ZOrder(MsoZOrderCmd.msoBringForward);
+            }
         }
         static public void ShapeZDown() {
-            ShapeRange Selected = Misc.SelectedShapes();
-            Selected.ZOrder(MsoZOrderCmd.msoSendBackward);
+            if(Misc.WithActiveSelection()) {
+                ShapeRange Selected = Misc.SelectedShapes();
+                Selected.ZOrder(MsoZOrderCmd.msoSendBackward);
+            }
         }
         static public void ShapeZMoveRelative(int ReletiveOrder) {
             bool       flag     = true;
-            ShapeRange Selected = Misc.SelectedShapes();
+            
             List<Shape> iShapes = new List<Shape>();
 
-            if(Selected.Count > 1) {
+            if(Misc.WithActiveSelection()) {
+                ShapeRange Selected = Misc.SelectedShapes();
                 Shape TargetShape = Selected[1];
                 for(int i = 2;i <= Selected.Count;i++) {iShapes.Add(Selected[i]);}
 
