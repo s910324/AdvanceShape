@@ -20,15 +20,14 @@ using Shape = Microsoft.Office.Interop.PowerPoint.Shape;
 using MsoLineDashStyle = Microsoft.Office.Core.MsoLineDashStyle;
 using MsoPatternType = Microsoft.Office.Core.MsoPatternType;
 namespace AdvShape {
-    public partial class WPF_Tester:Window {
-        List<MsoLineDashStyle?> PreviewLineStyleList  = new List<MsoLineDashStyle?>();
+    abstract public partial class WPF_Tester:Window {
 
-        private FrameworkElementFactory factory;
-        private List<TextureWrapper> sourcelist;
-        private ListView               listview;
-        private TextureWrapper      CurrentHover = null;
-        private bool                   CloseFlag = true;
-        private bool               StyleSelected = false;
+        protected FrameworkElementFactory factory;
+        protected List<TextureWrapper> sourcelist;
+        protected ListView               listview;
+        protected TextureWrapper      CurrentHover = null;
+        protected bool                   CloseFlag = true;
+        protected bool               StyleSelected = false;
 
         public WPF_Tester() {
             InitializeComponent();
@@ -53,15 +52,45 @@ namespace AdvShape {
             this.Deactivated           += (o,e) => { this.TriggerClose(); };
 
             this.SetupPayload();
-
-
         }
-        private void SetupPayload() {
+        protected abstract void SetupPayload();
+        protected abstract void Preview();
+        protected abstract void CollectStyle();
+        protected abstract void CancelPreview();
+        protected void ItemHovered(object sender,RoutedEventArgs e) {
+            DependencyObject dep = (DependencyObject)e.OriginalSource;
+            while((dep != null) && !(dep is ListViewItem)) { dep = VisualTreeHelper.GetParent(dep); }
+            if(dep == null) { return; }
+
+            ListViewItem item = (ListViewItem)dep;
+            if(this.CurrentHover == null || !(this.CurrentHover.Equals((TextureWrapper)item.Content))) {
+                this.CurrentHover = (TextureWrapper)item.Content;
+                this.Preview();
+            }
+        }
+        protected void ItemClicked(object sender,RoutedEventArgs e) {
+            DependencyObject dep = (DependencyObject)e.OriginalSource;
+            while((dep != null) && !(dep is ListViewItem)) { dep = VisualTreeHelper.GetParent(dep); }
+            if(dep == null) { return; }
+
+            this.StyleSelected = true;
+            this.TriggerClose();
+        }
+        protected void TriggerClose() {
+            if(this.CloseFlag) {
+                this.CloseFlag = false;
+                this.Close();
+            }
+        }
+    }
+    public class WPF_LineDashSelector:WPF_Tester{
+        List<MsoLineDashStyle?> PreviewLineStyleList = new List<MsoLineDashStyle?>();
+        protected override void SetupPayload() {
             int ImageWidth  = 50;
             int ImageHeight = 12;
 
-            factory.SetValue(Image.WidthProperty, (double)ImageWidth);
-            factory.SetValue(Image.HeightProperty,(double)ImageHeight);
+            this.factory.SetValue(Image.WidthProperty,(double)ImageWidth);
+            this.factory.SetValue(Image.HeightProperty,(double)ImageHeight);
 
             Color fgcolor = Color.Black;
             Color bgcolor = Color.Transparent;
@@ -71,7 +100,7 @@ namespace AdvShape {
                 BitmapImage bitmap = texturePair.Value.RenderBitmapImage((int)ImageWidth,(int)ImageHeight,1,1,fgcolor,bgcolor,bdcolor);
 
                 sourcelist.Add(new TextureWrapper {
-                    image   = bitmap,
+                    image = bitmap,
                     fgcolor = fgcolor,
                     bgcolor = bgcolor,
                     bdcolor = bdcolor,
@@ -83,8 +112,7 @@ namespace AdvShape {
             this.Width = ImageWidth * 2.0;
             this.Height = ImageHeight * listview.Items.Count * 1.9;
         }
-
-        private void Preview() {
+        protected override void Preview() {
             this.CollectStyle();
             if(Misc.WithActiveSelection()) {
                 ShapeRange shaperange = Misc.SelectedShapes();
@@ -95,7 +123,7 @@ namespace AdvShape {
                 }
             }
         }
-        private void CollectStyle() {
+        protected override void CollectStyle() {
             if(Misc.WithActiveSelection()) {
                 ShapeRange shaperange = Misc.SelectedShapes();
                 if(this.PreviewLineStyleList.Count == 0) {
@@ -109,7 +137,7 @@ namespace AdvShape {
                 }
             }
         }
-        private void CancelPreview() {
+        protected override void CancelPreview() {
             if(Misc.WithActiveSelection() && this.StyleSelected == false) {
                 ShapeRange shaperange = Misc.SelectedShapes();
                 if(this.PreviewLineStyleList.Count != 0) {
@@ -124,35 +152,10 @@ namespace AdvShape {
                 }
             }
         }
-        private void ItemHovered(object sender,RoutedEventArgs e) {
-            DependencyObject dep = (DependencyObject)e.OriginalSource;
-            while((dep != null) && !(dep is ListViewItem)) { dep = VisualTreeHelper.GetParent(dep); }
-            if(dep == null) { return; }
 
-            ListViewItem item = (ListViewItem)dep;
-            if(this.CurrentHover == null || !(this.CurrentHover.Equals((TextureWrapper)item.Content))) {
-                this.CurrentHover = (TextureWrapper)item.Content;
-                this.Preview();
-            }
-        }
-        private void ItemClicked(object sender,RoutedEventArgs e) {
-            DependencyObject dep = (DependencyObject)e.OriginalSource;
-            while((dep != null) && !(dep is ListViewItem)) { dep = VisualTreeHelper.GetParent(dep); }
-            if(dep == null) { return; }
-
-            this.StyleSelected = true;
-            this.TriggerClose();
-        }
-        private void TriggerClose() {
-            if(this.CloseFlag) {
-                this.CloseFlag = false;
-                this.Close();
-            }
-        }
     }
 
-
-    class TextureWrapper {
+    public class TextureWrapper {
         public BitmapImage image { get; set; }
         public Texture   texture { get; set; }
         public Color     fgcolor { get; set; }

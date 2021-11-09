@@ -10,7 +10,7 @@ using SolidBrush = System.Drawing.SolidBrush;
 using BitmapImage = System.Windows.Media.Imaging.BitmapImage;
 
 namespace AdvShape {
-    class ImageGenerate {
+	public class ImageGenerate {
         public void Draw() {
             int Width = 32;
             int Height = 32;
@@ -28,8 +28,8 @@ namespace AdvShape {
 			
         }
     }
-	
-    class DefaultTexture{
+
+	public class DefaultTexture {
 		
 
 		static public Dictionary<int,Texture> DashDict = new Dictionary<int,Texture> {
@@ -335,7 +335,7 @@ namespace AdvShape {
 		};
     }
 
-    class Texture {
+    public class Texture {
 		int     Texturewidth;
 		int     TextureHeight;
         bool    TextureReverse;
