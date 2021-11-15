@@ -21,37 +21,24 @@ using MsoLineDashStyle = Microsoft.Office.Core.MsoLineDashStyle;
 using MsoPatternType = Microsoft.Office.Core.MsoPatternType;
 namespace AdvShape {
     abstract public partial class WPF_Tester:Window {
-
-        protected FrameworkElementFactory factory;
-        protected List<TextureWrapper> sourcelist;
-        protected ListView               listview;
+        protected List<TextureWrapper> sourcelist  = new List<TextureWrapper>();
         protected TextureWrapper      CurrentHover = null;
         protected bool                   CloseFlag = true;
         protected bool               StyleSelected = false;
 
         public WPF_Tester() {
             InitializeComponent();
-
-            this.factory          = new FrameworkElementFactory(typeof(Image));
-            this.sourcelist       = new List<TextureWrapper>();
-            this.listview         = new ListView();
-            GridView     gridview = new GridView();
-            DataTemplate template = new DataTemplate { VisualTree = factory };
-
-            listview.View         = gridview;
-            listview.ItemsSource  = sourcelist;
-
-            gridview.Columns.Add(new GridViewColumn { Header = null,CellTemplate = template });
-            factory.SetValue(Image.SourceProperty,new Binding(nameof(TextureWrapper.image)));
-            this.AddChild(listview);
-
-            listview.MouseMove         += (o,e) => { this.ItemHovered(o,e); };
-            listview.MouseLeftButtonUp += (o,e) => { this.ItemClicked(o,e); };
-            this.KeyDown               += (o,e) => { if(e.Key == Key.Escape) { this.TriggerClose(); } };
-            this.MouseLeave            += (o,e) => { this.CancelPreview(); };
-            this.Deactivated           += (o,e) => { this.TriggerClose(); };
+        
+            this.listview.ItemsSource        = sourcelist;
+            this.listview.MouseMove         += (o,e) => { this.ItemHovered(o,e); };
+            this.listview.MouseLeftButtonUp += (o,e) => { this.ItemClicked(o,e); };
+            this.KeyDown                    += (o,e) => { if(e.Key == Key.Escape) { this.TriggerClose(); } };
+            this.MouseLeave                 += (o,e) => { this.CancelPreview(); };
+            this.Deactivated                += (o,e) => { this.TriggerClose(); };
 
             this.SetupPayload();
+            this.Width  = 250;
+            this.Height = 350;
         }
         protected abstract void SetupPayload();
         protected abstract void Preview();
@@ -82,15 +69,25 @@ namespace AdvShape {
                 this.Close();
             }
         }
+        protected List<Shape> FlatShapeRange(ShapeRange shaperange) {
+            List<Shape> flattened = new List<Shape>();
+            foreach(Shape shape in shaperange) {
+                if(shape.Child > 0) {
+                    foreach(Shape sub_shape in shape.GroupItems) {
+                        flattened.Add(sub_shape);
+                    }
+                } else {
+                    flattened.Add(shape);
+                }
+            }
+            return flattened;
+        }
     }
     public class WPF_LineDashSelector:WPF_Tester{
-        List<MsoLineDashStyle?> PreviewLineStyleList = new List<MsoLineDashStyle?>();
+        List<MsoLineDashStyle?> PreviewStyleList = new List<MsoLineDashStyle?>();
         protected override void SetupPayload() {
             int ImageWidth  = 50;
             int ImageHeight = 12;
-
-            this.factory.SetValue(Image.WidthProperty,(double)ImageWidth);
-            this.factory.SetValue(Image.HeightProperty,(double)ImageHeight);
 
             Color fgcolor = Color.Black;
             Color bgcolor = Color.Transparent;
@@ -100,17 +97,16 @@ namespace AdvShape {
                 BitmapImage bitmap = texturePair.Value.RenderBitmapImage((int)ImageWidth,(int)ImageHeight,1,1,fgcolor,bgcolor,bdcolor);
 
                 sourcelist.Add(new TextureWrapper {
-                    image = bitmap,
+                    image   = bitmap,
                     fgcolor = fgcolor,
                     bgcolor = bgcolor,
                     bdcolor = bdcolor,
                     texture = texturePair.Value,
-                    data = texturePair.Key
+                    data    = texturePair.Key,
+                    width   = ImageWidth,
+                    height  = ImageHeight
                 });
             }
-
-            this.Width = ImageWidth * 2.0;
-            this.Height = ImageHeight * listview.Items.Count * 1.9;
         }
         protected override void Preview() {
             this.CollectStyle();
@@ -126,12 +122,12 @@ namespace AdvShape {
         protected override void CollectStyle() {
             if(Misc.WithActiveSelection()) {
                 ShapeRange shaperange = Misc.SelectedShapes();
-                if(this.PreviewLineStyleList.Count == 0) {
-                    foreach(Shape shape in shaperange) {
+                if(this.PreviewStyleList.Count == 0) {
+                    foreach(Shape shape in this.FlatShapeRange(shaperange)) {
                         if(shape.Line != null) {
-                            this.PreviewLineStyleList.Add(shape.Line.DashStyle);
+                            this.PreviewStyleList.Add(shape.Line.DashStyle);
                         } else {
-                            this.PreviewLineStyleList.Add(null);
+                            this.PreviewStyleList.Add(null);
                         }
                     }
                 }
@@ -140,12 +136,11 @@ namespace AdvShape {
         protected override void CancelPreview() {
             if(Misc.WithActiveSelection() && this.StyleSelected == false) {
                 ShapeRange shaperange = Misc.SelectedShapes();
-                if(this.PreviewLineStyleList.Count != 0) {
+                if(this.PreviewStyleList.Count != 0) {
                     int index = 0;
-                    foreach(Shape shape in shaperange) {
-                        MsoLineDashStyle? style = this.PreviewLineStyleList[index];
-                        if(style != null && shape.Line != null) {
-                            shape.Line.DashStyle = (MsoLineDashStyle)style;
+                    foreach(Shape shape in this.FlatShapeRange(shaperange)) {
+                        if(shape.Line != null) {
+                            shape.Line.DashStyle = (MsoLineDashStyle)this.PreviewStyleList[index];
                         }
                         index++;
                     }
@@ -155,6 +150,78 @@ namespace AdvShape {
 
     }
 
+    public class WPF_FillTextureSelector:WPF_Tester {
+        List<FillFormat> PreviewStyleList = new List<FillFormat>();
+        protected override void SetupPayload() {
+            int ImageWidth  = 32;
+            int ImageHeight = 32;
+
+            Color fgcolor = Color.Black;
+            Color bgcolor = Color.Transparent;
+            Color bdcolor = Color.Gray;
+            foreach(KeyValuePair<int,Texture> texturePair in DefaultTexture.TextureDict) {
+
+                BitmapImage bitmap = texturePair.Value.RenderBitmapImage((int)ImageWidth,(int)ImageHeight,1,1,fgcolor,bgcolor,bdcolor);
+
+                sourcelist.Add(new TextureWrapper {
+                    image   = bitmap,
+                    fgcolor = fgcolor,
+                    bgcolor = bgcolor,
+                    bdcolor = bdcolor,
+                    texture = texturePair.Value,
+                    data    = texturePair.Key,
+                    width   = ImageWidth,
+                    height  = ImageHeight
+                });
+            }
+        }
+        protected override void Preview() {
+            this.CollectStyle();
+            if(Misc.WithActiveSelection()) {
+                ShapeRange shaperange = Misc.SelectedShapes();
+                foreach(Shape shape in shaperange) {
+                    if(shape.Fill != null) {
+                        shape.Fill.Patterned((MsoPatternType)this.CurrentHover.data);
+                    }
+                }
+            }
+        }
+        protected override void CollectStyle() {
+            if(Misc.WithActiveSelection()) {
+                ShapeRange shaperange = Misc.SelectedShapes();
+                if(this.PreviewStyleList.Count == 0) {
+                    foreach(Shape shape in this.FlatShapeRange(shaperange)) {
+                        if(shape.Fill != null) {
+                            this.PreviewStyleList.Add(shape.Fill);
+                        } else {
+                            this.PreviewStyleList.Add(null);
+                        }
+                    }
+                }
+            }
+        }
+        protected override void CancelPreview() {
+            if(Misc.WithActiveSelection() && this.StyleSelected == false) {
+                ShapeRange shaperange = Misc.SelectedShapes();
+                if(this.PreviewStyleList.Count != 0) {
+                    int index = 0;
+                    foreach(Shape shape in this.FlatShapeRange(shaperange)) {
+                        FillFormat style = this.PreviewStyleList[index];
+                        if(style != null && shape.Fill != null) {
+                            if(style.Type == Microsoft.Office.Core.MsoFillType.msoFillPatterned) {
+                                shape.Fill.Solid();
+                                Misc.print("XX");
+                            } else {
+                                shape.Fill.Patterned(style.Pattern);
+                            }
+                        }
+                        index++;
+                    }
+                }
+            }
+        }
+    }
+
     public class TextureWrapper {
         public BitmapImage image { get; set; }
         public Texture   texture { get; set; }
@@ -162,6 +229,8 @@ namespace AdvShape {
         public Color     bgcolor { get; set; }
         public Color     bdcolor { get; set; }
         public int          data { get; set; }
+        public int         width { get; set; }
+        public int        height { get; set; }
     }
 
 }

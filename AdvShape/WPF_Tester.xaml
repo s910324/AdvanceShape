@@ -7,6 +7,24 @@
              mc:Ignorable="d" 
              WindowStyle="None"
              d:DesignHeight="100" d:DesignWidth="100">
-
+    <ListView x:Name="listview" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <UniformGrid Columns="5" HorizontalAlignment="Stretch"/>
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <StackPanel Orientation="Vertical" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Image Source="{Binding image}" 
+                           HorizontalAlignment="Stretch" 
+                           VerticalAlignment="Top" 
+                           Stretch="UniformToFill" 
+                           Width="{Binding width}" 
+                           Height="{Binding height}"/>
+                </StackPanel>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </Window>
  

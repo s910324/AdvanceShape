@@ -447,7 +447,8 @@ namespace AdvShape {
         }
 
         private void button3_Click_1(object sender,RibbonControlEventArgs e) {
-            var w = new WPF_LineDashSelector();
+            //var w = new WPF_LineDashSelector();
+            var w = new WPF_FillTextureSelector();
             System.Windows.Point p = Misc.GetCursorPosition();
             /*System.Windows.Point pointToWindow = System.Windows.Input.Mouse.GetPosition(this.button3);
             int x = Globals.ThisAddIn.Application.ActiveWindow.PointsToScreenPixelsX((float)pointToWindow.X);
