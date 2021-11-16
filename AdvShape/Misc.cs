@@ -82,7 +82,19 @@ namespace AdvShape {
             Selection CurrentSelection       = (Selection)Globals.ThisAddIn.Application.ActiveWindow.Selection;
             return CurrentSelection.ShapeRange;
         }
-
+        static public List<Shape> FlattenShapeRange(ShapeRange shaperange) {
+            List<Shape> flattened = new List<Shape>();
+            foreach(Shape shape in shaperange) {
+                if(shape.GroupItems != null) {
+                    foreach(Shape sub_shape in shape.GroupItems) {
+                        flattened.Add(sub_shape);
+                    }
+                } else {
+                    flattened.Add(shape);
+                }
+            }
+            return flattened;
+        }
         static public float ActiveSlideWidth() { return Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideWidth; }
         static public float ActiveSlideHeight() {return Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideHeight;}
 

@@ -25,7 +25,7 @@ namespace AdvShape {
         protected TextureWrapper      CurrentHover = null;
         protected bool                   CloseFlag = true;
         protected bool               StyleSelected = false;
-
+        protected bool               CheckPointSet = false;
         public WPF_Tester() {
             InitializeComponent();
         
@@ -42,8 +42,12 @@ namespace AdvShape {
         }
         protected abstract void SetupPayload();
         protected abstract void Preview();
-        protected abstract void CollectStyle();
-        protected abstract void CancelPreview();
+        protected void CancelPreview() {
+            if(this.CheckPointSet) {
+                this.CheckPointSet = false;
+                Globals.ThisAddIn.Application.CommandBars.ExecuteMso("Undo");
+            }
+        }
         protected void ItemHovered(object sender,RoutedEventArgs e) {
             DependencyObject dep = (DependencyObject)e.OriginalSource;
             while((dep != null) && !(dep is ListViewItem)) { dep = VisualTreeHelper.GetParent(dep); }
@@ -68,19 +72,6 @@ namespace AdvShape {
                 this.CloseFlag = false;
                 this.Close();
             }
-        }
-        protected List<Shape> FlatShapeRange(ShapeRange shaperange) {
-            List<Shape> flattened = new List<Shape>();
-            foreach(Shape shape in shaperange) {
-                if(shape.Child > 0) {
-                    foreach(Shape sub_shape in shape.GroupItems) {
-                        flattened.Add(sub_shape);
-                    }
-                } else {
-                    flattened.Add(shape);
-                }
-            }
-            return flattened;
         }
     }
     public class WPF_LineDashSelector:WPF_Tester{
@@ -109,45 +100,20 @@ namespace AdvShape {
             }
         }
         protected override void Preview() {
-            this.CollectStyle();
             if(Misc.WithActiveSelection()) {
+                if(this.CheckPointSet != true) {
+                    this.CheckPointSet = true;
+                    Globals.ThisAddIn.Application.StartNewUndoEntry();
+                }
                 ShapeRange shaperange = Misc.SelectedShapes();
                 foreach(Shape shape in shaperange) {
                     if(shape.Line != null) {
                         shape.Line.DashStyle = (MsoLineDashStyle)this.CurrentHover.data;
                     }
                 }
-            }
-        }
-        protected override void CollectStyle() {
-            if(Misc.WithActiveSelection()) {
-                ShapeRange shaperange = Misc.SelectedShapes();
-                if(this.PreviewStyleList.Count == 0) {
-                    foreach(Shape shape in this.FlatShapeRange(shaperange)) {
-                        if(shape.Line != null) {
-                            this.PreviewStyleList.Add(shape.Line.DashStyle);
-                        } else {
-                            this.PreviewStyleList.Add(null);
-                        }
-                    }
-                }
-            }
-        }
-        protected override void CancelPreview() {
-            if(Misc.WithActiveSelection() && this.StyleSelected == false) {
-                ShapeRange shaperange = Misc.SelectedShapes();
-                if(this.PreviewStyleList.Count != 0) {
-                    int index = 0;
-                    foreach(Shape shape in this.FlatShapeRange(shaperange)) {
-                        if(shape.Line != null) {
-                            shape.Line.DashStyle = (MsoLineDashStyle)this.PreviewStyleList[index];
-                        }
-                        index++;
-                    }
-                }
-            }
-        }
 
+            }
+        }
     }
 
     public class WPF_FillTextureSelector:WPF_Tester {
@@ -176,46 +142,16 @@ namespace AdvShape {
             }
         }
         protected override void Preview() {
-            this.CollectStyle();
+
             if(Misc.WithActiveSelection()) {
+                if(this.CheckPointSet != true){
+                    Globals.ThisAddIn.Application.StartNewUndoEntry();
+                    this.CheckPointSet = true;
+                } 
                 ShapeRange shaperange = Misc.SelectedShapes();
-                foreach(Shape shape in shaperange) {
+                foreach(Shape shape in Misc.FlattenShapeRange(shaperange)) {
                     if(shape.Fill != null) {
                         shape.Fill.Patterned((MsoPatternType)this.CurrentHover.data);
-                    }
-                }
-            }
-        }
-        protected override void CollectStyle() {
-            if(Misc.WithActiveSelection()) {
-                ShapeRange shaperange = Misc.SelectedShapes();
-                if(this.PreviewStyleList.Count == 0) {
-                    foreach(Shape shape in this.FlatShapeRange(shaperange)) {
-                        if(shape.Fill != null) {
-                            this.PreviewStyleList.Add(shape.Fill);
-                        } else {
-                            this.PreviewStyleList.Add(null);
-                        }
-                    }
-                }
-            }
-        }
-        protected override void CancelPreview() {
-            if(Misc.WithActiveSelection() && this.StyleSelected == false) {
-                ShapeRange shaperange = Misc.SelectedShapes();
-                if(this.PreviewStyleList.Count != 0) {
-                    int index = 0;
-                    foreach(Shape shape in this.FlatShapeRange(shaperange)) {
-                        FillFormat style = this.PreviewStyleList[index];
-                        if(style != null && shape.Fill != null) {
-                            if(style.Type == Microsoft.Office.Core.MsoFillType.msoFillPatterned) {
-                                shape.Fill.Solid();
-                                Misc.print("XX");
-                            } else {
-                                shape.Fill.Patterned(style.Pattern);
-                            }
-                        }
-                        index++;
                     }
                 }
             }
