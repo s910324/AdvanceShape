@@ -39,7 +39,7 @@ namespace AdvShape {
 
             
             //Texture texture = DefaultTexture.TextureDict[(int)Microsoft.Office.Core.MsoPatternType.msoPatternSmallCheckerBoard];
-            Texture texture = DefaultTexture.DashDict[(int)MsoLineDashStyle.msoLineDash];
+            Texture texture = DefaultTexture.TextureDict[(int)Microsoft.Office.Core.MsoPatternType.msoPatternZigZag];
             this.ShapeFill_RBPB.Image = texture.RenderBitmap(32,32,1,1,Color.White,Color.Red,Color.Black);
             this.comboBox1.Image = texture.RenderBitmap(32,32,1,2,Color.White,Color.Red,Color.Black);
             this.LineDashMenu.Image = texture.RenderBitmap(32,32,1,2,Color.White,Color.Red,Color.Black);
@@ -145,6 +145,8 @@ namespace AdvShape {
             this.ShapeZDown_RBPB.Click             += (o,i) => { ShapeOrder.ShapeZDown(); };
             this.ShapeZAbove_RBPB.Click            += (o,i) => { ShapeOrder.ShapeZMoveRelative(1); };
             this.ShapeZBelow_RBPB.Click            += (o,i) => { ShapeOrder.ShapeZMoveRelative(-1); };
+
+            this.ShapeFill_RBPB.Click              += (o,e) => { this.ShapeFill_RBPB_Clicked(o,e); };
         }
         private void ShowShapeAlignDialig() {
             var app = new WPF_ShapeAlign();
@@ -294,7 +296,9 @@ namespace AdvShape {
                 this.ShapeFillOpacityUnit_RBLB, this.ShapeFill_RBPB,
 
                 this.ShapeLineOpacity_RBET,     this.ShapeLineOpacityInc_RBPB, this.ShapeLineOpacityDec_RBPB,
-                this.ShapeLineOpacityUnit_RBLB, this.ShapeLine_RBPB
+                this.ShapeLineOpacityUnit_RBLB, this.ShapeLine_RBPB,
+
+                this.ShapeFill_RBPB
 
             };
 
@@ -436,7 +440,15 @@ namespace AdvShape {
                 this.SetShapeLineOpacity(100);
             }
         }
-
+        private void ShapeFill_RBPB_Clicked(object sender,RibbonControlEventArgs e) {
+            //var w = new WPF_LineDashSelector();
+            var w = new WPF_FillTextureSelector();
+            System.Windows.Point p = Misc.GetCursorPosition();
+            w.WindowStartupLocation = System.Windows.WindowStartupLocation.Manual;
+            w.Top = p.Y;
+            w.Left = p.X;
+            w.Show();
+        }
         
         private void button2_Click(object sender,RibbonControlEventArgs e) {
             Shape i = Misc.SelectedShapes()[1];
@@ -468,5 +480,7 @@ namespace AdvShape {
         private void comboBox1_TextChanged(object sender,RibbonControlEventArgs e) {
 
         }
+
+
     }
 }

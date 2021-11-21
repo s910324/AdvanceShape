@@ -77,6 +77,7 @@
             this.AlignBottomRight_RBPB = this.Factory.CreateRibbonButton();
             this.ShapeArrayDialog_RBPB = this.Factory.CreateRibbonButton();
             this.ShapeTransDialog_RBPB = this.Factory.CreateRibbonButton();
+            this.group7 = this.Factory.CreateRibbonGroup();
             this.group5 = this.Factory.CreateRibbonGroup();
             this.box5 = this.Factory.CreateRibbonBox();
             this.ShapeFill_RBPB = this.Factory.CreateRibbonButton();
@@ -166,6 +167,7 @@
             this.tab1.Groups.Add(this.group4);
             this.tab1.Groups.Add(this.group2);
             this.tab1.Groups.Add(this.group1);
+            this.tab1.Groups.Add(this.group7);
             this.tab1.Groups.Add(this.group5);
             this.tab1.Groups.Add(this.ShapeAttributeGroup);
             this.tab1.Groups.Add(this.group3);
@@ -431,6 +433,11 @@
             // 
             this.ShapeTransDialog_RBPB.Label = "☩ Shape Translation";
             this.ShapeTransDialog_RBPB.Name = "ShapeTransDialog_RBPB";
+            // 
+            // group7
+            // 
+            this.group7.Label = "group7";
+            this.group7.Name = "group7";
             // 
             // group5
             // 
@@ -1012,6 +1019,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button14;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button15;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton LineDashStyle_RBPB;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group7;
     }
 
     partial class ThisRibbonCollection {

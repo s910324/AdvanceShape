@@ -43,7 +43,7 @@ namespace AdvShape {
         protected abstract void SetupPayload();
         protected abstract void Preview();
         protected void CancelPreview() {
-            if(this.CheckPointSet) {
+            if(this.CheckPointSet && !this.StyleSelected) {
                 this.CheckPointSet = false;
                 Globals.ThisAddIn.Application.CommandBars.ExecuteMso("Undo");
             }

@@ -80,12 +80,12 @@ namespace AdvShape {
         static public ShapeRange SelectedShapes() {
             Slide ActiveSlide = Misc.ActiveSlide();
             Selection CurrentSelection       = (Selection)Globals.ThisAddIn.Application.ActiveWindow.Selection;
-            return CurrentSelection.ShapeRange;
+            return (CurrentSelection.HasChildShapeRange) ? CurrentSelection.ChildShapeRange : CurrentSelection.ShapeRange;
         }
         static public List<Shape> FlattenShapeRange(ShapeRange shaperange) {
             List<Shape> flattened = new List<Shape>();
             foreach(Shape shape in shaperange) {
-                if(shape.GroupItems != null) {
+                if(Misc.RangeIsGrouped(shape)) {
                     foreach(Shape sub_shape in shape.GroupItems) {
                         flattened.Add(sub_shape);
                     }
@@ -94,6 +94,12 @@ namespace AdvShape {
                 }
             }
             return flattened;
+        }
+        static public bool RangeIsGrouped(ShapeRange shapeRange) {
+            try { return shapeRange.GroupItems.Count > 0; } catch { return false; }
+        }
+        static public bool RangeIsGrouped(Shape shape) {
+            try { return shape.GroupItems.Count > 0; } catch { return false; }
         }
         static public float ActiveSlideWidth() { return Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideWidth; }
         static public float ActiveSlideHeight() {return Globals.ThisAddIn.Application.ActivePresentation.PageSetup.SlideHeight;}
