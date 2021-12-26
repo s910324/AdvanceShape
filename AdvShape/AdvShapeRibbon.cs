@@ -41,7 +41,7 @@ namespace AdvShape {
             //Texture texture = DefaultTexture.TextureDict[(int)Microsoft.Office.Core.MsoPatternType.msoPatternSmallCheckerBoard];
             Texture texture = DefaultTexture.TextureDict[(int)Microsoft.Office.Core.MsoPatternType.msoPatternZigZag];
             this.ShapeFill_RBPB.Image = texture.RenderBitmap(32,32,1,1,Color.White,Color.Red,Color.Black);
-            this.comboBox1.Image = texture.RenderBitmap(32,32,1,2,Color.White,Color.Red,Color.Black);
+            //this.comboBox1.Image = texture.RenderBitmap(32,32,1,2,Color.White,Color.Red,Color.Black);
             this.LineDashMenu.Image = texture.RenderBitmap(32,32,1,2,Color.White,Color.Red,Color.Black);
             this.test();
         }

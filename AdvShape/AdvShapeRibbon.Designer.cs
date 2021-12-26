@@ -35,23 +35,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ribbon1));
             Microsoft.Office.Tools.Ribbon.RibbonDialogLauncher ribbonDialogLauncherImpl1 = this.Factory.CreateRibbonDialogLauncher();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ribbon1));
             this.tab1 = this.Factory.CreateRibbonTab();
-            this.group4 = this.Factory.CreateRibbonGroup();
-            this.dropDown1 = this.Factory.CreateRibbonDropDown();
-            this.buttonGroup2 = this.Factory.CreateRibbonButtonGroup();
-            this.button4 = this.Factory.CreateRibbonButton();
-            this.button5 = this.Factory.CreateRibbonButton();
-            this.button6 = this.Factory.CreateRibbonButton();
-            this.button7 = this.Factory.CreateRibbonButton();
-            this.group2 = this.Factory.CreateRibbonGroup();
-            this.editBox4 = this.Factory.CreateRibbonEditBox();
-            this.buttonGroup1 = this.Factory.CreateRibbonButtonGroup();
-            this.button2 = this.Factory.CreateRibbonButton();
-            this.button3 = this.Factory.CreateRibbonButton();
-            this.comboBox1 = this.Factory.CreateRibbonComboBox();
-            this.dropDown2 = this.Factory.CreateRibbonDropDown();
             this.group1 = this.Factory.CreateRibbonGroup();
             this.box1 = this.Factory.CreateRibbonBox();
             this.ShapeAlignDialog_RBPB = this.Factory.CreateRibbonButton();
@@ -77,7 +63,6 @@
             this.AlignBottomRight_RBPB = this.Factory.CreateRibbonButton();
             this.ShapeArrayDialog_RBPB = this.Factory.CreateRibbonButton();
             this.ShapeTransDialog_RBPB = this.Factory.CreateRibbonButton();
-            this.group7 = this.Factory.CreateRibbonGroup();
             this.group5 = this.Factory.CreateRibbonGroup();
             this.box5 = this.Factory.CreateRibbonBox();
             this.ShapeFill_RBPB = this.Factory.CreateRibbonButton();
@@ -139,15 +124,10 @@
             this.ShapeZbottom_RBPB = this.Factory.CreateRibbonButton();
             this.ShapeZDown_RBPB = this.Factory.CreateRibbonButton();
             this.ShapeZBelow_RBPB = this.Factory.CreateRibbonButton();
-            this.group6 = this.Factory.CreateRibbonGroup();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tab1.SuspendLayout();
-            this.group4.SuspendLayout();
-            this.buttonGroup2.SuspendLayout();
-            this.group2.SuspendLayout();
-            this.buttonGroup1.SuspendLayout();
             this.group1.SuspendLayout();
             this.box1.SuspendLayout();
             this.group5.SuspendLayout();
@@ -164,115 +144,12 @@
             // tab1
             // 
             this.tab1.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office;
-            this.tab1.Groups.Add(this.group4);
-            this.tab1.Groups.Add(this.group2);
             this.tab1.Groups.Add(this.group1);
-            this.tab1.Groups.Add(this.group7);
             this.tab1.Groups.Add(this.group5);
             this.tab1.Groups.Add(this.ShapeAttributeGroup);
             this.tab1.Groups.Add(this.group3);
-            this.tab1.Groups.Add(this.group6);
             this.tab1.Label = "AdvShape";
             this.tab1.Name = "tab1";
-            // 
-            // group4
-            // 
-            this.group4.Items.Add(this.dropDown1);
-            this.group4.Items.Add(this.buttonGroup2);
-            this.group4.Label = "Font";
-            this.group4.Name = "group4";
-            // 
-            // dropDown1
-            // 
-            this.dropDown1.Label = "dropDown1";
-            this.dropDown1.Name = "dropDown1";
-            this.dropDown1.ShowLabel = false;
-            // 
-            // buttonGroup2
-            // 
-            this.buttonGroup2.Items.Add(this.button4);
-            this.buttonGroup2.Items.Add(this.button5);
-            this.buttonGroup2.Items.Add(this.button6);
-            this.buttonGroup2.Items.Add(this.button7);
-            this.buttonGroup2.Name = "buttonGroup2";
-            // 
-            // button4
-            // 
-            this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
-            this.button4.Label = "button4";
-            this.button4.Name = "button4";
-            this.button4.ShowImage = true;
-            this.button4.ShowLabel = false;
-            // 
-            // button5
-            // 
-            this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
-            this.button5.Label = "button5";
-            this.button5.Name = "button5";
-            this.button5.ShowImage = true;
-            this.button5.ShowLabel = false;
-            // 
-            // button6
-            // 
-            this.button6.Image = ((System.Drawing.Image)(resources.GetObject("button6.Image")));
-            this.button6.Label = "button6";
-            this.button6.Name = "button6";
-            this.button6.ShowImage = true;
-            this.button6.ShowLabel = false;
-            // 
-            // button7
-            // 
-            this.button7.Image = ((System.Drawing.Image)(resources.GetObject("button7.Image")));
-            this.button7.Label = "button7";
-            this.button7.Name = "button7";
-            this.button7.ShowImage = true;
-            this.button7.ShowLabel = false;
-            // 
-            // group2
-            // 
-            this.group2.Items.Add(this.editBox4);
-            this.group2.Items.Add(this.buttonGroup1);
-            this.group2.Items.Add(this.comboBox1);
-            this.group2.Items.Add(this.dropDown2);
-            this.group2.Label = "group2";
-            this.group2.Name = "group2";
-            // 
-            // editBox4
-            // 
-            this.editBox4.Label = "editBox4";
-            this.editBox4.Name = "editBox4";
-            this.editBox4.Text = null;
-            // 
-            // buttonGroup1
-            // 
-            this.buttonGroup1.Items.Add(this.button2);
-            this.buttonGroup1.Items.Add(this.button3);
-            this.buttonGroup1.Name = "buttonGroup1";
-            // 
-            // button2
-            // 
-            this.button2.Label = "button2";
-            this.button2.Name = "button2";
-            this.button2.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button2_Click);
-            // 
-            // button3
-            // 
-            this.button3.Label = "button3";
-            this.button3.Name = "button3";
-            this.button3.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.button3_Click_1);
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Label = "comboBox1";
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.ShowLabel = false;
-            this.comboBox1.Text = null;
-            this.comboBox1.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.comboBox1_TextChanged);
-            // 
-            // dropDown2
-            // 
-            this.dropDown2.Label = "dropDown2";
-            this.dropDown2.Name = "dropDown2";
             // 
             // group1
             // 
@@ -434,11 +311,6 @@
             this.ShapeTransDialog_RBPB.Label = "☩ Shape Translation";
             this.ShapeTransDialog_RBPB.Name = "ShapeTransDialog_RBPB";
             // 
-            // group7
-            // 
-            this.group7.Label = "group7";
-            this.group7.Name = "group7";
-            // 
             // group5
             // 
             this.group5.Items.Add(this.box5);
@@ -446,6 +318,7 @@
             this.group5.Items.Add(this.box6);
             this.group5.Label = "Shape Texture";
             this.group5.Name = "group5";
+            this.group5.Visible = false;
             // 
             // box5
             // 
@@ -854,11 +727,6 @@
             this.ShapeZBelow_RBPB.Name = "ShapeZBelow_RBPB";
             this.ShapeZBelow_RBPB.ShowImage = true;
             // 
-            // group6
-            // 
-            this.group6.Label = "group6";
-            this.group6.Name = "group6";
-            // 
             // notifyIcon1
             // 
             this.notifyIcon1.Text = "notifyIcon1";
@@ -878,14 +746,6 @@
             this.Load += new Microsoft.Office.Tools.Ribbon.RibbonUIEventHandler(this.Ribbon1_Load);
             this.tab1.ResumeLayout(false);
             this.tab1.PerformLayout();
-            this.group4.ResumeLayout(false);
-            this.group4.PerformLayout();
-            this.buttonGroup2.ResumeLayout(false);
-            this.buttonGroup2.PerformLayout();
-            this.group2.ResumeLayout(false);
-            this.group2.PerformLayout();
-            this.buttonGroup1.ResumeLayout(false);
-            this.buttonGroup1.PerformLayout();
             this.group1.ResumeLayout(false);
             this.group1.PerformLayout();
             this.box1.ResumeLayout(false);
@@ -916,7 +776,6 @@
 
         internal Microsoft.Office.Tools.Ribbon.RibbonTab tab1;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group2;
         internal Microsoft.Office.Tools.Ribbon.RibbonMenu ShapeAlignMenu;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeArrayDialog_RBPB;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton AlignTop_RBPB;
@@ -958,13 +817,9 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeAngleDec_RBPB;
         internal Microsoft.Office.Tools.Ribbon.RibbonEditBox ShapeAngle_RBET;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeAngleInc_RBPB;
-        internal Microsoft.Office.Tools.Ribbon.RibbonEditBox editBox4;
         internal Microsoft.Office.Tools.Ribbon.RibbonLabel ShapeWidth_RBLB;
         internal Microsoft.Office.Tools.Ribbon.RibbonLabel ShapeHeight_RBLB;
         internal Microsoft.Office.Tools.Ribbon.RibbonLabel ShapeAngle_RBLB;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButtonGroup buttonGroup1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button2;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button3;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group3;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeZTop_RBPB;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeZbottom_RBPB;
@@ -972,13 +827,6 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeZDown_RBPB;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeZAbove_RBPB;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeZBelow_RBPB;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group4;
-        internal Microsoft.Office.Tools.Ribbon.RibbonDropDown dropDown1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButtonGroup buttonGroup2;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button4;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button5;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button6;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button7;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group5;
         internal Microsoft.Office.Tools.Ribbon.RibbonBox box5;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeFill_RBPB;
@@ -993,14 +841,11 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeLineOpacityDec_RBPB;
         internal Microsoft.Office.Tools.Ribbon.RibbonEditBox ShapeLineOpacity_RBET;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeLineOpacityInc_RBPB;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group6;
         internal Microsoft.Office.Tools.Ribbon.RibbonLabel ShapeFillOpacity_RBLB;
         internal Microsoft.Office.Tools.Ribbon.RibbonLabel ShapeFillOpacityUnit_RBLB;
         internal Microsoft.Office.Tools.Ribbon.RibbonLabel ShapeLineOpacity_RBLB;
         internal Microsoft.Office.Tools.Ribbon.RibbonLabel ShapeLineOpacityUnit_RBLB;
         private System.Windows.Forms.ColorDialog colorDialog1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonComboBox comboBox1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonDropDown dropDown2;
         private System.Windows.Forms.ImageList imageList1;
         internal Microsoft.Office.Tools.Ribbon.RibbonMenu menu3;
         internal Microsoft.Office.Tools.Ribbon.RibbonMenu LineDashMenu;
@@ -1019,7 +864,6 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button14;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button15;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton LineDashStyle_RBPB;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group7;
     }
 
     partial class ThisRibbonCollection {

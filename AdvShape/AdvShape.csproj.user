@@ -4,7 +4,8 @@
     <StartAction>Project</StartAction>
   </PropertyGroup>
   <PropertyGroup>
-    <PublishUrlHistory>publish\</PublishUrlHistory>
+    <PublishUrlHistory>
+    </PublishUrlHistory>
     <InstallUrlHistory />
     <SupportUrlHistory />
   </PropertyGroup>
